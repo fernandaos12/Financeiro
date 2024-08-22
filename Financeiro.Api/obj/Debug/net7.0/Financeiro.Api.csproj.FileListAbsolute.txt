@@ -1,0 +1,8 @@
+D:\Projetos\Financeiro\Financeiro.Api\obj\Debug\net7.0\Financeiro.Api.csproj.AssemblyReference.cache
+D:\Projetos\Financeiro\Financeiro.Api\obj\Debug\net7.0\Financeiro.Api.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projetos\Financeiro\Financeiro.Api\obj\Debug\net7.0\Financeiro.Api.AssemblyInfoInputs.cache
+D:\Projetos\Financeiro\Financeiro.Api\obj\Debug\net7.0\Financeiro.Api.AssemblyInfo.cs
+D:\Projetos\Financeiro\Financeiro.Api\obj\Debug\net7.0\Financeiro.Api.csproj.CoreCompileInputs.cache
+D:\Projetos\Financeiro\Financeiro.Api\obj\Debug\net7.0\Financeiro.Api.MvcApplicationPartsAssemblyInfo.cs
+D:\Projetos\Financeiro\Financeiro.Api\obj\Debug\net7.0\Financeiro.Api.MvcApplicationPartsAssemblyInfo.cache
+D:\Projetos\Financeiro\Financeiro.Api\obj\Debug\net7.0\Financeiro.Api.sourcelink.json
