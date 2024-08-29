@@ -1,9 +1,14 @@
+using Financeiro.Api.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<ApiDbContext>(options =>
-    options.UseMySql(connectionString));
+var connectionString = builder.Configuration.GetConnectionString("ConnectionMySql") ?? throw new InvalidOperationException("Connection string não encontrado.");
+builder.Services.AddDbContext<ApiDbcontext>(options =>
+    options.UseMySQL(connectionString));
+
+   builder.Services.AddScoped<DbContext,ApiDbcontext>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
