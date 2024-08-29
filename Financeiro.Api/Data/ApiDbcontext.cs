@@ -16,6 +16,11 @@ namespace Financeiro.Api.Data
                // base.OnConfiguring(optionsBuilder);
             }       
 
+            public DbSet<ContasPagar> ContasPagar {get;set;}
+            public DbSet<ContasReceber> ContasReceber {get;set;}
+            public DbSet<Pagamento> Pagamento {get;set;}
+            public DbSet<Categorias> Categorias {get;set;}
+            
     }
 
 }

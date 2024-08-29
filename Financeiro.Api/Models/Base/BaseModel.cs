@@ -9,5 +9,6 @@ namespace Financeiro.Api.Models.Base
     {
         public int Id { get; set; }
         public Datetime DataAlteracao { get; set; }
+        public int Status { get; set; }
     }
 }

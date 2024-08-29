@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 
 namespace Financeiro.Api.Models
 {
-    public class ContasPagar
-    {
-        public int Id { get; set; }
-        public Datetime DataAlteracao { get; set; }
+    public class ContasPagar : BaseModel
+    {        
         public double Valor { get; set; }
         public Datetime DataVencimento { get; set; }
         public bool Repeticao { get; set; }
@@ -20,7 +18,6 @@ namespace Financeiro.Api.Models
         public string Categoria { get; set; }
         public string Observacoes { get; set; }
         public List<string> Tags { get; set; }
-        
-        
+                
     }
 }
