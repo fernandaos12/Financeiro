@@ -1,14 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Financeiro.Api.Models.Enums;
 
 namespace Financeiro.Api.Models.Base
 {
     public class BaseModel
     {
-        public int Id { get; set; }
-        public Datetime DataAlteracao { get; set; }
-        public int Status { get; set; }
+        [Key]
+        [Column("ID")]
+         public int Id { get; set; }
+        
+        [Column("DATA_ALTERACAO")]
+        public DateTime DataAlteracao { get; set; } = DateTime.Now;
+
+        [Column("STATUS")]
+        public Status_Default Status { get; set; } = Status_Default.Ativo;
     }
 }

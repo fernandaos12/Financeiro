@@ -1,11 +1,23 @@
 {
   "Version": 1,
-  "Hash": "KZON12ggMCw5261HzOXKT6bQOf7xSPbeS1+YHY/Q1n4=",
+  "Hash": "Gn8+HokCBzOpUOoq6eVMeyZpCMjraKqv/CivTwP+dOs=",
   "Source": "Financeiro",
   "BasePath": "_content/Financeiro",
   "Mode": "Default",
   "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "D:\\Projetos\\Financeiro\\Financeiro.Api\\Financeiro.Api.csproj",
+      "Version": 2,
+      "Source": "Financeiro.Api",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
+    }
+  ],
   "DiscoveryPatterns": [
     {
       "Name": "Financeiro\\wwwroot",
