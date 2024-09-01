@@ -4,7 +4,7 @@ using Financeiro.Api.Models.Base;
 
 namespace Financeiro.Api.Models;
 
-[Table("CARTAO_CREDITO")]
+[Table("TB_CARTAO_CREDITO")]
 public class CartaoCredito : BaseModel
 {
     [Column("DESCRICAO")]

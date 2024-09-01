@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Financeiro", "Financeiro\Fi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financeiro.Api", "Financeiro.Api\Financeiro.Api.csproj", "{07A2E5E7-F44E-4D62-AE0F-87F89F2F3D77}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financeiro.Core", "Financeiro.Core\Financeiro.Core.csproj", "{9E15FC7A-7224-449A-B758-93A11807B308}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{07A2E5E7-F44E-4D62-AE0F-87F89F2F3D77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07A2E5E7-F44E-4D62-AE0F-87F89F2F3D77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07A2E5E7-F44E-4D62-AE0F-87F89F2F3D77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E15FC7A-7224-449A-B758-93A11807B308}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E15FC7A-7224-449A-B758-93A11807B308}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E15FC7A-7224-449A-B758-93A11807B308}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E15FC7A-7224-449A-B758-93A11807B308}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
