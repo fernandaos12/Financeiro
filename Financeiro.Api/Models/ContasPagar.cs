@@ -7,6 +7,8 @@ namespace Financeiro.Api.Models
     [Table("TB_CONTAS_PAGAR")]
     public class ContasPagar : BaseModel
     {
+        private double _saldoDevedor;
+
         [Column("DESCRICAO")]
         [Required]
         [StringLength(maximumLength:500,ErrorMessage ="Campo Descrição obrigatório")]
@@ -26,6 +28,24 @@ namespace Financeiro.Api.Models
         
         [Column("VALOR")]
         public double Valor { get; set; }
+        
+        [Column("PAGTO_PARCIAL")]
+        public bool PagamentoParcial { get; set; }
+        
+        [Column("VALOR_PAGTO_PARCIAL")]
+        public double ValorPagamentoParcial { get; set; }
+        
+        [Column("SALDO_DEVEDOR")]
+        public double SaldoDevedor {
+             get => _saldoDevedor != 0 ? _saldoDevedor : 0; 
+             set
+             {
+                if (PagamentoParcial == true){
+                    _saldoDevedor = Valor - ValorPagamentoParcial;
+                }
+
+             }
+        } 
         
         [Column("CATEGORIA")]
         [ForeignKey("ID")]

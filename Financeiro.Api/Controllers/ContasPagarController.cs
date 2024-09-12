@@ -54,8 +54,8 @@ namespace Financeiro.Api.Controllers
             _repository.Atualizar(cp);            
         }
 
-        [HttpGet("{id}")]
-        [Route("api/contaspagar/listarcontas/FindById")]
+        [HttpDelete("{id}")]
+        [Route("api/contaspagar/listarcontas/Remover")]
         public async Task<bool> Apagar(int id)
         {
             var retorno = await _repository.FindId(id);
