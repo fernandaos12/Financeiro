@@ -37,7 +37,7 @@ namespace Financeiro.Api.Repository
         public async Task<bool> Remover(int id)
         {
 
-            ContasPagar contadeletar = await _context.contasPagar.Where(p => p.Id == id).FirstOrDefaultAsync();
+            ContasPagar contadeletar = await FindId(id);
 
             if(contadeletar == null){                
                 return false;

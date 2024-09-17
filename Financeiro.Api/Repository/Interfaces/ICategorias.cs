@@ -4,10 +4,10 @@ namespace Financeiro.Api.Repository.Interfaces
 {
     public interface ICategorias
     {
-        IQueryable<Categorias> Listar();
+        Task<IEnumerable<Categorias>> Listar();
         Task<Categorias> FindId(int id);
-        Boolean Salvar(Categorias categoria);
-        void Atualizar(Categorias categoria);
-        Boolean Remover(int id);
+        Task<bool> Remover(int id);
+        Task<bool> Salvar(Categorias categoria);
+        Task<bool> Atualizar(Categorias categoria);
     }
 }

@@ -4,11 +4,10 @@ namespace Financeiro.Api.Repository.Interfaces
 {
     public interface IContasReceber
     {
-        IQueryable<ContasReceber> ListarContas();
-
+        Task <IEnumerable<ContasReceber>> ListarContas();
         Task<ContasReceber> FindId(int id);
-        Boolean Salvar(ContasReceber cr);
-        void Atualizar(ContasReceber cr);
-        Boolean Remover(int id);        
+        Task<bool> Salvar(ContasReceber cr);
+        Task<bool> Atualizar(ContasReceber cr);
+        Task<bool> Remover(int id);        
     }
 }
