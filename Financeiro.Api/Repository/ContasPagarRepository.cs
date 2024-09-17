@@ -12,29 +12,54 @@ namespace Financeiro.Api.Repository
         {
             _context = context;
         }
-        public void Atualizar(ContasPagar cp)
+        public async void Atualizar(ContasPagar cp)
         {
-            throw new NotImplementedException();
+            _context.contasPagar.Update(cp);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<ContasPagar> FindId(int id)
         {
-            throw new NotImplementedException();
+            var item = await _context.contasPagar.FirstOrDefaultAsync(p=>p.Id == id);
+
+            if(item == null){
+                throw new ArgumentNullException("Item Not Found - 404 ");
+            }
+            return item;
         }
 
         public async Task<IEnumerable<ContasPagar>> ListarContas()
-        {
-            return await _context.contasPagar.ToListAsync();
+        {           
+            List<ContasPagar> contaslistar = await _context.contasPagar.ToListAsync();
+            return contaslistar;
         }
 
         public async Task<bool> Remover(int id)
         {
-            throw new NotImplementedException();
+
+            ContasPagar contadeletar = await _context.contasPagar.Where(p => p.Id == id).FirstOrDefaultAsync();
+
+            if(contadeletar == null){                
+                return false;
+            }
+            
+            _context.contasPagar.Remove(contadeletar);
+            await _context.SaveChangesAsync();
+            return true;
+
         }
 
         public async Task<bool> Salvar(ContasPagar cp)
         {
-            throw new NotImplementedException();
+            try{
+            _context.contasPagar.Add(cp);
+            await _context.SaveChangesAsync();
+            return true;
+            }
+            catch(Exception)
+            {
+                throw new Exception("Erro ao gravar na base de dados");
+            }
         }
     }
 }

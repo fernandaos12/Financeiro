@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace Financeiro.Api.Controllers
 {
     [ApiController]
+    [Route("api/[controller]")]
     public class ContasPagarController //: BaseController
     {
         private readonly ContasPagarRepository _repository;
@@ -14,8 +15,7 @@ namespace Financeiro.Api.Controllers
             _repository = repo;
         }
 
-        [HttpGet]
-        [Route("api/contaspagar/listarcontas")]
+        [HttpGet()]
         public async Task<IEnumerable<ContasPagar>> ListarContas()
         {
            var retorno = await _repository.ListarContas();
@@ -24,8 +24,7 @@ namespace Financeiro.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        [Route("api/contaspagar/listarcontas/FindById")]
-        public async Task<ContasPagar> ObterporId(int id)
+        public async Task<ContasPagar> FindbyId(int id)
         {
             var retorno = await _repository.FindId(id);
             if(retorno == null){
@@ -35,15 +34,13 @@ namespace Financeiro.Api.Controllers
         }
 
         [HttpPost()]
-        [Route("api/contaspagar/listarcontas/Salvar")]
         public async Task<bool> Salvar(ContasPagar cp)
         {
             await _repository.Salvar(cp);
             return true;         
         }
 
-        [HttpPut()]
-        [Route("api/contaspagar/listarcontas/Atualizar")]
+        [HttpPut("{id:int}")]
         public async void AtualizarItem(ContasPagar cp)
         { 
             var item = await _repository.FindId(cp.Id);
@@ -54,8 +51,7 @@ namespace Financeiro.Api.Controllers
             _repository.Atualizar(cp);            
         }
 
-        [HttpDelete("{id}")]
-        [Route("api/contaspagar/listarcontas/Remover")]
+        [HttpDelete("{id:int}")]
         public async Task<bool> Apagar(int id)
         {
             var retorno = await _repository.FindId(id);
