@@ -66,7 +66,7 @@ namespace Financeiro.Api.Migrations
 
                     b.HasIndex("ID");
 
-                    b.ToTable("CARTAO_CREDITO", t =>
+                    b.ToTable("TB_CARTAO_CREDITO", t =>
                         {
                             t.Property("ID")
                                 .HasColumnName("ID1");

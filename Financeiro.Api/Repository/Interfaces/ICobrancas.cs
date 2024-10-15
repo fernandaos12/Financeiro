@@ -1,6 +1,7 @@
 using System;
 using Financeiro.Api.Models;
 using Financeiro.Api.Repository.Models;
+using Microsoft.Net.Http.Headers;
 
 namespace Financeiro.Api.Repository.Interfaces;
 
@@ -19,4 +20,5 @@ public interface ICobrancas
     byte[] GetPDF(string linhaDigitavel, Int64? idGateway, Cobrancas cobrancaFaturamento);
     RetornoPix CobrancaPix(string pix);
 
+ 
 }

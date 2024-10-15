@@ -14,13 +14,12 @@ namespace Financeiro.Api.Models
         public string? Descricao { get; set; }
 
         [Column("MES_COMPETENCIA")]
+        [DataType(DataType.Date)]
         [Required]
-        [JsonConverter(typeof(MesCompetencia))]
         public MesCompetencia? MesCompetencia { get; set; }
 
         [Column("FORMA_PAGAMENTO")]
         [Required]
-        [JsonConverter(typeof(TipoConta))]
         public TipoConta FormaPagamento { get; set; }
 
         [Column("DATA_FECHAMENTO")]

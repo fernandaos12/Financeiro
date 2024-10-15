@@ -15,10 +15,12 @@ namespace Financeiro.Api.Models
         public string? Descricao { get; set; }
         
         [Column("EMISSAO")]
+        [DataType(DataType.Date)]
         [Required]
         public DateTime Data_Emissao { get; set; }
         
         [Column("VENCIMENTO")]
+        [DataType(DataType.Date)]
         [Required]
         public DateTime Data_Vencimento { get; set; }
         

@@ -114,3 +114,6 @@ D:\Projetos\Financeiro\Financeiro\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.
 D:\Projetos\Financeiro\Financeiro\bin\Debug\net7.0\Financeiro.Api.dll
 D:\Projetos\Financeiro\Financeiro\bin\Debug\net7.0\Financeiro.Api.pdb
 D:\Projetos\Financeiro\Financeiro\obj\Debug\net7.0\Financeiro.sourcelink.json
+C:\Projetos\Financeiro\Financeiro\obj\Debug\net7.0\Financeiro.dll
+C:\Projetos\Financeiro\Financeiro\obj\Debug\net7.0\refint\Financeiro.dll
+C:\Projetos\Financeiro\Financeiro\obj\Debug\net7.0\Financeiro.pdb

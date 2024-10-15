@@ -17,7 +17,6 @@ namespace Financeiro.Api.Models
         
         [Column("TIPOCATEGORIA")]  
         [Required]
-        [JsonConverter(typeof(TipoCategoria))]
         public TipoCategoria tipoCategoria {get;set;}
                
 

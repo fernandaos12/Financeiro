@@ -1,0 +1,38 @@
+<p>Listagem Contas a Pagar</p>
+
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <button>Cadastrar Conta</button>
+        </div>
+        <div class="col-6 input-box">
+            <fa-icon [icon]="faMagnifyingGlass" style="color: cornflowerblue;"></fa-icon><label>Procurar</label>
+            <input type="text" placeholder="Buscar registro"/>
+        </div>
+    </div>
+    <div class="row">
+        <table>
+            <thead>
+                <tr>
+                    <th><fa-icon [icon]="faCheck" style="color: green;"></fa-icon></th>
+                    <th><fa-icon [icon]="faCircleXmark" style="color: red;"></fa-icon></th>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Valor</th>
+                    <th></th>
+                    <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td>1</td>
+                <td>Rafael</td>
+                <td>20,00</td>
+                <td><button>Editar</button></td>
+                <td><button>Excluir</button></td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</div>

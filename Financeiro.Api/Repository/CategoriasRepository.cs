@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Financeiro.Api.Data;
 using Financeiro.Api.Models;
 using Financeiro.Api.Repository.Interfaces;

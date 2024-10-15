@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projetos\\Financeiro\\Financeiro.Core\\Financeiro.Core.csproj": {}
+    "C:\\Projetos\\Financeiro\\Financeiro.Core\\Financeiro.Core.csproj": {}
   },
   "projects": {
-    "D:\\Projetos\\Financeiro\\Financeiro.Core\\Financeiro.Core.csproj": {
+    "C:\\Projetos\\Financeiro\\Financeiro.Core\\Financeiro.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projetos\\Financeiro\\Financeiro.Core\\Financeiro.Core.csproj",
+        "projectUniqueName": "C:\\Projetos\\Financeiro\\Financeiro.Core\\Financeiro.Core.csproj",
         "projectName": "Financeiro.Core",
-        "projectPath": "D:\\Projetos\\Financeiro\\Financeiro.Core\\Financeiro.Core.csproj",
+        "projectPath": "C:\\Projetos\\Financeiro\\Financeiro.Core\\Financeiro.Core.csproj",
         "packagesPath": "C:\\Users\\ferna\\.nuget\\packages\\",
-        "outputPath": "D:\\Projetos\\Financeiro\\Financeiro.Core\\obj\\",
+        "outputPath": "C:\\Projetos\\Financeiro\\Financeiro.Core\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
           "C:\\Users\\ferna\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -49,6 +45,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.19, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -65,7 +67,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

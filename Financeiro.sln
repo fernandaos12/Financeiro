@@ -4,13 +4,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Financeiro", "Financeiro\Financeiro.csproj", "{3C0A12F7-031A-4CC2-9F2C-6A9D26DBC340}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9E15FC7A-7224-449A-B758-93A11807B308} = {9E15FC7A-7224-449A-B758-93A11807B308}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Financeiro.Api", "Financeiro.Api\Financeiro.Api.csproj", "{07A2E5E7-F44E-4D62-AE0F-87F89F2F3D77}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Financeiro.Core", "Financeiro.Core\Financeiro.Core.csproj", "{9E15FC7A-7224-449A-B758-93A11807B308}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financeiro.Web", "Financeiro.Web\Financeiro.Web.csproj", "{8399F29E-2225-4968-B78A-2EE1125A04E0}"
-EndProject
+
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
