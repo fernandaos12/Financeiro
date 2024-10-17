@@ -40,17 +40,17 @@ namespace Financeiro.Api.Models
         public string? Descricao { get; set; }
         
         [Column("CONTA")]
-        [JsonConverter(typeof(TipoConta))]
+        [EnumDataType(typeof(TipoConta))]
         public TipoConta? Conta { get; set; } //se a conta é de cartao de credito
          
-        [Column("CATEGORIAS")]
+        [Column("ID_CATEGORIAS")]
         public Categorias? Categoria { get; set; }
         
         [Column("OBSERVACOES")]
         public string? Observacoes { get; set; }
         
         [Column("TAGS")]
-        [ForeignKey("ID")]
+        [ForeignKey("ID_TAGS")]
         public List<Tags>? Tags { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace Financeiro.Api.Models
         public MesCompetencia? MesCompetencia { get; set; }
 
         [Column("FORMA_PAGAMENTO")]
-        [Required]
+        [EnumDataType(typeof(TipoConta))]
         public TipoConta FormaPagamento { get; set; }
 
         [Column("DATA_FECHAMENTO")]
@@ -27,5 +27,8 @@ namespace Financeiro.Api.Models
         [DataType(DataType.Date)]
         public DateTime DataFechamento { get; set; }
 
-    } 
+        [Column("ID_CONTA_PAGAR")]
+        [ForeignKey("ID_CONTAPAGAR")]
+        public ContasPagar? Id_ContaPagar { get; set; }
+    }
 }

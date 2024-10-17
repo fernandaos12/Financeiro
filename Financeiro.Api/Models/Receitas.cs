@@ -15,17 +15,17 @@ public class Receitas : BaseModel
 
     [Column("TIPO_RECEITA")]
     [Required]
-    [JsonConverter(typeof(TipoReceita))]
+    [EnumDataType(typeof(TipoReceita))]
     public TipoReceita? TipoReceita { get; set; }
 
     [Column("TIPO_CONTA")]
     [Required]
-    [JsonConverter(typeof(TipoConta))]
+    [EnumDataType(typeof(TipoConta))]
     public TipoConta? TipoConta { get; set; }
 
     [Column("MES_COMPETENCIA")]
     [Required]
-    [JsonConverter(typeof(MesCompetencia))]
+    [EnumDataType(typeof(MesCompetencia))]
     public MesCompetencia? MesCompetencia { get; set; }
     
     [Column("VALIDADE")]

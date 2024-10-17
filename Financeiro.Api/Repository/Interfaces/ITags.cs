@@ -9,5 +9,6 @@ namespace Financeiro.Api.Repository.Interfaces
         Task<Boolean> Salvar(Tags cp);
         void Atualizar(Tags cp);
         Task<Boolean> Remover(int id);
+
     }
 }

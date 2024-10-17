@@ -16,13 +16,13 @@ public class Cobranca_Negociacao : BaseModel
     public string? Descricao { get; set; }
 
     [Column("PAGAMENTO")]
-    [ForeignKey("ID")]
+    [ForeignKey("ID_PAGAMENTO")]
     public Pagamento? Pagamento { get; set; }
 
     [Required]
-    [Column("CATEGORIA")]
-    [JsonConverter(typeof(TipoCategoria))]
-    public TipoCategoria? CategoriaDivida { get; set; }
+    [Column("ID_CATEGORIA")]
+    [ForeignKey("ID_CATEGORIA")]
+    public Categorias? CategoriaDivida { get; set; }
     
     [Required]
     [Column("VALOR")]

@@ -23,15 +23,15 @@ namespace Financeiro.Api.Models
         public int telefone { get; set; }
 
         [Column("RECEITAS")]
-        [ForeignKey("ID")]
+        [ForeignKey("ID_RECEITAS")]
         public List<Receitas>? Receitas { get; set; }
 
         [Column("CARTAO_CREDITO")]
-        [ForeignKey("ID")]
+        [ForeignKey("ID_CARTAO_CREDITO")]
         public List<CartaoCredito>? CartaoCredito { get; set; }
 
         [Column("CONTABANCARIA")]
-        [ForeignKey("ID")]
+        [ForeignKey("ID_CONTA_BANCARIA")]
         public List<ContaBancaria>? ContasBancarias { get; set; }
     }
 }

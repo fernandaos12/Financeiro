@@ -25,7 +25,7 @@ public class CartaoCredito : BaseModel
     
     [Column("BANCO")]
     [Required]
-    [ForeignKey("ID")]
+    [ForeignKey("ID_CONTA_BANCARIA")]
     public ContaBancaria? Banco { get; set; }
 
     [Column("LIMITE_TOTAL")]

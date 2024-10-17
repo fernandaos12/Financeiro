@@ -25,7 +25,7 @@ namespace Financeiro.Api.Models
         public DateTime Data_Vencimento { get; set; }
         
         [Column("PAGAMENTO")]
-        [ForeignKey("ID")]
+        [ForeignKey("ID_PAGAMENTO")]
         public Pagamento? Pagamento { get; set; }
         
         [Column("VALOR")]
@@ -50,7 +50,7 @@ namespace Financeiro.Api.Models
         } 
         
         [Column("CATEGORIA")]
-        [ForeignKey("ID")]
+        [ForeignKey("ID_CATEGORIA")]
         public Categorias? Categoria { get; set; }
         
         [Column("REPETICAO")]
@@ -63,7 +63,7 @@ namespace Financeiro.Api.Models
         public string? Observacoes { get; set; }
         
         [Column("TAGS")]
-        [ForeignKey("ID")]
+        [ForeignKey("TAG_ID")]
         public List<Tags>? Tags { get; set; }
     }
 }

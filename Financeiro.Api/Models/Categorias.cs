@@ -17,8 +17,13 @@ namespace Financeiro.Api.Models
         
         [Column("TIPOCATEGORIA")]  
         [Required]
+        [EnumDataType(typeof(TipoCategoria))]
         public TipoCategoria tipoCategoria {get;set;}
-               
+
+        [Column("ID_CONTA_PAGAR")]
+        [ForeignKey("ID_CONTAPAGAR")]
+        public ContasPagar? Id_ContaPagar { get; set; }
+
 
     }
 }
