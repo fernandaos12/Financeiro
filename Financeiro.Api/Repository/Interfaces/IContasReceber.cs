@@ -1,13 +1,14 @@
 using Financeiro.Api.Models;
+using Financeiro.Api.Repository.Models;
 
 namespace Financeiro.Api.Repository.Interfaces
 {
     public interface IContasReceber
     {
-        Task <IEnumerable<ContasReceber>> ListarContas();
-        Task<ContasReceber> FindId(int id);
-        Task<bool> Salvar(ContasReceber cr);
-        Task<bool> Atualizar(ContasReceber cr);
-        Task<bool> Remover(int id);        
+        Task <ServiceResponse<IEnumerable<ContasReceber>>> ListarContas();
+        Task<ServiceResponse<ContasReceber>> FindId(int id);
+        Task<ServiceResponse<Boolean>> Salvar(ContasReceber cr);
+        Task<ServiceResponse<Boolean>> Atualizar(ContasReceber cr);
+        Task<ServiceResponse<Boolean>> Remover(int id);        
     }
 }

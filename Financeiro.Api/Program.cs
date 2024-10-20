@@ -2,6 +2,7 @@ using Financeiro.Api.Data;
 using Financeiro.Api.Repository;
 using Financeiro.Api.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +14,7 @@ builder.Services.AddDbContext<ApiDbcontext>(o => o.UseMySql(connection, ServerVe
 builder.Services.AddScoped<DbContext,ApiDbcontext>();
 //builder.Services.AddScoped<IContasPagar,ContasPagarRepository>();
 builder.Services.AddTransient<ContasPagarRepository>();
-builder.Services.AddTransient<ContasReceberRepository>();
+builder.Services.AddScoped<IContasReceber,ContasReceberRepository>();
 builder.Services.AddTransient<PagamentosRepository>();
 builder.Services.AddTransient<CategoriasRepository>();
 builder.Services.AddTransient<CartaoCreditoRepository>();
@@ -24,7 +25,16 @@ builder.Services.AddTransient<TagsRepository>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c=>{
+    c.SwaggerDoc("v1",new Microsoft.OpenApi.Models.OpenApiInfo{
+        Title="Financeiro API",
+        Version="v1.0"
+    });
+    var xmlFile = "Financeiro.Api.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
+});
+
 builder.Services.AddCors(options =>
             {
                 options.AddPolicy("EnableCORS", builder =>

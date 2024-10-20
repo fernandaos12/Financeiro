@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Financeiro.Api.Models.Base;
+using Financeiro.Api.Models.Enums;
 
 namespace Financeiro.Api.Models
 {
@@ -13,6 +14,10 @@ namespace Financeiro.Api.Models
         [Required]
         [StringLength(maximumLength:500,ErrorMessage ="Campo Descrição obrigatório")]
         public string? Descricao { get; set; }
+
+        [Column("STATUS_CONTA")]
+        [EnumDataType(typeof(StatusConta))]
+        public StatusConta Status_Conta {get; set;}
         
         [Column("EMISSAO")]
         [DataType(DataType.Date)]

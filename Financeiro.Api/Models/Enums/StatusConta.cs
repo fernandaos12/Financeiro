@@ -3,9 +3,10 @@ using System.Text.Json.Serialization;
 namespace Financeiro.Api.Models.Enums
 {
     [JsonConverter(typeof(JsonStringEnumConverter))]
-    public enum Status_Default
+    public enum StatusConta
     {
-        Ativo = 1,
-        Inativo = 2,
+        Pendente = 0,
+        Pago = 1
+    
     }
 }

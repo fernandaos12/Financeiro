@@ -1,7 +1,9 @@
 using System;
+using System.Text.Json.Serialization;
 
 namespace Financeiro.Api.Models.Enums;
 
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum TipoCategoria
 {
     Habitacao = 1,
