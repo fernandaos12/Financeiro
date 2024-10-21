@@ -1,13 +1,13 @@
-using System;
 using Financeiro.Api.Models;
+using Financeiro.Api.Repository.Models;
 
 namespace Financeiro.Api.Repository.Interfaces;
 
 public interface IReceitas
 {
-    Task<IEnumerable<Receitas>> GetAll();
-    Task<Receitas> FindId(int id);
-    Task<bool> AtualizarItem(Receitas receitas);
-    Task<bool> Remover(int id);
-    Task<bool> Salvar(Receitas receitas);
+    Task<ServiceResponse<IEnumerable<Receitas>>> Listar();
+    Task<ServiceResponse<Receitas>> FindId(int id);
+    Task<ServiceResponse<Boolean>> Atualizar(Receitas receitas);
+    Task<ServiceResponse<Boolean>> Remover(int id);
+    Task<ServiceResponse<Boolean>> Salvar(Receitas receitas);
 }

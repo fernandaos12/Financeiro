@@ -1,6 +1,7 @@
 using Financeiro.Api.Data;
 using Financeiro.Api.Models;
 using Financeiro.Api.Repository.Interfaces;
+using Financeiro.Api.Repository.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Financeiro.Api.Repository
@@ -12,54 +13,116 @@ namespace Financeiro.Api.Repository
         {
             _context = context;
         }
-        public async void Atualizar(ContasPagar cp)
+
+        public async Task<ServiceResponse<Boolean>> Atualizar(ContasPagar receber)
         {
-            _context.contasPagar.Update(cp);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task<ContasPagar> FindId(int id)
-        {
-            var item = await _context.contasPagar.FirstOrDefaultAsync(p=>p.Id == id);
-
-            if(item == null){
-                throw new ArgumentNullException("Item Not Found - 404 ");
-            }
-            return item;
-        }
-
-        public async Task<IEnumerable<ContasPagar>> ListarContas()
-        {           
-            List<ContasPagar> contaslistar = await _context.contasPagar.ToListAsync();
-            return contaslistar;
-        }
-
-        public async Task<bool> Remover(int id)
-        {
-
-            ContasPagar contadeletar = await FindId(id);
-
-            if(contadeletar == null){                
-                return false;
-            }
-            
-            _context.contasPagar.Remove(contadeletar);
-            await _context.SaveChangesAsync();
-            return true;
-
-        }
-
-        public async Task<bool> Salvar(ContasPagar cp)
-        {
-            try{
-            _context.contasPagar.Add(cp);
-            await _context.SaveChangesAsync();
-            return true;
-            }
-            catch(Exception)
+            var retorno = new ServiceResponse<Boolean>();
+            try
             {
-                throw new Exception("Erro ao gravar na base de dados");
+                ContasPagar item = await _context.contasPagar.AsNoTracking().FirstOrDefaultAsync(p => p.Id == receber.Id);
+                if (item == null)
+                {
+                    retorno.Mensagem = "Conta a receber não existe no banco de dados.";
+                    retorno.Sucesso = false;
+                }
+
+                item.DataAlteracao = DateTime.Now.ToLocalTime();
+                _context.contasPagar.Update(receber);
+                await _context.SaveChangesAsync();
+                retorno.DadosRetorno = true;
+
             }
+            catch (Exception ex)
+            {
+                retorno.Mensagem = ex.Message;
+                retorno.Sucesso = false;
+            }
+            return retorno;
+        }
+
+        public async Task<ServiceResponse<ContasPagar>> FindId(int id)
+        {
+            var retorno = new ServiceResponse<ContasPagar>();
+            try
+            {
+                ContasPagar item = await _context.contasPagar.FirstOrDefaultAsync(p => p.Id == id);
+                retorno.DadosRetorno = item;
+
+                if (item == null)
+                {
+                    retorno.DadosRetorno = null;
+                    retorno.Mensagem = "Conta a receber não existe no banco de dados.";
+                    retorno.Sucesso = false;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                retorno.Mensagem = ex.Message;
+                retorno.Sucesso = false;
+            }
+            return retorno;
+        }
+
+        public async Task<ServiceResponse<IEnumerable<ContasPagar>>> ListarContas()
+        {
+            var retorno = new ServiceResponse<IEnumerable<ContasPagar>>();
+            try
+            {
+                retorno.DadosRetorno = await _context.contasPagar.ToListAsync();
+                if (retorno.DadosRetorno == null)
+                {
+                    retorno.Mensagem = "Nenhuma conta a receber encontrada.";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                retorno.Mensagem = ex.Message;
+                retorno.Sucesso = false;
+            }
+            return retorno;
+        }
+
+        public async Task<ServiceResponse<Boolean>> Remover(int id)
+        {
+            var retorno = new ServiceResponse<Boolean>();
+            try
+            {
+                ContasPagar item = await _context.contasPagar.FirstOrDefaultAsync(p => p.Id == id);
+
+                _context.contasPagar.Remove(item);
+                await _context.SaveChangesAsync();
+
+                retorno.DadosRetorno = true;
+                retorno.Mensagem = "Conta a receber removida com sucesso.";
+
+
+            }
+            catch (Exception ex)
+            {
+                retorno.Mensagem = $@"Erro ao remover conta a receber. {ex.Message}";
+                retorno.Sucesso = false;
+            }
+
+            return retorno;
+        }
+
+        public async Task<ServiceResponse<Boolean>> Salvar(ContasPagar contaspagar)
+        {
+            var retorno = new ServiceResponse<Boolean>();
+            try
+            {
+                _context.contasPagar.Add(contaspagar);
+                await _context.SaveChangesAsync();
+                retorno.DadosRetorno = true;
+                retorno.Mensagem = "Dados gravados com sucesso.";
+            }
+            catch (Exception e)
+            {
+                retorno.Mensagem = $@"Erro ao gravar conta a receber no banco de dados. {e.Message}";
+            }
+            return retorno;
         }
     }
 }

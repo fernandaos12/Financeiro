@@ -1,13 +1,13 @@
-using System;
 using Financeiro.Api.Models;
+using Financeiro.Api.Repository.Models;
 
 namespace Financeiro.Api.Repository.Interfaces;
 
 public interface ICobrancaNegociacao
 {
-  Task<IEnumerable<Cobranca_Negociacao>> GetAll();
-    Task<Cobranca_Negociacao> FindId(int id);
-    Task<bool> AtualizarItem(Cobranca_Negociacao cobranca);
-    Task<bool> Remover(int id);
-    Task<bool> Salvar(Cobranca_Negociacao cobranca);
+    Task<ServiceResponse<IEnumerable<Cobranca_Negociacao>>> Listar();
+    Task<ServiceResponse<Cobranca_Negociacao>> FindId(int id);
+    Task<ServiceResponse<Boolean>> Atualizar(Cobranca_Negociacao cobranca);
+    Task<ServiceResponse<Boolean>> Remover(int id);
+    Task<ServiceResponse<Boolean>> Salvar(Cobranca_Negociacao cobranca);
 }

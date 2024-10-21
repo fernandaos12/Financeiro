@@ -1,6 +1,6 @@
 using Financeiro.Api.Models;
-using Financeiro.Api.Repository;
-using Microsoft.AspNetCore.Http;
+using Financeiro.Api.Repository.Interfaces;
+using Financeiro.Api.Repository.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Financeiro.Api.Controllers
@@ -9,58 +9,43 @@ namespace Financeiro.Api.Controllers
     [ApiController]
     public class ReceitasController : ControllerBase
     {
-        private readonly ReceitasRepository _repository;
-        public ReceitasController(ReceitasRepository repo)
+        private readonly IReceitas _repository;
+        public ReceitasController(IReceitas repo)
         {
             _repository = repo;
         }
 
         [HttpGet()]
-        public async Task<IEnumerable<Receitas>> ListarContas()
+        public async Task<ActionResult<ServiceResponse<IEnumerable<Receitas>>>> ListarContas()
         {
-           var retorno = await _repository.GetAll();
-
-           return retorno;
+            return await _repository.Listar();
         }
 
         [HttpGet("{id}")]
-        public async Task<Receitas> FindbyId(int id)
+        public async Task<ActionResult<Receitas>> FindbyId(int id)
         {
-            var retorno = await _repository.FindId(id);
-            if(retorno == null){
-                 throw new Exception("Conta a pagar não encontrado.");
-            }
-            return retorno;         
+            ServiceResponse<Receitas> contaReceberItem = await _repository.FindId(id);
+            return Ok(contaReceberItem);
         }
 
         [HttpPost()]
-        public async Task<bool> Salvar(Receitas receitas)
+        public async Task<ActionResult<ServiceResponse<Boolean>>> Salvar(Receitas Receitas)
         {
-            await _repository.Salvar(receitas);
-            return true;         
+            return Ok(await _repository.Salvar(Receitas));
         }
 
-        [HttpPut("{id:int}")]
-        public async void AtualizarItem(Receitas receita)
-        { 
-            var item = await _repository.FindId(receita.Id);
-            if(item == null){
-                throw new Exception("Erro ao atualizar. Item não encontrado.");
-            }
-            
-           await _repository.AtualizarItem(receita);            
+        [HttpPut()]
+        public async Task<ActionResult<Boolean>> AtualizarItem(Receitas Receitas)
+        {
+            ServiceResponse<Boolean> contaReceberAtualizar = await _repository.Atualizar(Receitas);
+            return Ok(contaReceberAtualizar);
         }
 
-        [HttpDelete("{id:int}")]
-        public async Task<bool> Apagar(int id)
+        [HttpDelete()]
+        public async Task<ActionResult<Boolean>> Apagar(int id)
         {
-            var retorno = await _repository.FindId(id);
-            if(retorno == null){
-                 throw new Exception("Item receita não encontrado.");
-            }
-
-            await _repository.Remover(id);
-            return true;  
+            ServiceResponse<Boolean> contaReceberRemover = await _repository.Remover(id);
+            return Ok(contaReceberRemover);
         }
 
     }

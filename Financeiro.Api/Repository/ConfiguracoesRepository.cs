@@ -1,6 +1,7 @@
 using Financeiro.Api.Data;
 using Financeiro.Api.Models;
 using Financeiro.Api.Repository.Interfaces;
+using Financeiro.Api.Repository.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Financeiro.Api.Repository;
@@ -12,54 +13,115 @@ public class ConfiguracoesRepository : IConfiguracoes
     {
         _context = context;
     }
-    public async Task<bool> AtualizarItem(Configuracoes config)
-    {
-        _context.Configuracoes.Update(config);
-        await _context.SaveChangesAsync();
-        return true;
-    }
 
-    public async Task<Configuracoes> FindId(int id)
+    public async Task<ServiceResponse<Boolean>> Atualizar(Configuracoes receber)
     {
-        var item = await _context.Configuracoes.FirstOrDefaultAsync(p=>p.Id == id);    
-        
-        if(item == null)
+        var retorno = new ServiceResponse<Boolean>();
+        try
         {
-             throw new ArgumentNullException("Item Not Found - 404 ");
+            Configuracoes item = await _context.Configuracoes.AsNoTracking().FirstOrDefaultAsync(p => p.Id == receber.Id);
+            if (item == null)
+            {
+                retorno.Mensagem = "Conta a receber não existe no banco de dados.";
+                retorno.Sucesso = false;
+            }
+
+            item.DataAlteracao = DateTime.Now.ToLocalTime();
+            _context.Configuracoes.Update(receber);
+            await _context.SaveChangesAsync();
+            retorno.DadosRetorno = true;
+
         }
-        
-        return item;
-    }
-
-    public async Task<IEnumerable<Configuracoes>> GetAll()
-    {
-        List<Configuracoes> lista = await _context.Configuracoes.ToListAsync();
-        return lista;
-    }
-
-    public async Task<bool> Remover(int id)
-    {
-        Configuracoes deletar = await FindId(id);
-        if(deletar == null){
-            return false;
+        catch (Exception ex)
+        {
+            retorno.Mensagem = ex.Message;
+            retorno.Sucesso = false;
         }
-        _context.Configuracoes.Remove(deletar);
-        await _context.SaveChangesAsync();
-        return true;
+        return retorno;
     }
 
-    public async Task<bool> Salvar(Configuracoes config)
+    public async Task<ServiceResponse<Configuracoes>> FindId(int id)
     {
-       try
-       {
-         _context.Configuracoes.Add(config);
-         await _context.SaveChangesAsync();
-         return true;
+        var retorno = new ServiceResponse<Configuracoes>();
+        try
+        {
+            Configuracoes item = await _context.Configuracoes.FirstOrDefaultAsync(p => p.Id == id);
+            retorno.DadosRetorno = item;
 
-       }
-       catch (System.Exception)
-       {        
-           throw new Exception("Erro ao gravar na base de dados.");
-       }
+            if (item == null)
+            {
+                retorno.DadosRetorno = null;
+                retorno.Mensagem = "Conta a receber não existe no banco de dados.";
+                retorno.Sucesso = false;
+            }
+
+        }
+        catch (Exception ex)
+        {
+            retorno.Mensagem = ex.Message;
+            retorno.Sucesso = false;
+        }
+        return retorno;
+    }
+
+    public async Task<ServiceResponse<IEnumerable<Configuracoes>>> Listar()
+    {
+        var retorno = new ServiceResponse<IEnumerable<Configuracoes>>();
+        try
+        {
+            retorno.DadosRetorno = await _context.Configuracoes.ToListAsync();
+            if (retorno.DadosRetorno == null)
+            {
+                retorno.Mensagem = "Nenhuma conta a receber encontrada.";
+            }
+
+        }
+        catch (Exception ex)
+        {
+            retorno.Mensagem = ex.Message;
+            retorno.Sucesso = false;
+        }
+        return retorno;
+    }
+
+    public async Task<ServiceResponse<Boolean>> Remover(int id)
+    {
+        var retorno = new ServiceResponse<Boolean>();
+        try
+        {
+            Configuracoes item = await _context.Configuracoes.FirstOrDefaultAsync(p => p.Id == id);
+
+            _context.Configuracoes.Remove(item);
+            await _context.SaveChangesAsync();
+
+            retorno.DadosRetorno = true;
+            retorno.Mensagem = "Conta a receber removida com sucesso.";
+
+
+        }
+        catch (Exception ex)
+        {
+            retorno.Mensagem = $@"Erro ao remover conta a receber. {ex.Message}";
+            retorno.Sucesso = false;
+        }
+
+        return retorno;
+    }
+
+    public async Task<ServiceResponse<Boolean>> Salvar(Configuracoes Configuracoes)
+    {
+        var retorno = new ServiceResponse<Boolean>();
+        try
+        {
+            _context.Configuracoes.Add(Configuracoes);
+            await _context.SaveChangesAsync();
+            retorno.DadosRetorno = true;
+            retorno.Mensagem = "Dados gravados com sucesso.";
+        }
+        catch (Exception e)
+        {
+            retorno.Mensagem = $@"Erro ao gravar conta a receber no banco de dados. {e.Message}";
+        }
+        return retorno;
     }
 }

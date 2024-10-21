@@ -1,14 +1,14 @@
-using System;
 using Financeiro.Api.Models;
+using Financeiro.Api.Repository.Models;
 
 namespace Financeiro.Api.Repository.Interfaces;
 
 public interface ICartaoCredito 
 {
-    Task<IEnumerable<CartaoCredito>> GetAll();
-    Task<CartaoCredito> FindId(int id);
-    Task<bool> AtualizarItem(CartaoCredito cartao);
-    Task<bool> Remover(int id);
-    Task<bool> Salvar(CartaoCredito cartao);
+    Task<ServiceResponse<IEnumerable<CartaoCredito>>> Listar();
+    Task<ServiceResponse<CartaoCredito>> FindId(int id);
+    Task<ServiceResponse<Boolean>> Atualizar(CartaoCredito cartao);
+    Task<ServiceResponse<Boolean>> Remover(int id);
+    Task<ServiceResponse<Boolean>> Salvar(CartaoCredito cartao);
 
 }

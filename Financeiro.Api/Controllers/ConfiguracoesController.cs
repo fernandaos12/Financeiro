@@ -1,66 +1,49 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Financeiro.Api.Models;
-using Financeiro.Api.Repository;
+using Financeiro.Api.Repository.Interfaces;
+using Financeiro.Api.Repository.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Financeiro.Api.Controllers
 {
     public class ConfiguracoesController : ControllerBase 
     {
-        private readonly ConfiguracoesRepository _repository;
-        public ConfiguracoesController(ConfiguracoesRepository repo)
+        private readonly IConfiguracoes _repository;
+        public ConfiguracoesController(IConfiguracoes repo)
         {
             _repository = repo;
         }
 
         [HttpGet()]
-        public async Task<IEnumerable<Configuracoes>> ListarContas()
+        public async Task<ActionResult<ServiceResponse<IEnumerable<Configuracoes>>>> ListarContas()
         {
-           var retorno = await _repository.GetAll();
-           return retorno;
+            return await _repository.Listar();
         }
 
         [HttpGet("{id}")]
-        public async Task<Configuracoes> FindbyId(int id)
+        public async Task<ActionResult<Configuracoes>> FindbyId(int id)
         {
-            var retorno = await _repository.FindId(id);
-            if(retorno == null){
-                 throw new Exception("Conta a pagar não encontrado.");
-            }
-            return retorno;         
+            ServiceResponse<Configuracoes> contaReceberItem = await _repository.FindId(id);
+            return Ok(contaReceberItem);
         }
 
         [HttpPost()]
-        public async Task<bool> Salvar(Configuracoes cp)
+        public async Task<ActionResult<ServiceResponse<Boolean>>> Salvar(Configuracoes Configuracoes)
         {
-            await _repository.Salvar(cp);
-            return true;         
+            return Ok(await _repository.Salvar(Configuracoes));
         }
 
-        [HttpPut("{id:int}")]
-        public async void AtualizarItem(Configuracoes cp)
-        { 
-            var item = await _repository.FindId(cp.Id);
-            if(item == null){
-                throw new Exception("Erro ao atualizar.Item não encontrado.");
-            }
-            
-            await _repository.AtualizarItem(cp);            
-        }
-
-        [HttpDelete("{id:int}")]
-        public async Task<bool> Apagar(int id)
+        [HttpPut()]
+        public async Task<ActionResult<Boolean>> AtualizarItem(Configuracoes Configuracoes)
         {
-            var retorno = await _repository.FindId(id);
-            if(retorno == null){
-                 throw new Exception("Item não encontrado.");
-            }
-            await _repository.Remover(id);
-            return true;  
+            ServiceResponse<Boolean> contaReceberAtualizar = await _repository.Atualizar(Configuracoes);
+            return Ok(contaReceberAtualizar);
         }
 
+        [HttpDelete()]
+        public async Task<ActionResult<Boolean>> Apagar(int id)
+        {
+            ServiceResponse<Boolean> contaReceberRemover = await _repository.Remover(id);
+            return Ok(contaReceberRemover);
+        }
     }
 }

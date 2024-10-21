@@ -1,14 +1,14 @@
-using System;
 using Financeiro.Api.Models;
+using Financeiro.Api.Repository.Models;
 
 namespace Financeiro.Api.Repository.Interfaces;
 
 public interface IConfiguracoes
 {
-    Task<IEnumerable<Configuracoes>> GetAll();
-    Task<Configuracoes> FindId(int id);
-    Task<bool> AtualizarItem(Configuracoes config);
-    Task<bool> Remover(int id);
-    Task<bool> Salvar(Configuracoes config);
+    Task<ServiceResponse<IEnumerable<Configuracoes>>> Listar();
+    Task<ServiceResponse<Configuracoes>> FindId(int id);
+    Task<ServiceResponse<Boolean>> Atualizar(Configuracoes config);
+    Task<ServiceResponse<Boolean>> Remover(int id);
+    Task<ServiceResponse<Boolean>> Salvar(Configuracoes config);
 
 }

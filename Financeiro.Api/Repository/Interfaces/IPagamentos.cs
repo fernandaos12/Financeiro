@@ -1,14 +1,14 @@
-using System;
 using Financeiro.Api.Models;
+using Financeiro.Api.Repository.Models;
 
 namespace Financeiro.Api.Repository.Interfaces;
 
 public interface IPagamentos
 {
-    Task<IEnumerable<Pagamento>> GetAll();
-    Task<Pagamento> FindId(int id);
-    Task<bool> AtualizarItem(Pagamento pag);
-    Task<bool> Remover(int id);
-    Task<bool> Salvar(Pagamento pag);
+    Task<ServiceResponse<IEnumerable<Pagamento>>> Listar();
+    Task<ServiceResponse<Pagamento>> FindId(int id);
+    Task<ServiceResponse<Boolean>> Atualizar(Pagamento pag);
+    Task<ServiceResponse<Boolean>> Remover(int id);
+    Task<ServiceResponse<Boolean>> Salvar(Pagamento pag);
 
 }
