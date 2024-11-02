@@ -13,13 +13,13 @@ builder.Services.AddDbContext<ApiDbcontext>(o => o.UseMySql(connection, ServerVe
 
 builder.Services.AddScoped<DbContext,ApiDbcontext>();
 //builder.Services.AddScoped<IContasPagar,ContasPagarRepository>();
-builder.Services.AddTransient<ContasPagarRepository>();
+builder.Services.AddScoped<IContasPagar,ContasPagarRepository>();
 builder.Services.AddScoped<IContasReceber,ContasReceberRepository>();
-builder.Services.AddTransient<PagamentosRepository>();
-builder.Services.AddTransient<CategoriasRepository>();
-builder.Services.AddTransient<CartaoCreditoRepository>();
-builder.Services.AddTransient<ReceitasRepository>();
-builder.Services.AddTransient<TagsRepository>();
+builder.Services.AddScoped<IPagamentos,PagamentosRepository>();
+builder.Services.AddScoped<ICategorias,CategoriasRepository>();
+builder.Services.AddScoped<ICartaoCredito,CartaoCreditoRepository>();
+builder.Services.AddScoped<IReceitas,ReceitasRepository>();
+builder.Services.AddScoped<ITags,TagsRepository>();
 
 
 builder.Services.AddControllers();
@@ -36,12 +36,12 @@ builder.Services.AddSwaggerGen(c=>{
 });
 
 builder.Services.AddCors(options =>
-            {
-                options.AddPolicy("EnableCORS", builder =>
-                {
-                    builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().Build();
-                });
-            });
+    {
+        options.AddPolicy("EnableCORS", builder =>
+        {
+            builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().Build();
+        });
+    });
 var app = builder.Build();
 
 app.UseRouting();

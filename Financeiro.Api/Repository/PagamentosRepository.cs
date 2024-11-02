@@ -19,7 +19,7 @@ public class PagamentosRepository : IPagamentos
         var retorno = new ServiceResponse<Boolean>();
         try
         {
-            Pagamentos item = await _context.Pagamentos.AsNoTracking().FirstOrDefaultAsync(p => p.Id == receber.Id);
+            Pagamento item = await _context.Pagamentos.AsNoTracking().FirstOrDefaultAsync(p => p.Id == receber.Id);
             if (item == null)
             {
                 retorno.Mensagem = "Conta a receber não existe no banco de dados.";
@@ -45,7 +45,7 @@ public class PagamentosRepository : IPagamentos
         var retorno = new ServiceResponse<Pagamento>();
         try
         {
-            Pagamentos item = await _context.Pagamentos.FirstOrDefaultAsync(p => p.Id == id);
+            Pagamento item = await _context.Pagamentos.FirstOrDefaultAsync(p => p.Id == id);
             retorno.DadosRetorno = item;
 
             if (item == null)
@@ -107,7 +107,11 @@ public class PagamentosRepository : IPagamentos
 
         return retorno;
     }
-
+    /// <summary>
+    /// Método responsável por gravar os dados  
+    /// </summary>
+    /// <param name="Pagamentos"></param>
+    /// <returns>boolean</returns>
     public async Task<ServiceResponse<Boolean>> Salvar(Pagamento Pagamentos)
     {
         var retorno = new ServiceResponse<Boolean>();
