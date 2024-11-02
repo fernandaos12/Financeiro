@@ -1,0 +1,61 @@
+canvas {
+    max-width: 600px;
+    margin: auto;
+  }
+
+  .bgCardGastosTotais{
+   background-color: blueviolet; 
+   color: aliceblue;
+  }   
+  .bgCardSaldoAno{
+   background-color: rgb(226, 43, 73); 
+   color: aliceblue;
+  } 
+  .bgCardSaldoMes{
+   background-color: rgb(6, 32, 180); 
+   color: aliceblue;
+  }
+  .bgCardAgendamentos{
+   background-color: rgb(230, 78, 40); 
+   color: aliceblue;
+  }
+  .cardBottom{
+    border: 1px solid rgb(1, 124, 22);
+  }
+
+  .iconeCard1{
+    color: cornflowerblue;
+    float: right;
+    font-size: 50px;
+    margin-top: -50%;
+    margin-right: -66%;
+    padding-top: 10px;
+    
+  }
+  .iconeCard2{
+    color: rgb(188, 173, 241);
+    float: right;
+    font-size: 50px;
+    margin-top: -50%;
+    margin-right: -66%;
+    padding-top: 10px;
+    
+  }
+  .iconeCard3{
+    color: rgb(243, 156, 217);
+    float: right;
+    font-size: 50px;
+    margin-top: -50%;
+    margin-right: -66%;
+    padding-top: 10px;
+    
+  }
+  .iconeCard4{
+    color: rgb(247, 204, 169);
+    float: right;
+    font-size: 50px;
+    margin-top: -50%;
+    margin-right: -66%;
+    padding-top: 10px;
+    
+  }

@@ -1,0 +1,82 @@
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #b2f3b8;">
+    <a class="navbar-brand"> <fa-icon [icon]="faSackDollar" style="color: rgb(5, 109, 57);"></fa-icon>
+      <span class="text-success ml-2"> Minhas Finanças</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+    <div class="collapse navbar-collapse" id="navbarToggle">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" [routerLink]="['/']" routerLinkActive="router-link-active" >Início</a>
+        <a class="nav-item nav-link" [routerLink]="['/contaspagar']" routerLinkActive="router-link-active" >Contas Pagar</a>
+        <a class="nav-item nav-link" routerLink="/">Contas Receber</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown link
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+    </div>
+    </div>
+  </nav> -->
+
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand"> <fa-icon [icon]="faSackDollar" style="color: rgb(5, 109, 57);"></fa-icon>
+        <span class="text-success ml-2"> Minhas Finanças</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-item nav-link" [routerLink]="['/']" routerLinkActive="router-link-active" >Início</a>
+          </li>   
+        
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Movimentações Finanças
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="nav-item nav-link" [routerLink]="['/contaspagar']" routerLinkActive="router-link-active" >Contas Pagar</a></li>
+              <li><a class="nav-item nav-link">Contas Receber</a></li>
+              <li><a class="nav-item nav-link">Impostos</a></li>
+             
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Movimentações Bancárias
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="nav-item nav-link">Bancos</a></li>
+              <li><a class="nav-item nav-link">Negociações</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/about">Receitas</a>
+          </li>
+    
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Configurações
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="nav-item nav-link">Geral</a></li>
+              <li><a class="nav-item nav-link">Pagamentos</a></li>
+              <li><a class="nav-item nav-link">Notificações</a></li>
+              <li><a class="nav-item nav-link">Usuários</a></li>
+            </ul>
+          </li>        
+        </ul>
+      </div>
+    </div>
+  </nav>

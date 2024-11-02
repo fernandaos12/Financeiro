@@ -1,0 +1,144 @@
+<!-- <div class="container">
+    <h1 class="display-5 text-center">Minhas Finanças</h1>
+</div> -->
+
+<div class="container-fluid mb-4">
+    <div class="row">
+        <div class="col-6 ">
+            <div class="card pb-2">
+                <div class="card-body">               
+                    <div style="display: block;" >
+                        <canvas id="doughnutChart_ContasPagar"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">    
+            <div class="card">
+                <div class="card-body">
+                    <div style="display: block;" >
+                        <canvas id="doughnutChart_Metas"></canvas>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body bgCardSaldoMes">
+                    <div class="col-6">
+                        Saldo Mensal
+                        <h3>R$ 100,00</h3>
+                    </div>
+                      <div class="col-6">
+                        <fa-icon [icon]="faHandHoldingDollar" class="iconeCard1"></fa-icon>
+                    </div>         
+
+                </div>
+            </div>
+        </div>
+        <div class="col-3">  
+            <div class="card bgCardGastosTotais">
+                <div class="card-body">
+                    <div class="col-6">
+                        Total Gastos do Mês
+                        <h3>R$ 100,00</h3>
+                    </div>
+                    <div class="col-6">
+                        <fa-icon [icon]="faCircleDollarToSlot" class="iconeCard2"></fa-icon>
+                    </div>     
+                </div>
+            </div>  
+        </div>  
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body bgCardSaldoAno">
+                    <div class="col-6">
+                        Saldo Anual
+                        <h3>R$ 100,00</h3>
+                    </div>
+                      <div class="col-6">
+                        <fa-icon [icon]="faChartLine" class="iconeCard3"></fa-icon>
+                    </div>   
+                </div>
+            </div>
+        </div>
+        <div class="col-3">  
+            <div class="card bgCardAgendamentos">
+                <div class="card-body">
+                    <div class="col-6">
+                        Agendamentos do Mês
+                        <h3>R$ 100,00</h3>
+                    </div>
+                      <div class="col-6">
+                        <fa-icon [icon]="faClock" class="iconeCard4"></fa-icon>
+                    </div>                   
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-6">
+            <div class="card cardBottom">
+                <div class="card-body">
+                <p class="text-center"><b>Contas a Pagar Recentes</b></p>
+                <table class="table table-sm">
+                    <thead>
+                      <tr class="table-info">
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Valor</th>
+                        <th scope="col">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                          <td>Mark</td>
+                        <td>Otto</td>
+                        <td>mdo</td>
+                      </tr>
+                      <tr>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>fat</td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">Larry the Bird</td>
+                        <td>tter</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">  
+            <div class="card cardBottom">
+                <div class="card-body ">
+                    <p class="text-center"><b>Pagamentos Recentes</b></p>
+                <table class="table table-sm">
+                    <thead>
+                      <tr class="table-success">
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Valor</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        </tr>
+                      <tr>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                      </tr>
+                      <tr>
+                        <td>Larry the Bird</td>
+                        <td>Larry the Bird</td>  
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+            </div>  
+        </div>  
+    </div>  
+</div>
