@@ -14,43 +14,47 @@ namespace Financeiro.Api.Models
         [Column("VALOR")]
         [Required]
         public double Valor { get; set; }
-         
+
         [Column("VENCIMENTO")]
         [DataType(DataType.Date)]
         [Required]
         public DateTime DataVencimento { get; set; }
-                
+
         [Column("REPETICAO")]
         [Required]
         public bool Repeticao { get; set; }
-        
+
         [Column("CONFIRMADO")]
         public bool Confirmado { get; set; }
-        
+
         [Column("CONCILIADO")]
         [Required]
         public bool Conciliado { get; set; }
-        
+
         [Column("QDADE_REPETICOES")]
         public int QdadeRepeticoes { get; set; }
-        
-        [Column("DESCRICAO")]         
+
+        [Column("DESCRICAO")]
         [Required]
-        [StringLength(maximumLength:500,ErrorMessage ="Campo Descrição obrigatório")]
+        [StringLength(maximumLength: 500, ErrorMessage = "Campo Descrição obrigatório")]
         public string? Descricao { get; set; }
-        
+
         [Column("CONTA")]
         [EnumDataType(typeof(TipoConta))]
         public TipoConta? Conta { get; set; } //se a conta é de cartao de credito
-         
+
         [Column("ID_CATEGORIAS")]
         public Categorias? Categoria { get; set; }
-        
+
         [Column("OBSERVACOES")]
         public string? Observacoes { get; set; }
-        
+
         [Column("TAGS")]
         [ForeignKey("ID_TAGS")]
         public List<Tags>? Tags { get; set; }
+
+        [Column("COR_GRAFICO")]
+        public string? CorGrafico { get; set; }
+
     }
 }

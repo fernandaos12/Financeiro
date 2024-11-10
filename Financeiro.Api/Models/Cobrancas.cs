@@ -7,10 +7,10 @@ namespace Financeiro.Api.Models;
 [Table("TB_COBRANCA")]
 public class Cobrancas : BaseModel
 {
-    [Column("DESCRICAO")]  
+    [Column("DESCRICAO")]
     [Required]
-    [StringLength(maximumLength:500,ErrorMessage = "Esse campo é obrigatório")]
-    public string? Descricao {get;set;}
+    [StringLength(maximumLength: 500, ErrorMessage = "Esse campo é obrigatório")]
+    public string? Descricao { get; set; }
 
     [Column("PAGAMENTO")]
     [ForeignKey("ID_PAGAMENTO")]
@@ -20,7 +20,7 @@ public class Cobrancas : BaseModel
     [Column("ID_CATEGORIA")]
     [ForeignKey("ID_CATEGORIA")]
     public Categorias? CategoriaDivida { get; set; }
-    
+
     [Required]
     [Column("VALOR")]
     public double? Valor { get; set; }
@@ -28,7 +28,7 @@ public class Cobrancas : BaseModel
     [Required]
     [Column("NEGOCIA_DIVIDA")]
     public bool NegociaDivida { get; set; }
-    
+
     [Column("NEGOCIACAO")]
     [ForeignKey("ID_NEGOCIACAO")]
     public Cobranca_Negociacao? NegociacaoDivida { get; set; }
@@ -36,4 +36,8 @@ public class Cobrancas : BaseModel
     [Column("VENCIMENTO")]
     [DataType(DataType.Date)]
     public DateTime? Vencimento { get; set; }
+
+    [Column("COR_GRAFICO")]
+    public string? CorGrafico { get; set; }
+
 }
