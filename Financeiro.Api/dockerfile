@@ -1,0 +1,23 @@
+FROM mcr.microsoft.com/dotnet/sdk:7.0-alpine as base
+WORKDIR /app
+RUN apk add --no-cache icu-libs icu-data-full
+EXPOSE 5000
+ENV ASPNETCORE_URLS=http://+:5000
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+
+FROM mcr.microsoft.com/dotnet/sdk:7.0-alpine as build
+WORKDIR /src
+COPY ["Financeiro.Api/Financeiro.Api.csproj", "Financeiro.Api/"]
+RUN dotnet restore "Financeiro.Api/Financeiro.Api.csproj"
+COPY  . .
+WORKDIR "/src/Financeiro.Api"
+
+RUN dotnet build "Financeiro.Api.csproj" -c Release -o /app/build
+
+FROM build as publish
+RUN dotnet  publish "Financeiro.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+FROM base as final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "Financeiro.Api.dll"]
