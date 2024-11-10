@@ -18,5 +18,6 @@ export interface ContasPagar{
         tags:string;
         status:number;
         status_Conta: number;
+        corGrafico: string;
     
     }

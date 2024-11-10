@@ -39,11 +39,11 @@
             <a class="nav-item nav-link" [routerLink]="['/']" routerLinkActive="router-link-active" >Início</a>
           </li>   
         
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown ">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Movimentações Finanças
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown" data-bs-toggle="dropdown">
               <li><a class="nav-item nav-link" [routerLink]="['/contaspagar']" routerLinkActive="router-link-active" >Contas Pagar</a></li>
               <li><a class="nav-item nav-link">Contas Receber</a></li>
               <li><a class="nav-item nav-link">Impostos</a></li>
@@ -79,4 +79,5 @@
         </ul>
       </div>
     </div>
+    
   </nav>
