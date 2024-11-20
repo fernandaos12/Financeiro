@@ -9,6 +9,7 @@ namespace Financeiro.Api.Models
     [Table("TB_PAGAMENTO")]
     public class Pagamento : BaseModel
     {
+
         [Column("DESCRICAO")]
         [Required]
         public string? Descricao { get; set; }
@@ -22,10 +23,14 @@ namespace Financeiro.Api.Models
         [EnumDataType(typeof(TipoConta))]
         public TipoConta FormaPagamento { get; set; }
 
-        [Column("DATA_FECHAMENTO")]
-        [Required]
-        [DataType(DataType.Date)]
-        public DateTime DataFechamento { get; set; }
+        [Column("PAGTO_PARCIAL")]
+        public bool PagamentoParcial { get; set; } = false;
+
+        [Column("VALOR_PAGTO_PARCIAL")]
+        public double ValorPagamentoParcial { get; set; } = 0;
+
+        [Column("SALDO_DEVEDOR")]
+        public double SaldoDevedor { get; set; } = 0;
 
         [Column("ID_CONTA_PAGAR")]
         [ForeignKey("ID_CONTAPAGAR")]

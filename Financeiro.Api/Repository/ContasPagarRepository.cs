@@ -115,13 +115,13 @@ namespace Financeiro.Api.Repository
             {
                 _context.contasPagar.Add(contaspagar);
                 await _context.SaveChangesAsync();
-                retorno.DadosRetorno = true;
-                retorno.Mensagem = "Dados gravados com sucesso.";
             }
             catch (Exception e)
             {
-                retorno.Mensagem = $@"Erro ao gravar conta a receber no banco de dados. {e.Message}";
+                retorno.Mensagem = $@"Erro ao gravar conta a pagar no banco de dados :  {e.Message}";
             }
+            retorno.DadosRetorno = true;
+            retorno.Mensagem = "Dados gravados com sucesso.";
             return retorno;
         }
     }

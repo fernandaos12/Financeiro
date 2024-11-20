@@ -30,6 +30,10 @@ namespace Financeiro.Api.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("DATA_ALTERACAO");
 
+                    b.Property<DateTime>("DataFechamento")
+                        .HasColumnType("datetime(6)")
+                        .HasColumnName("DATA_FECHAMENTO");
+
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasColumnType("longtext")
@@ -95,9 +99,6 @@ namespace Financeiro.Api.Migrations
                         .HasColumnType("varchar(600)")
                         .HasColumnName("DESCRICAO");
 
-                    b.Property<int?>("ID_CONTAPAGAR")
-                        .HasColumnType("int");
-
                     b.Property<int>("Status")
                         .HasColumnType("int")
                         .HasColumnName("STATUS");
@@ -107,8 +108,6 @@ namespace Financeiro.Api.Migrations
                         .HasColumnName("TIPOCATEGORIA");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ID_CONTAPAGAR");
 
                     b.ToTable("TB_CATEGORIAS");
                 });
@@ -322,17 +321,13 @@ namespace Financeiro.Api.Migrations
                         .HasColumnType("int")
                         .HasColumnName("ID");
 
-                    b.Property<string>("CorGrafico")
+                    b.Property<string>("Anexos")
                         .HasColumnType("longtext")
-                        .HasColumnName("COR_GRAFICO");
+                        .HasColumnName("ANEXOS");
 
                     b.Property<DateTime>("DataAlteracao")
                         .HasColumnType("datetime(6)")
                         .HasColumnName("DATA_ALTERACAO");
-
-                    b.Property<DateTime>("Data_Emissao")
-                        .HasColumnType("datetime(6)")
-                        .HasColumnName("EMISSAO");
 
                     b.Property<DateTime>("Data_Vencimento")
                         .HasColumnType("datetime(6)")
@@ -347,28 +342,21 @@ namespace Financeiro.Api.Migrations
                     b.Property<int?>("ID_CATEGORIA")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ID_PAGAMENTO")
-                        .HasColumnType("int");
+                    b.Property<int?>("NumeroParcelas")
+                        .HasColumnType("int")
+                        .HasColumnName("NUMERO_PARCELAS");
 
                     b.Property<string>("Observacoes")
                         .HasColumnType("longtext")
                         .HasColumnName("OBSERVACOES");
 
-                    b.Property<bool>("PagamentoParcial")
-                        .HasColumnType("tinyint(1)")
-                        .HasColumnName("PAGTO_PARCIAL");
-
-                    b.Property<int>("QdadeRepeticao")
+                    b.Property<int?>("Periodicidade")
                         .HasColumnType("int")
-                        .HasColumnName("QDADE_REPETICAO");
+                        .HasColumnName("PERIODICIDADE");
 
-                    b.Property<bool>("Repeticao")
-                        .HasColumnType("tinyint(1)")
+                    b.Property<int?>("Repeticao")
+                        .HasColumnType("int")
                         .HasColumnName("REPETICAO");
-
-                    b.Property<double>("SaldoDevedor")
-                        .HasColumnType("double")
-                        .HasColumnName("SALDO_DEVEDOR");
 
                     b.Property<int>("Status")
                         .HasColumnType("int")
@@ -382,15 +370,13 @@ namespace Financeiro.Api.Migrations
                         .HasColumnType("double")
                         .HasColumnName("VALOR");
 
-                    b.Property<double>("ValorPagamentoParcial")
-                        .HasColumnType("double")
-                        .HasColumnName("VALOR_PAGTO_PARCIAL");
+                    b.Property<int?>("ValorParcela")
+                        .HasColumnType("int")
+                        .HasColumnName("VALOR_PARCELA");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ID_CATEGORIA");
-
-                    b.HasIndex("ID_PAGAMENTO");
 
                     b.ToTable("TB_CONTAS_PAGAR");
                 });
@@ -473,10 +459,6 @@ namespace Financeiro.Api.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("DATA_ALTERACAO");
 
-                    b.Property<DateTime>("DataFechamento")
-                        .HasColumnType("datetime(6)")
-                        .HasColumnName("DATA_FECHAMENTO");
-
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasColumnType("longtext")
@@ -493,9 +475,21 @@ namespace Financeiro.Api.Migrations
                         .HasColumnType("int")
                         .HasColumnName("MES_COMPETENCIA");
 
+                    b.Property<bool>("PagamentoParcial")
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("PAGTO_PARCIAL");
+
+                    b.Property<double>("SaldoDevedor")
+                        .HasColumnType("double")
+                        .HasColumnName("SALDO_DEVEDOR");
+
                     b.Property<int>("Status")
                         .HasColumnType("int")
                         .HasColumnName("STATUS");
+
+                    b.Property<double>("ValorPagamentoParcial")
+                        .HasColumnType("double")
+                        .HasColumnName("VALOR_PAGTO_PARCIAL");
 
                     b.HasKey("Id");
 
@@ -568,9 +562,6 @@ namespace Financeiro.Api.Migrations
                     b.Property<int?>("ID_CONTAPAGAR")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ID_TAG")
-                        .HasColumnType("int");
-
                     b.Property<int?>("ID_TAGS")
                         .HasColumnType("int");
 
@@ -581,8 +572,6 @@ namespace Financeiro.Api.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ID_CONTAPAGAR");
-
-                    b.HasIndex("ID_TAG");
 
                     b.HasIndex("ID_TAGS");
 
@@ -602,15 +591,6 @@ namespace Financeiro.Api.Migrations
                         .IsRequired();
 
                     b.Navigation("Banco");
-                });
-
-            modelBuilder.Entity("Financeiro.Api.Models.Categorias", b =>
-                {
-                    b.HasOne("Financeiro.Api.Models.ContasPagar", "Id_ContaPagar")
-                        .WithMany()
-                        .HasForeignKey("ID_CONTAPAGAR");
-
-                    b.Navigation("Id_ContaPagar");
                 });
 
             modelBuilder.Entity("Financeiro.Api.Models.Cobranca_Negociacao", b =>
@@ -666,13 +646,7 @@ namespace Financeiro.Api.Migrations
                         .WithMany()
                         .HasForeignKey("ID_CATEGORIA");
 
-                    b.HasOne("Financeiro.Api.Models.Pagamento", "Pagamento")
-                        .WithMany()
-                        .HasForeignKey("ID_PAGAMENTO");
-
                     b.Navigation("Categoria");
-
-                    b.Navigation("Pagamento");
                 });
 
             modelBuilder.Entity("Financeiro.Api.Models.ContasReceber", b =>
@@ -706,10 +680,6 @@ namespace Financeiro.Api.Migrations
                         .WithMany()
                         .HasForeignKey("ID_CONTAPAGAR");
 
-                    b.HasOne("Financeiro.Api.Models.ContasPagar", null)
-                        .WithMany("Tags")
-                        .HasForeignKey("ID_TAG");
-
                     b.HasOne("Financeiro.Api.Models.ContasReceber", null)
                         .WithMany("Tags")
                         .HasForeignKey("ID_TAGS");
@@ -724,11 +694,6 @@ namespace Financeiro.Api.Migrations
                     b.Navigation("ContasBancarias");
 
                     b.Navigation("Receitas");
-                });
-
-            modelBuilder.Entity("Financeiro.Api.Models.ContasPagar", b =>
-                {
-                    b.Navigation("Tags");
                 });
 
             modelBuilder.Entity("Financeiro.Api.Models.ContasReceber", b =>

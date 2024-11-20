@@ -14,15 +14,15 @@ public class CartaoCredito : BaseModel
     [Column("NUMERO_CARTAO")]
     [Required]
     public int NumeroCartao { get; set; }
-    
+
     [Column("VALIDADE")]
     [Required]
     public DateTime Validade { get; set; }
-    
+
     [Column("NOME_NOCARTAO")]
     [Required]
     public int NomeNoCartao { get; set; }
-    
+
     [Column("BANCO")]
     [Required]
     [ForeignKey("ID_CONTA_BANCARIA")]
@@ -35,5 +35,10 @@ public class CartaoCredito : BaseModel
     [Column("LIMITE_UTILIZADO")]
     [Required]
     public double LimiteUtilizado { get; set; }
+
+    [Column("DATA_FECHAMENTO")]
+    [Required]
+    [DataType(DataType.Date)]
+    public DateTime DataFechamento { get; set; }
 
 }

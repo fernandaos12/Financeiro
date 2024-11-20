@@ -20,12 +20,8 @@ namespace Financeiro.Api.Models
         [EnumDataType(typeof(TipoCategoria))]
         public TipoCategoria tipoCategoria { get; set; }
 
-        [Column("ID_CONTA_PAGAR")]
-        [ForeignKey("ID_CONTAPAGAR")]
-        public ContasPagar? Id_ContaPagar { get; set; }
-
         [Column("COR_GRAFICO")]
-        public string? CorGrafico { get; set; }
+        public string? CorGrafico { get; set; } = "#FFF";
 
     }
 }
