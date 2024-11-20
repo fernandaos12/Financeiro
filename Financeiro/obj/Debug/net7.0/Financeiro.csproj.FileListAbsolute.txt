@@ -206,3 +206,4 @@ C:\Projetos\Financeiro\Financeiro\obj\Debug\net7.0\scopedcss\projectbundle\Finan
 C:\Projetos\Financeiro\Financeiro\obj\Debug\net7.0\Financeiro.csproj.Up2Date
 C:\Projetos\Financeiro\Financeiro\obj\Debug\net7.0\Financeiro.genruntimeconfig.cache
 C:\Projetos\Financeiro\Financeiro\obj\Debug\net7.0\ref\Financeiro.dll
+C:\Projetos\Financeiro\Financeiro\bin\Debug\net7.0\Financeiro.Api.xml

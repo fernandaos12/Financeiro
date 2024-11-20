@@ -1,0 +1,60 @@
+<div class="container mt-5">
+  <h3 class="text-center">Cadastrar</h3>
+  <form
+    [formGroup]="cadastroFormulario"
+    (ngSubmit)="salvar()"
+    #formDir="ngForm"
+  >
+    <div class="form-group">
+      <label for="descricao">Descrição</label>
+      <input
+        type="text"
+        class="form-control"
+        id="descricao"
+        placeholder="Descrição"
+        formControlName="descricao"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="descricao">Valor</label>
+      <input
+        type="number"
+        class="form-control"
+        id="valor"
+        placeholder="R$ 0,00"
+        formControlName="valor"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="descricao">Observação</label>
+      <input
+        type="text"
+        class="form-control"
+        id="observacao"
+        placeholder="observação"
+        formControlName="observacao"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="descricao">Situação</label>
+      <select
+        type="text"
+        class="form-control"
+        id="situacao"
+        placeholder="selecione"
+        formControlName="situacao"
+      >
+        <option value="false">Pendente</option>
+        <option value="true">Pago</option>
+      </select>
+    </div>
+
+    <div class="form-group d-flex mt-3 justify-content-end">
+      <button type="submit" class="btn btn-success">Cadastrar</button>
+      <a class="btn btn-danger ml-2" [routerLink]="['/']">Cancelar</a>
+    </div>
+  </form>
+</div>

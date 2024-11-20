@@ -1,107 +1,102 @@
 <div class="container">
-    <h1 class="display-5">Contas a Pagar</h1>
+  <h1 class="display-5">Contas a Pagar</h1>
 </div>
 
 <div class="container mt-lg-5">
-    <div class="row">
-        <div class="col-6">
-            <button type="button" class="btn btn-success" (click)="openModalCadastro()">Cadastrar Conta</button>
-           
-        </div>
-        <div class="col-6 input-box">        
-            
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Buscar registro" aria-label="BuscarRegistroContasPagar" aria-describedby="basic-addon2" (input)="search($event)"/>
-                <div class="input-group-append">
-                    <span class="input-group-text" id="basic-addon2">
-                        <fa-icon [icon]="faMagnifyingGlass" style="color: cornflowerblue;"></fa-icon>
-                    </span>
-                </div>
-              </div>
-        </div>
+  <div class="row">
+    <div class="col-6">
+      <button
+        type="button"
+        class="btn btn-success"
+        (click)="openModalCadastro()"
+      >
+        Cadastrar Conta
+      </button>
     </div>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-lg-end">
-          <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-              <span class="sr-only">Previous</span>
-            </a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-              <span class="sr-only">Next</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    <div class="row mt-lg-5">
-        <table class="table">
-            <thead>
-                <tr>
-                    <td></td>
-                    <td>ID</td>
-                    <td>Descrição</td>
-                    <td>Valor</td>
-                    <td>Data de vencimento</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </thead>
-            <tbody *ngFor="let item of contaspagarlist">
-                <tr>
-                    <td>
-                        <div *ngIf="item.status_Conta == 1; else inativo">
-                            <fa-icon [icon]="faCheck" style="color: green;"></fa-icon>
-                        </div>
-                        <ng-template #inativo>
-                            <fa-icon [icon]="faCircleXmark" style="color: red;"></fa-icon>
-                        </ng-template>                  
-                    </td>
-                <td>{{item.id}}</td>
-                <td>{{item.descricao}}</td>
-                <td>{{item.valor}}</td>
-                <td>{{item.data_Vencimento}}</td>
-                <td><button type="button" class="btn btn-info">Editar</button></td>
-                <td><button type="button" class="btn btn-danger">Excluir</button></td>
-            </tr>
-        </tbody>
-    </table>
-    </div>    
-</div>
-
-    <!-- cadastro -->    
-
-    <div class="modal" id="cadastrarContaPagar" >
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Cadastrar Conta a Pagar</h4>                
-            </div>            
-
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-6">
-                      descricao
-                    </div>  
-                     <div class="col-6">
-                        status
-                    </div>
-
-                </div>
-            </div>
-            
-           
-          <div class="modal-footer">
-                <button type="button" class="btn btn-success" (click)="salvarDados()">Salvar</button>
-                <button type="button" class="btn btn-danger" (click)="closeModalCadastro()">Cancelar</button>
-            </div>
-          </div>
+    <div class="col-6 input-box">
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Buscar registro"
+          aria-label="BuscarRegistroContasPagar"
+          aria-describedby="basic-addon2"
+          (input)="search($event)"
+        />
+        <div class="input-group-append">
+          <span class="input-group-text" id="basic-addon2">
+            <fa-icon
+              [icon]="faMagnifyingGlass"
+              style="color: cornflowerblue"
+            ></fa-icon>
+          </span>
         </div>
       </div>
-       
-      
+    </div>
+  </div>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-lg-end">
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div class="row mt-lg-5">
+    <table class="table">
+      <thead>
+        <tr>
+          <td></td>
+          <td>ID</td>
+          <td>Descrição</td>
+          <td>Valor</td>
+          <td>Data de vencimento</td>
+          <td></td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody *ngFor="let item of contaspagarlist">
+        <tr>
+          <td>
+            <div *ngIf="item.status_Conta == 1; else inativo">
+              <fa-icon [icon]="faCheck" style="color: green"></fa-icon>
+            </div>
+            <ng-template #inativo>
+              <fa-icon [icon]="faCircleXmark" style="color: red"></fa-icon>
+            </ng-template>
+          </td>
+          <td>{{ item.id }}</td>
+          <td>{{ item.descricao }}</td>
+          <td>{{ item.valor }}</td>
+          <td>{{ item.data_Vencimento }}</td>
+          <td><button type="button" class="btn btn-info">Editar</button></td>
+          <td><button type="button" class="btn btn-danger">Excluir</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- modal cadastro -->
+
+<div class="modal" id="cadastrarContaPagar">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <app-contas-pagar-cadastro
+        (onSubmit)="criarContaPagar($event)"
+      ></app-contas-pagar-cadastro>
+      <!-- <app-formulario (onSubmit)="criarContaPagar($event)"></app-formulario> -->
+    </div>
+  </div>
+</div>

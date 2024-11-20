@@ -1,0 +1,126 @@
+<div class="container" id="cadastrarContaPagar">
+  <div>
+    <h4 class="modal-title">Cadastrar Conta a Pagar</h4>
+  </div>
+  <div class="row">
+    <div class="card mb-2">
+      <div class="card-body">
+        <form
+          [formGroup]="cadastroContasPagarForm"
+          (ngSubmit)="salvarDados()"
+          #formDir="ngForm"
+        >
+          <div class="row col-12">
+            <div class="col-6">
+              <label>Descrição</label>
+              <input
+                formControlName="descricao"
+                name="descricao"
+                type="text"
+                class="form-control"
+                required
+              />
+            </div>
+            <div class="col-6">
+              <label>Valor</label>
+              <input
+                formControlName="valor"
+                name="descricao"
+                type="number"
+                class="form-control"
+                placeholder="R$ 0,00"
+                required
+              />
+            </div>
+          </div>
+          <div class="row col-12">
+            <div class="col-6">
+              <label>Data Emissão</label>
+              <input
+                formControlName="data_Emissao"
+                name="data_Emissao"
+                type="date"
+                id="data_Emissao"
+                class="form-control"
+                bsDatepicker
+                required
+              />
+            </div>
+            <div class="col-6">
+              <label>Data Vencimento</label>
+              <input
+                formControlName="data_Vencimento"
+                name="data_Vencimento"
+                type="date"
+                class="form-control"
+                id="data_Vencimento"
+                bsDatepicker
+                required
+              />
+            </div>
+          </div>
+          <div class="row col-12">
+            <div class="col-6 form-group">
+              <label>Repetição</label>
+              <select
+                class="form-control"
+                name="repeticao"
+                id="repeticao"
+                formControlName="repeticao"
+              >
+                <option value="Unico">Único</option>
+                <option value="Parcelado">Parcelado</option>
+                <option value="Fixo">Fixo</option>
+              </select>
+            </div>
+            <div class="col-6 form-group">
+              <label>Quantidade Repetições</label>
+              <input
+                formControlName="qdadeRepeticao"
+                name="descricao"
+                type="number"
+                class="form-control"
+              />
+            </div>
+          </div>
+          <div class="row col-12">
+            <div class="col-6">
+              <label>Conta</label>
+              <input
+                formControlName="conta"
+                name="descricao"
+                type="text"
+                class="form-control"
+                required
+              />
+            </div>
+            <div class="col-6">
+              <label>Categoria</label>
+              <input
+                formControlName="categoria"
+                name="descricao"
+                type="text"
+                class="form-control"
+                required
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="row col-6 mb-2">
+    <div class="col-3">
+      <button type="submit" class="btn btn-success">Cadastrar</button>
+    </div>
+    <div class="col-3">
+      <button
+        type="button"
+        class="btn btn-danger"
+        (click)="closeModalCadastro()"
+      >
+        Cancelar
+      </button>
+    </div>
+  </div>
+</div>

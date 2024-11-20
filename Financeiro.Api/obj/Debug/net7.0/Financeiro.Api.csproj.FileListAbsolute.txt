@@ -110,3 +110,5 @@ C:\Projetos\Financeiro\Financeiro.Api\obj\Debug\net7.0\scopedcss\bundle\Financei
 C:\Projetos\Financeiro\Financeiro.Api\obj\Debug\net7.0\Financei.B54B3B2E.Up2Date
 C:\Projetos\Financeiro\Financeiro.Api\obj\Debug\net7.0\Financeiro.Api.genruntimeconfig.cache
 C:\Projetos\Financeiro\Financeiro.Api\obj\Debug\net7.0\ref\Financeiro.Api.dll
+C:\Projetos\Financeiro\Financeiro.Api\bin\Debug\net7.0\Financeiro.Api.xml
+C:\Projetos\Financeiro\Financeiro.Api\obj\Debug\net7.0\Financeiro.Api.xml
