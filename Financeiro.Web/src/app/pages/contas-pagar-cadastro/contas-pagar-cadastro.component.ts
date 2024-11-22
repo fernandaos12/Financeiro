@@ -55,6 +55,8 @@ import { RouterModule } from '@angular/router';
   styleUrl: './contas-pagar-cadastro.component.css',
 })
 export class ContasPagarCadastroComponent implements OnInit {
+  selectedOptionRepeticao: string = 'Selecione'; //padrao select repeticao
+
   cadastroContasPagarForm!: FormGroup;
 
   @Output() onSubmit = new EventEmitter<ContasPagar>();
@@ -65,25 +67,17 @@ export class ContasPagarCadastroComponent implements OnInit {
 
     this.cadastroContasPagarForm = new FormGroup({
       descricao: new FormControl(''),
-      data_Emissao: new FormControl(''),
       data_Vencimento: new FormControl(''),
-      dataAlteracao: new FormControl(''),
-      pagamento: new FormControl(''),
       id: new FormControl(0),
-      nome: new FormControl(''),
       valor: new FormControl(0),
-      pagamentoParcial: new FormControl(''),
-      valorPagamentoParcial: new FormControl(''),
-      saldoDevedor: new FormControl(''),
       categoria: new FormControl(''),
       repeticao: new FormControl(''),
-      qdadeRepeticao: new FormControl(''),
+      periodicidade: new FormControl(''),
       observacoes: new FormControl(''),
-      tags: new FormControl(''),
-      status: new FormControl(''),
       status_Conta: new FormControl(''),
-      corGrafico: new FormControl(''),
-      conta: new FormControl(''),
+      anexos: new FormControl(''),
+      numeroParcelas: new FormControl(0),
+      valorParcela: new FormControl(0),
     });
   }
 

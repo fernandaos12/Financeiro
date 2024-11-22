@@ -2,7 +2,7 @@
   <div>
     <h4 class="modal-title">Cadastrar Conta a Pagar</h4>
   </div>
-  <div class="row">
+  <div class="row m-2">
     <div class="card mb-2">
       <div class="card-body">
         <form
@@ -18,32 +18,27 @@
                 name="descricao"
                 type="text"
                 class="form-control"
-                required
               />
             </div>
             <div class="col-6">
               <label>Valor</label>
               <input
                 formControlName="valor"
-                name="descricao"
+                name="valor"
                 type="number"
                 class="form-control"
                 placeholder="R$ 0,00"
-                required
               />
             </div>
           </div>
           <div class="row col-12">
             <div class="col-6">
-              <label>Data Emissão</label>
+              <label>Categoria</label>
               <input
-                formControlName="data_Emissao"
-                name="data_Emissao"
-                type="date"
-                id="data_Emissao"
+                formControlName="categoria"
+                name="categoria"
+                type="text"
                 class="form-control"
-                bsDatepicker
-                required
               />
             </div>
             <div class="col-6">
@@ -55,7 +50,6 @@
                 class="form-control"
                 id="data_Vencimento"
                 bsDatepicker
-                required
               />
             </div>
           </div>
@@ -67,43 +61,69 @@
                 name="repeticao"
                 id="repeticao"
                 formControlName="repeticao"
+                [(ngModel)]="selectedOptionRepeticao"
               >
+                <option value="">Selecione</option>
                 <option value="Unico">Único</option>
                 <option value="Parcelado">Parcelado</option>
                 <option value="Fixo">Fixo</option>
               </select>
             </div>
             <div class="col-6 form-group">
-              <label>Quantidade Repetições</label>
+              <label>Anexos</label>
               <input
-                formControlName="qdadeRepeticao"
-                name="descricao"
-                type="number"
+                formControlName="anexos"
+                name="anexos"
+                type="text"
                 class="form-control"
               />
             </div>
           </div>
+
+          <div *ngIf="selectedOptionRepeticao == 'Parcelado'">
+            <div class="row col-12">
+              <div class="col-6">
+                <label>Periodicidade</label>
+                <select
+                  formControlName="periodicidade"
+                  name="periodicidade"
+                  class="form-control"
+                >
+                  <option value="quinzenal">Quinzenal</option>
+                  <option value="semanal">Semanal</option>
+                  <option value="mensal">Mensal</option>
+                  <option value="semestral">Semestral</option>
+                  <option value="anual">Anual</option>
+                </select>
+              </div>
+              <div class="col-6">
+                <label>Número de Parcelas</label>
+                <input
+                  formControlName="numeroParcelas"
+                  name="numeroParcelas"
+                  type="number"
+                  class="form-control"
+                />
+              </div>
+              <div class="col-6">
+                <label>Valor da Parcela</label>
+                <input
+                  formControlName="valorParcela"
+                  name="valorParcela"
+                  type="number"
+                  class="form-control"
+                />
+              </div>
+            </div>
+          </div>
           <div class="row col-12">
-            <div class="col-6">
-              <label>Conta</label>
-              <input
-                formControlName="conta"
-                name="descricao"
-                type="text"
-                class="form-control"
-                required
-              />
-            </div>
-            <div class="col-6">
-              <label>Categoria</label>
-              <input
-                formControlName="categoria"
-                name="descricao"
-                type="text"
-                class="form-control"
-                required
-              />
-            </div>
+            <label>Observações</label>
+            <input
+              formControlName="observacoes"
+              name="observacoes"
+              type="text"
+              class="form-control"
+            />
           </div>
         </form>
       </div>

@@ -67,11 +67,16 @@ export class ContasPagarComponent implements OnInit {
       const dados = data.dadosRetorno;
 
       dados.map((item) => {
-        item.data_Emissao = new Date(item.data_Emissao).toLocaleDateString();
-        item.data_Vencimento = new Date(
-          item.data_Vencimento
-        ).toLocaleDateString();
-        item.dataAlteracao = new Date(item.dataAlteracao).toLocaleDateString();
+        let date = new Date(item.data_Vencimento);
+
+        if (!isNaN(date.getTime())) {
+          item.data_Vencimento = date.toLocaleDateString();
+        } else {
+          console.log('data invalida', date);
+        }
+        // item.data_Vencimento = new Date(
+        //   item.data_Vencimento
+        // ).toLocaleDateString();
       });
 
       this.contaspagarlist = dados;
