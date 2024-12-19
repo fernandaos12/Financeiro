@@ -23,5 +23,7 @@ namespace Financeiro.Api.Models
         [Column("COR_GRAFICO")]
         public string? CorGrafico { get; set; } = "#FFF";
 
+        public ICollection<ContasPagar>? ContasPagar { get; set; }
+
     }
 }

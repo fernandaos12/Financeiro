@@ -6,7 +6,7 @@ namespace Financeiro.Api.Data
     public class ApiDbcontext : DbContext
     {
         public ApiDbcontext(DbContextOptions<ApiDbcontext> _options) : base(_options)
-        {            
+        {
         }
         public DbSet<ContasPagar> contasPagar { get; set; }
         public DbSet<ContasReceber> ContasReceber { get; set; }
@@ -20,14 +20,14 @@ namespace Financeiro.Api.Data
         public DbSet<Receitas> Receitas { get; set; }
         public DbSet<Tags> Tags { get; set; }
 
-        // protected override void OnModelCreating(ModelBuilder builder)
-        // {
-        //     builder.Entity<ContasPagar>(a=> 
-        //     {
-        //         a.HasKey(p=>p.Id);
-        //         a.Property(p=>p.Descricao).HasMaxLength(500).HasColumnType("varchar(500)");
-        //         a.HasMany(p=>p.Tags).WithOne().HasForeignKey(p=>p.Id);
-        //         });
-        // }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<ContasPagar>()
+            .HasOne(p => p.Categoria)
+            .WithMany(c => c.ContasPagar)
+            .HasForeignKey(p => p.CategoriaId);
+
+        }
     }
 }

@@ -29,6 +29,9 @@ namespace Financeiro.Api.Models
         [ForeignKey("ID_CATEGORIA")]
         public Categorias? Categoria { get; set; }
 
+        [Column("CATEGORIAID")]
+        public int? CategoriaId { get; set; }
+
         [Column("REPETICAO")]
         [EnumDataType(typeof(TipoRepeticao))]
         public TipoRepeticao? Repeticao { get; set; } = TipoRepeticao.UNICO;
@@ -48,5 +51,6 @@ namespace Financeiro.Api.Models
 
         [Column("ANEXOS")]
         public String? Anexos { get; set; } = String.Empty;
+
     }
 }
