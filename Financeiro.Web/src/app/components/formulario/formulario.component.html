@@ -1,60 +1,165 @@
-<div class="container mt-5">
-  <h3 class="text-center">Cadastrar</h3>
-  <form
-    [formGroup]="cadastroFormulario"
-    (ngSubmit)="salvar()"
-    #formDir="ngForm"
-  >
-    <div class="form-group">
-      <label for="descricao">Descrição</label>
-      <input
-        type="text"
-        class="form-control"
-        id="descricao"
-        placeholder="Descrição"
-        formControlName="descricao"
-      />
-    </div>
+<div class="container" id="cadastrarContaPagar">
+  <div class="row">
+    <h4 class="modal-title">{{ btnTitulo }}</h4>
+  </div>
+</div>
 
-    <div class="form-group">
-      <label for="descricao">Valor</label>
-      <input
-        type="number"
-        class="form-control"
-        id="valor"
-        placeholder="R$ 0,00"
-        formControlName="valor"
-      />
+<div class="container">
+  <form [formGroup]="contasForm" (ngSubmit)="salvar()" #formDir="ngForm">
+    <input type="hidden" formControlName="id" />
+    <div class="row">
+      <div class="col-lg-6 col-sm-12">
+        <label>Descrição</label>
+        <input
+          formControlName="descricao"
+          name="descricao"
+          type="text"
+          class="form-control"
+        />
+      </div>
+      <div class="col-lg-6 col-sm-12">
+        <label>Valor</label>
+        <input
+          formControlName="valor"
+          name="valor"
+          type="number"
+          class="form-control"
+          placeholder="R$ 0,00"
+        />
+      </div>
     </div>
-
-    <div class="form-group">
-      <label for="descricao">Observação</label>
-      <input
-        type="text"
-        class="form-control"
-        id="observacao"
-        placeholder="observação"
-        formControlName="observacao"
-      />
+    <div class="row">
+      <div class="col-lg-6 col-sm-12">
+        <label>Categoria</label>
+        <select
+          class="form-control"
+          name="categoria"
+          id="categoria"
+          formControlName="categoriaId"
+          [(ngModel)]="categoriaId"
+        >
+          <option value="">Selecione</option>
+          <option *ngFor="let item of categorias" [value]="item.id">
+            {{ item.descricao }}
+          </option>
+        </select>
+      </div>
+      <div class="col-lg-6 col-sm-12">
+        <label>Data Vencimento</label>
+        <input
+          formControlName="data_Vencimento"
+          name="data_Vencimento"
+          type="date"
+          class="form-control"
+          id="data_Vencimento"
+          bsDatepicker
+        />
+      </div>
     </div>
-
-    <div class="form-group">
-      <label for="descricao">Situação</label>
-      <select
-        type="text"
-        class="form-control"
-        id="situacao"
-        placeholder="selecione"
-        formControlName="situacao"
-      >
-        <option value="false">Pendente</option>
-        <option value="true">Pago</option>
-      </select>
+    <div class="row">
+      <div class="col-lg-6 col-sm-12 form-group">
+        <label>Repetição</label>
+        <select
+          class="form-control"
+          name="repeticao"
+          id="repeticao"
+          formControlName="repeticao"
+        >
+          <option value="">Selecione</option>
+          <option value="0">Único</option>
+          <option value="1">Parcelado</option>
+          <option value="2">Fixo</option>
+        </select>
+      </div>
+      <div class="col-lg-6 col-sm-12 form-group">
+        <label>Status</label>
+        <select
+          class="form-control"
+          name="status_Conta"
+          id="status_Conta"
+          formControlName="status_Conta"
+        >
+          <option value="">Selecione</option>
+          <option value="Pago">Pago</option>
+          <option value="Pendente">Pendente</option>
+        </select>
+      </div>
     </div>
-
-    <div class="form-group d-flex mt-3 justify-content-end">
-      <button type="submit" class="btn btn-success">Cadastrar</button>
-      <a class="btn btn-danger ml-2" [routerLink]="['/']">Cancelar</a>
+    <div class="row">
+      <div class="col-lg-6 col-sm-12 form-group">
+        <label>Anexos</label>
+        <input
+          formControlName="anexos"
+          name="anexos"
+          type="text"
+          class="form-control"
+        />
+      </div>
+      <div class="col-lg-6 col-sm-12">
+        <label>Observações</label>
+        <input
+          formControlName="observacoes"
+          name="observacoes"
+          type="text"
+          class="form-control"
+        />
+      </div>
+    </div>
+    <div *ngIf="contasForm.get('repeticao')?.value === '1'">
+      <div class="row col-sm-12">
+        <div class="col-lg-6 col-sm-12">
+          <label>Periodicidade</label>
+          <select
+            formControlName="periodicidade"
+            name="periodicidade"
+            class="form-control"
+          >
+            <option value="0">Quinzenal</option>
+            <option value="1">Semanal</option>
+            <option value="2">Mensal</option>
+            <option value="3">Semestral</option>
+            <option value="4">Anual</option>
+          </select>
+        </div>
+        <div class="col-lg-3 col-sm-12">
+          <label>Número de Parcelas</label>
+          <input
+            formControlName="numeroParcelas"
+            name="numeroParcelas"
+            type="number"
+            class="form-control"
+          />
+        </div>
+        <div class="col-lg-3 col-sm-12">
+          <label>Valor da Parcela</label>
+          <input
+            formControlName="valorParcela"
+            name="valorParcela"
+            type="number"
+            class="form-control"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="row col-lg-3 col-sm-12">
+        <button
+          type="submit"
+          class="btn btn-success mt-2 btn-block"
+          [disabled]="!contasForm.valid"
+        >
+          {{ btnAcao }}
+        </button>
+      </div>
+      <div class="row col-lg-3 col-sm-12 ml-2">
+        <button
+          type="button"
+          class="btn btn-danger mt-2"
+          routerLink="/contaspagar"
+        >
+          Cancelar
+        </button>
+      </div>
     </div>
   </form>
 </div>

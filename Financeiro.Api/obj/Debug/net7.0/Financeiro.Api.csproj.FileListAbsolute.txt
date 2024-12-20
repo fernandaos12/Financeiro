@@ -112,3 +112,6 @@ C:\Projetos\Financeiro\Financeiro.Api\obj\Debug\net7.0\Financeiro.Api.genruntime
 C:\Projetos\Financeiro\Financeiro.Api\obj\Debug\net7.0\ref\Financeiro.Api.dll
 C:\Projetos\Financeiro\Financeiro.Api\bin\Debug\net7.0\Financeiro.Api.xml
 C:\Projetos\Financeiro\Financeiro.Api\obj\Debug\net7.0\Financeiro.Api.xml
+C:\Projetos\Financeiro\Financeiro.Api\bin\Debug\net7.0\Financeiro.Api.staticwebassets.endpoints.json
+C:\Projetos\Financeiro\Financeiro.Api\obj\Debug\net7.0\staticwebassets.build.endpoints.json
+C:\Projetos\Financeiro\Financeiro.Api\obj\Debug\net7.0\staticwebassets\msbuild.Financeiro.Api.Microsoft.AspNetCore.StaticWebAssetEndpoints.props

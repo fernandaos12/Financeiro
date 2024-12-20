@@ -1,0 +1,8 @@
+<div *ngIf="contaPagar">
+  <app-formulario
+    [btnAcao]="btnAcao"
+    [btnTitulo]="btnTitulo"
+    [dadosContasPagar]="contaPagar"
+    (onSubmit)="atualizarContaPagar($event)"
+  ></app-formulario>
+</div>

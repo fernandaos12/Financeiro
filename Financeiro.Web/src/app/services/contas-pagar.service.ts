@@ -18,6 +18,14 @@ export class ContasPagarService {
   GetContasPagar(): Observable<Response<ContasPagar[]>> {
     return this.http.get<Response<ContasPagar[]>>(this.apiurl);
   }
+  UpdateContasPagar(
+    contapagar: ContasPagar
+  ): Observable<Response<ContasPagar[]>> {
+    return this.http.put<Response<ContasPagar[]>>(`${this.apiurl}`, contapagar);
+  }
+  GetContaPagar(id: number): Observable<Response<ContasPagar>> {
+    return this.http.get<Response<ContasPagar>>(`${this.apiurl}/${id}`);
+  }
   DeleteContasPagar(
     id: number | undefined
   ): Observable<Response<ContasPagar[]>> {
@@ -27,6 +35,19 @@ export class ContasPagarService {
   SaveContasPagar(
     contaspagar: ContasPagar
   ): Observable<Response<ContasPagar[]>> {
-    return this.http.post<Response<ContasPagar[]>>(this.apiurl, contaspagar);
+    return this.http.post<Response<ContasPagar[]>>(
+      `${this.apiurl}`,
+      contaspagar
+    );
+  }
+
+  //atualizar conta a pagar como pago na tela de pagameento
+  InativarContasPagar(
+    id: number | undefined
+  ): Observable<Response<ContasPagar[]>> {
+    return this.http.put<Response<ContasPagar[]>>(
+      `${this.apiurl}/Inativar?id=${id}`,
+      {}
+    );
   }
 }

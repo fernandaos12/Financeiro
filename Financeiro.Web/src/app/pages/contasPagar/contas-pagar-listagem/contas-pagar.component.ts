@@ -5,24 +5,19 @@ import {
   faMagnifyingGlass,
   faCircleXmark,
 } from '@fortawesome/free-solid-svg-icons';
-import { ContasPagarService } from '../../services/contas-pagar.service';
-import { ContasPagar } from '../../models/contasPagar';
+
 import { CommonModule } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import { Router } from '@angular/router';
-import { ContasPagarCadastroComponent } from '../contas-pagar-cadastro/contas-pagar-cadastro.component';
+import { Router, RouterModule } from '@angular/router';
+import { ContasPagar } from '../../../models/contasPagar';
+import { ContasPagarService } from '../../../services/contas-pagar.service';
 
 @Component({
   selector: 'app-contas-pagar',
   standalone: true,
-  imports: [
-    FontAwesomeModule,
-    MatSelectModule,
-    CommonModule,
-    ContasPagarCadastroComponent,
-  ],
+  imports: [FontAwesomeModule, MatSelectModule, CommonModule, RouterModule],
   providers: [
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
@@ -31,7 +26,7 @@ import { ContasPagarCadastroComponent } from '../contas-pagar-cadastro/contas-pa
     provideNativeDateAdapter(),
   ],
 
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './contas-pagar.component.html',
   styleUrl: './contas-pagar.component.css',
 })
@@ -63,6 +58,9 @@ export class ContasPagarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //this.loadingService.show();
+    // setTimeout(() => this.loadingService.hide(), 3000);
+
     this.ContasPagarService.GetContasPagar().subscribe((data) => {
       const dados = data.dadosRetorno;
 
@@ -74,9 +72,6 @@ export class ContasPagarComponent implements OnInit {
         } else {
           console.log('data invalida', date);
         }
-        // item.data_Vencimento = new Date(
-        //   item.data_Vencimento
-        // ).toLocaleDateString();
       });
 
       this.contaspagarlist = dados;

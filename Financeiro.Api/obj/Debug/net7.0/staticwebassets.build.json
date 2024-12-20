@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "zJste/fIowU6rAVXs5J8OL0oi/58Zh89hFsgs4fxiYw=",
+  "Hash": "79dpZ/kFM7YUjd14nC+zajlTYFUVZH3F3DDdQwIJgxs=",
   "Source": "Financeiro.Api",
   "BasePath": "_content/Financeiro.Api",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }

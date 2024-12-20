@@ -8,7 +8,8 @@
       <button
         type="button"
         class="btn btn-success"
-        (click)="openModalCadastro()"
+        [routerLink]="['/contaspagarcadastro']"
+        routerLinkActive="router-link-active"
       >
         Cadastrar Conta
       </button>
@@ -80,23 +81,18 @@
           <td>{{ item.descricao }}</td>
           <td>{{ item.valor }}</td>
           <td>{{ item.data_Vencimento }}</td>
-          <td><button type="button" class="btn btn-info">Editar</button></td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-info"
+              routerLink="/contaspagareditar/{{ item.id }}"
+            >
+              Editar
+            </button>
+          </td>
           <td><button type="button" class="btn btn-danger">Excluir</button></td>
         </tr>
       </tbody>
     </table>
-  </div>
-</div>
-
-<!-- modal cadastro -->
-
-<div class="modal" id="cadastrarContaPagar">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <app-contas-pagar-cadastro
-        (onSubmit)="criarContaPagar($event)"
-      ></app-contas-pagar-cadastro>
-      <!-- <app-formulario (onSubmit)="criarContaPagar($event)"></app-formulario> -->
-    </div>
   </div>
 </div>

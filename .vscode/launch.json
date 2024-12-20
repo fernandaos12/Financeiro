@@ -1,13 +1,12 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-      {
-        "name": "Launch Chrome",
-        "request": "launch",
-        "type": "chrome",
-        "url": "http://localhost:4200",
-        "webRoot": "${workspaceFolder}"
-      }
-    ]
-  }
-  
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch Edge",
+      "request": "launch",
+      "type": "edge",
+      "url": "http://localhost:4200",
+      "webRoot": "${workspaceFolder}"
+    }
+  ]
+}

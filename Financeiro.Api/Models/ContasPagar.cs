@@ -34,7 +34,7 @@ namespace Financeiro.Api.Models
 
         [Column("REPETICAO")]
         [EnumDataType(typeof(TipoRepeticao))]
-        public TipoRepeticao? Repeticao { get; set; } = TipoRepeticao.UNICO;
+        public TipoRepeticao Repeticao { get; set; } = TipoRepeticao.UNICO;
 
         [Column("PERIODICIDADE")] //MENSAL,ANUAL,SEMESTRAL
         [EnumDataType(typeof(Periodicidade))]
