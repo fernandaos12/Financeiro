@@ -6,7 +6,7 @@
 trigger:
 - main
 
-pool: financeiroAgent
+pool: AgentFinanceiro
 
 variables:
   solution: '**/*.sln'
