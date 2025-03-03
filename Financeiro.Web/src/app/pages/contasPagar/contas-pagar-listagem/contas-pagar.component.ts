@@ -1,4 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  CUSTOM_ELEMENTS_SCHEMA,
+} from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   faCheck,
@@ -13,11 +18,18 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { Router, RouterModule } from '@angular/router';
 import { ContasPagar } from '../../../models/contasPagar';
 import { ContasPagarService } from '../../../services/contas-pagar.service';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-contas-pagar',
   standalone: true,
-  imports: [FontAwesomeModule, MatSelectModule, CommonModule, RouterModule],
+  imports: [
+    FontAwesomeModule,
+    MatSelectModule,
+    CommonModule,
+    RouterModule,
+    NgxPaginationModule,
+  ],
   providers: [
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
@@ -29,8 +41,10 @@ import { ContasPagarService } from '../../../services/contas-pagar.service';
   // changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './contas-pagar.component.html',
   styleUrl: './contas-pagar.component.css',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ContasPagarComponent implements OnInit {
+  totalRegistros: number = 0;
   cadastrarContaPagar: any;
   faCheck = faCheck;
   faCircleXmark = faCircleXmark;
@@ -38,6 +52,10 @@ export class ContasPagarComponent implements OnInit {
 
   contaspagarlist: ContasPagar[] = [];
   contaspagarFiltrado: ContasPagar[] = [];
+  public paginaAtual = 1;
+  count: number = 0;
+  currentIndex = -1;
+  page = 1;
 
   constructor(
     private ContasPagarService: ContasPagarService,
@@ -76,6 +94,8 @@ export class ContasPagarComponent implements OnInit {
 
       this.contaspagarlist = dados;
       this.contaspagarFiltrado = dados;
+
+      this.totalRegistros = this.contaspagarlist.length;
     });
   }
   search($event: Event) {

@@ -49,8 +49,11 @@ namespace Financeiro.Api.Models
         [Column("OBSERVACOES")]
         public string? Observacoes { get; set; }
 
+        [Column("CAMINHO_ANEXOS")]
+        public String? CaminhoAnexos { get; set; } = String.Empty;  
+        
         [Column("ANEXOS")]
-        public String? Anexos { get; set; } = String.Empty;
+        public Byte[]? Anexos { get; set; }
 
     }
 }

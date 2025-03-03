@@ -1,5 +1,5 @@
 <div class="container">
-  <h1 class="display-5">Contas a Pagar</h1>
+  <h3 class="pt-4">Contas a Pagar</h3>
 </div>
 
 <div class="container mt-lg-5">
@@ -35,39 +35,41 @@
       </div>
     </div>
   </div>
-  <nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-lg-end">
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-          <span class="sr-only">Previous</span>
-        </a>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-          <span class="sr-only">Next</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
-  <div class="row mt-lg-5">
+  <div class="row justify-content-end">
+    <div class="col-6">
+      <pagination-controls
+        previousLabel="Anterior"
+        nextLabel="Próximo"
+        [responsive]="true"
+        (pageChange)="paginaAtual = $event"
+      ></pagination-controls>
+    </div>
+  </div>
+  <div class="row">
     <table class="table">
       <thead>
         <tr>
-          <td></td>
-          <td>ID</td>
-          <td>Descrição</td>
-          <td>Valor</td>
-          <td>Data de vencimento</td>
-          <td></td>
-          <td></td>
+          <td scope="col"></td>
+          <td scope="col">ID</td>
+          <td scope="col">Descrição</td>
+          <td scope="col">Valor</td>
+          <td scope="col">Data de vencimento</td>
+          <td scope="col"></td>
+          <td scope="col"></td>
         </tr>
       </thead>
-      <tbody *ngFor="let item of contaspagarlist">
+      <tbody
+        *ngFor="
+          let item of contaspagarlist
+            | paginate
+              : {
+                  itemsPerPage: 10,
+                  currentPage: paginaAtual,
+                  totalItems: totalRegistros,
+                };
+          let i = index
+        "
+      >
         <tr>
           <td>
             <div *ngIf="item.status_Conta == 1; else inativo">
@@ -77,10 +79,10 @@
               <fa-icon [icon]="faCircleXmark" style="color: red"></fa-icon>
             </ng-template>
           </td>
-          <td>{{ item.id }}</td>
-          <td>{{ item.descricao }}</td>
-          <td>{{ item.valor }}</td>
-          <td>{{ item.data_Vencimento }}</td>
+          <td scope="row">{{ item.id }}</td>
+          <td scope="row">{{ item.descricao }}</td>
+          <td scope="row">{{ item.valor }}</td>
+          <td scope="row">{{ item.data_Vencimento }}</td>
           <td>
             <button
               type="button"

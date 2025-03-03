@@ -1,6 +1,6 @@
 namespace Financeiro.Business.Interfaces;
 
-public interface IHandle
+public interface IHandler<T>   
 {
     
 }

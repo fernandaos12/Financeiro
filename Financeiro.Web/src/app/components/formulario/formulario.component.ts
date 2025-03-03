@@ -31,6 +31,9 @@ export class FormularioComponent implements OnInit {
   categorias: any[] = [];
   categoriaId: string = '';
   tiposrepeticao = Object.values(TipoRepeticao);
+  selectedFile: any;
+  nomeArquivoAnexo: string = 'AnexoContaPagar';
+  anexoArquivo: any = [];
 
   constructor(private categoriasService: CategoriaServiceService) {}
 
@@ -93,11 +96,34 @@ export class FormularioComponent implements OnInit {
           ? this.dadosContasPagar.observacoes
           : ''
       ),
+      caminhoAnexos: new FormControl(this.nomeArquivoAnexo),
       anexos: new FormControl(
         this.dadosContasPagar?.anexos ? this.dadosContasPagar.anexos : ''
       ),
     });
   }
+
+  uploadFile(event: any) {
+    if (event.target.files.length > 0) {
+      const arquivo = event.target.files[0];
+      if (arquivo) {
+        // const caminhoArquivo = arquivo.name.replace('C:\\fakepath\\', '');
+        // this.contasForm.patchValue({ caminhoAnexos: caminhoArquivo }); //retira o fakepath do caminho do arquivo
+
+        const reader = new FileReader();
+
+        reader.onload = () => {
+          const arrayBuffer = reader.result as ArrayBuffer;
+          const bytes = new Uint8Array(arrayBuffer);
+          console.log(bytes);
+          arquivo.setValue(bytes);
+          this.contasForm.patchValue({ anexos: arquivo });
+        };
+        reader.readAsArrayBuffer(arquivo);
+      }
+    }
+  }
+
   loadingCategorias() {
     this.categoriasService.GetSelectCategorias().subscribe((result: any) => {
       this.categorias = result.dadosRetorno;
@@ -105,7 +131,26 @@ export class FormularioComponent implements OnInit {
   }
 
   salvar() {
-    //console.log(this.contasForm.value);
+    console.log(this.contasForm.value);
     this.onSubmit.emit(this.contasForm.value);
+
+    // var file = this.contasForm.controls['anexos'].value.files[''];
+    // console.log(file);
+    // var reader = new FileReader();
+    // var fileByteArray : any[] = [];
+
+    // reader.readAsArrayBuffer(this.formGroup.controls.anexos.value.files[0]);
+
+    // reader.onloadend = function (evt: any) {
+
+    // if (evt.target.readyState == FileReader.DONE) {
+
+    // var arrayBuffer = <any>evt.target.result;
+
+    // var array = new Uint8Array(arrayBuffer);
+
+    // for (var i = 0; i < array.length; i++) {
+
+    // fileByteArray.push(array[i]);
   }
 }

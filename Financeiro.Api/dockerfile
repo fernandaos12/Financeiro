@@ -1,23 +1,29 @@
-FROM mcr.microsoft.com/dotnet/sdk:7.0-alpine as base
+# Acesse https://aka.ms/customizecontainer para saber como personalizar seu contêiner de depuração e como o Visual Studio usa este Dockerfile para criar suas imagens para uma depuração mais rápida.
+
+# Esta fase é usada durante a execução no VS no modo rápido (Padrão para a configuração de Depuração)
+FROM mcr.microsoft.com/dotnet/aspnet:7.0-alpine AS base
 WORKDIR /app
-RUN apk add --no-cache icu-libs icu-data-full
-EXPOSE 5000
-ENV ASPNETCORE_URLS=http://+:5000
-ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+EXPOSE 80
+EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:7.0-alpine as build
+
+# Esta fase é usada para compilar o projeto de serviço
+FROM mcr.microsoft.com/dotnet/sdk:7.0-alpine AS build
+ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Financeiro.Api/Financeiro.Api.csproj", "Financeiro.Api/"]
-RUN dotnet restore "Financeiro.Api/Financeiro.Api.csproj"
-COPY  . .
-WORKDIR "/src/Financeiro.Api"
+COPY ["Financeiro.Api.csproj", "."]
+RUN dotnet restore "./Financeiro.Api.csproj"
+COPY . .
+WORKDIR "/src/."
+RUN dotnet build "./Financeiro.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
-RUN dotnet build "Financeiro.Api.csproj" -c Release -o /app/build
+# Esta fase é usada para publicar o projeto de serviço a ser copiado para a fase final
+FROM build AS publish
+ARG BUILD_CONFIGURATION=Release
+RUN dotnet publish "./Financeiro.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
-FROM build as publish
-RUN dotnet  publish "Financeiro.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
-
-FROM base as final
+# Esta fase é usada na produção ou quando executada no VS no modo normal (padrão quando não está usando a configuração de Depuração)
+FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Financeiro.Api.dll"]

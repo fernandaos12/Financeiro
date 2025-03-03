@@ -1,4 +1,5 @@
 export interface ContasPagar {
+  length: any;
   id: number;
   descricao: string;
   status_Conta: number;
@@ -10,8 +11,9 @@ export interface ContasPagar {
   valorParcela: number;
   numeroParcelas: number;
   observacoes: string;
-  anexos: string;
+  anexos: [];
   dataAlteracao: string;
+  caminhoAnexos: string;
 }
 
 export enum TipoRepeticao {

@@ -20,4 +20,12 @@
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Financeiro.Api\Financeiro.Api.csproj" />
+  </ItemGroup>
+
 </Project>

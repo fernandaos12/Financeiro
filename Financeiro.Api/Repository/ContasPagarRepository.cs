@@ -1,3 +1,4 @@
+using System.Text;
 using Financeiro.Api.Data;
 using Financeiro.Api.Models;
 using Financeiro.Api.Repository.Interfaces;
@@ -9,6 +10,7 @@ namespace Financeiro.Api.Repository
     public class ContasPagarRepository : IContasPagar
     {
         private readonly ApiDbcontext _context;
+
         public ContasPagarRepository(ApiDbcontext context)
         {
             _context = context;
@@ -19,7 +21,8 @@ namespace Financeiro.Api.Repository
             var retorno = new ServiceResponse<Boolean>();
             try
             {
-                ContasPagar item = await _context.contasPagar.AsNoTracking().FirstOrDefaultAsync(p => p.Id == receber.Id);
+                ContasPagar item =
+                    await _context.contasPagar.AsNoTracking().FirstOrDefaultAsync(p => p.Id == receber.Id);
                 if (item == null)
                 {
                     retorno.Mensagem = "Conta a receber não existe no banco de dados.";
@@ -30,13 +33,13 @@ namespace Financeiro.Api.Repository
                 _context.contasPagar.Update(receber);
                 await _context.SaveChangesAsync();
                 retorno.DadosRetorno = true;
-
             }
             catch (Exception ex)
             {
                 retorno.Mensagem = ex.Message;
                 retorno.Sucesso = false;
             }
+
             return retorno;
         }
 
@@ -54,13 +57,13 @@ namespace Financeiro.Api.Repository
                     retorno.Mensagem = "Conta a receber não existe no banco de dados.";
                     retorno.Sucesso = false;
                 }
-
             }
             catch (Exception ex)
             {
                 retorno.Mensagem = ex.Message;
                 retorno.Sucesso = false;
             }
+
             return retorno;
         }
 
@@ -74,13 +77,13 @@ namespace Financeiro.Api.Repository
                 {
                     retorno.Mensagem = "Nenhuma conta a receber encontrada.";
                 }
-
             }
             catch (Exception ex)
             {
                 retorno.Mensagem = ex.Message;
                 retorno.Sucesso = false;
             }
+
             return retorno;
         }
 
@@ -96,8 +99,6 @@ namespace Financeiro.Api.Repository
 
                 retorno.DadosRetorno = true;
                 retorno.Mensagem = "Conta a receber removida com sucesso.";
-
-
             }
             catch (Exception ex)
             {
@@ -111,17 +112,40 @@ namespace Financeiro.Api.Repository
         public async Task<ServiceResponse<Boolean>> Salvar(ContasPagar contaspagar)
         {
             var retorno = new ServiceResponse<Boolean>();
+            byte[] anexopdf;
+            string nomeArquivo = contaspagar.CaminhoAnexos;
+            IFormFile file;
+           
             try
             {
+                //var caminhoFisicoAnexo = contaspagar.CaminhoAnexos;
+                //var caminho = Directory.GetFiles(caminhoFisicoAnexo);
+                if (nomeArquivo != null)
+                {
+                    string currentDirectory = Directory.GetCurrentDirectory();
+                    if (!Directory.Exists(Path.Combine(currentDirectory, "tmp")))
+                    {
+                        Directory.CreateDirectory(Path.Combine(currentDirectory, "tmp"));
+                    }
+
+                    var arquivo = Directory.GetDirectories(Path.Combine(currentDirectory, "tmp", nomeArquivo));
+                    //anexopdf = File.ReadAllBytes(contaspagar.Anexos);
+                    anexopdf = contaspagar.Anexos;
+                    File.WriteAllBytes(nomeArquivo, anexopdf.ToArray());
+                    
+                    contaspagar.Anexos = anexopdf.ToArray();
+                }
+
                 _context.contasPagar.Add(contaspagar);
                 await _context.SaveChangesAsync();
+                
+                retorno.DadosRetorno = true;
+                retorno.Mensagem = "Dados gravados com sucesso.";
             }
             catch (Exception e)
             {
                 retorno.Mensagem = $@"Erro ao gravar conta a pagar no banco de dados :  {e.Message}";
             }
-            retorno.DadosRetorno = true;
-            retorno.Mensagem = "Dados gravados com sucesso.";
             return retorno;
         }
     }

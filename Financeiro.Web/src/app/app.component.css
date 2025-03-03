@@ -1,7 +1,10 @@
+
 html, body{
     width: 100vw;
     height: 100vh;
     font: 80,5%;
+    font-family: "Montserrat", serif;
+    font-weight: 300;
 }
 
 .container{
@@ -10,4 +13,9 @@ html, body{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+h1, h2,h3,h4,h5,h6{
+    font-family: "Montserrat", serif;
+    font-weight: 300;
 }

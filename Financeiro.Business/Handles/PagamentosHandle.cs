@@ -2,10 +2,12 @@ using System.Net;
 using Financeiro.Api.Models.Enums;
 using Financeiro.Api.Repository;
 using Financeiro.Api.Repository.Interfaces;
+using Financeiro.Business.Interfaces;
+using Flunt.Notifications;
 
 namespace Financeiro.Api.Handle;
 
-public class PagamentosHandle : Notifiable, IHandler<IPagamemtoCommand>
+public class PagamentosHandle : Notifiable<Notification>, IHandler<IPagamentoCommand>
 {
     private readonly IPagamentos _pagamentosrepository;
     private readonly IContaPagar _contapagarrepository;
@@ -16,7 +18,7 @@ public class PagamentosHandle : Notifiable, IHandler<IPagamemtoCommand>
         IPagamentos pagamentosrepository,
         IContasPagar contaspagarrepository,
         IDescontos descontosrepository,
-        IAcrescimos acrescimosrespository)
+        IAcrecimosConta acrescimosrespository)
     {
         pagamentosrepository = _pagamentosrepository;
         contaspagarrepository = _contapagarrepository;
@@ -71,3 +73,4 @@ public class PagamentosHandle : Notifiable, IHandler<IPagamemtoCommand>
         return new GenericCommandResult(true, $"Pagamento {contaApagar.descricao} realizado com sucesso", Notifications.Default);
     }
 }
+

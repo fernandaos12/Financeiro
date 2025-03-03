@@ -1,6 +1,6 @@
 namespace Financeiro.Business.Interfaces;
 
-public class IDescontos
+public interface IDescontos
 {
     
 }

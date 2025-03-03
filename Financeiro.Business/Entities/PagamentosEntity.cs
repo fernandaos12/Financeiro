@@ -1,13 +1,15 @@
 using System.Reflection.Metadata.Ecma335;
+using Financeiro.Api.Models;
+using Financeiro.Business.Models;
 
 namespace Financeiro.Api.Entities;
 
 public class PagamentosEntity
 {
     public Desconto desconto { get; set; }
-    public IList<contapagar> Itens { get; set; }
+    public IList<ContasPagar> Itens { get; set; }
     
-    public void AddItem(ContaPagar contapagar, Int32 quantidade)
+    public void AddItem(ContasPagar contapagar, Int32 quantidade)
     {
         var item = new Item(contapagar, quantidade);
         if (item.Valid)
@@ -25,7 +27,7 @@ public class PagamentosEntity
             total += item.Total;
             if (vencimento > DateTime.Today)
             {
-                total -= Desconto != null ? Desconto.Value : 0;
+                total -= desconto != null ? Desconto.Value : 0;
             }
         }
         return total;

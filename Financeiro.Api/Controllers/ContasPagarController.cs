@@ -29,7 +29,7 @@ namespace Financeiro.Api.Controllers
             return Ok(contaReceberItem);
         }
 
-        [HttpPost()]
+        [HttpPost(), DisableRequestSizeLimit]
         public async Task<ActionResult<ServiceResponse<Boolean>>> Salvar(ContasPagar contaspagar)
         {
             return Ok(await _repository.Salvar(contaspagar));
