@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Reflection.Metadata;
 using Financeiro.Api.Models.Base;
 using Financeiro.Api.Models.Enums;
 
@@ -27,7 +26,7 @@ namespace Financeiro.Api.Models
 
         [Column("CATEGORIA")]
         [ForeignKey("ID_CATEGORIA")]
-        public Categorias? Categoria { get; set; }
+        public CategoriaReceitas? Categoria { get; set; }
 
         [Column("CATEGORIAID")]
         public int? CategoriaId { get; set; }
@@ -50,10 +49,14 @@ namespace Financeiro.Api.Models
         public string? Observacoes { get; set; }
 
         [Column("CAMINHO_ANEXOS")]
-        public String? CaminhoAnexos { get; set; } = String.Empty;  
-        
+        public String? CaminhoAnexos { get; set; } = String.Empty;
+
         [Column("ANEXOS")]
         public Byte[]? Anexos { get; set; }
+
+        [Column("ID_PAGAMENTOS")]
+        public int PagamentoId { get; set; }
+        public Pagamento? Pagamento { get; set; }
 
     }
 }

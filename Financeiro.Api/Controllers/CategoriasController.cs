@@ -16,26 +16,26 @@ namespace Financeiro.Api.Controllers
         }
 
         [HttpGet()]
-        public async Task<ActionResult<ServiceResponse<IEnumerable<Categorias>>>> ListarContas()
+        public async Task<ActionResult<ServiceResponse<IEnumerable<CategoriaReceitas>>>> ListarContas()
         {
             return await _repository.Listar();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Categorias>> FindbyId(int id)
+        public async Task<ActionResult<CategoriaReceitas>> FindbyId(int id)
         {
-            ServiceResponse<Categorias> contaReceberItem = await _repository.FindId(id);
+            ServiceResponse<CategoriaReceitas> contaReceberItem = await _repository.FindId(id);
             return Ok(contaReceberItem);
         }
 
         [HttpPost()]
-        public async Task<ActionResult<ServiceResponse<Boolean>>> Salvar(Categorias Categorias)
+        public async Task<ActionResult<ServiceResponse<Boolean>>> Salvar(CategoriaReceitas Categorias)
         {
             return Ok(await _repository.Salvar(Categorias));
         }
 
         [HttpPut()]
-        public async Task<ActionResult<Boolean>> AtualizarItem(Categorias Categorias)
+        public async Task<ActionResult<Boolean>> AtualizarItem(CategoriaReceitas Categorias)
         {
             ServiceResponse<Boolean> contaReceberAtualizar = await _repository.Atualizar(Categorias);
             return Ok(contaReceberAtualizar);

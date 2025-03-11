@@ -1,7 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Financeiro.Api.Models.Base;
-using Financeiro.Api.Models.Enums;
 
 namespace Financeiro.Api.Models;
 [Table("TB_COBRANCA")]

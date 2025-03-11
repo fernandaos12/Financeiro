@@ -5,8 +5,8 @@ using Financeiro.Api.Models.Enums;
 
 namespace Financeiro.Api.Models
 {
-    [Table("TB_CATEGORIAS")]
-    public class Categorias : BaseModel
+    [Table("TB_CATEGORIA_RECEITAS")]
+    public class CategoriaReceitas : BaseModel
     {
 
         [Column("DESCRICAO")]
@@ -21,8 +21,6 @@ namespace Financeiro.Api.Models
 
         [Column("COR_GRAFICO")]
         public string? CorGrafico { get; set; } = "#FFF";
-
-        public ICollection<ContasPagar>? ContasPagar { get; set; }
 
     }
 }

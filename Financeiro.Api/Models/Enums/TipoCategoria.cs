@@ -1,4 +1,3 @@
-using System;
 using System.Text.Json.Serialization;
 
 namespace Financeiro.Api.Models.Enums;
@@ -14,6 +13,8 @@ public enum TipoCategoria
     Alimentacao = 6,
     Vestuario = 7,
     Lazer = 8,
-    Transporte = 9
+    Transporte = 9,
+    Salário = 10,
+    Extras = 11
 
 }

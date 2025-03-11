@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 using Financeiro.Api.Models.Base;
 using Financeiro.Api.Models.Enums;
 
@@ -34,6 +33,6 @@ namespace Financeiro.Api.Models
 
         [Column("ID_CONTA_PAGAR")]
         [ForeignKey("ID_CONTAPAGAR")]
-        public ContasPagar? Id_ContaPagar { get; set; }
+        public ICollection<ContasPagar>? Id_ContaPagar { get; set; }
     }
 }

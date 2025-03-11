@@ -1,5 +1,4 @@
 using Financeiro.Api.Models;
-using Financeiro.Api.Repository;
 using Financeiro.Api.Repository.Interfaces;
 using Financeiro.Api.Repository.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -25,8 +24,8 @@ namespace Financeiro.Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ContasPagar>> FindbyId(int id)
         {
-            ServiceResponse<ContasPagar> contaReceberItem = await _repository.FindId(id);
-            return Ok(contaReceberItem);
+            ServiceResponse<ContasPagar> contaPagarItem = await _repository.FindId(id);
+            return Ok(contaPagarItem);
         }
 
         [HttpPost(), DisableRequestSizeLimit]

@@ -22,7 +22,7 @@ public class Cobranca_Negociacao : BaseModel
     [Required]
     [Column("ID_CATEGORIA")]
     [ForeignKey("ID_CATEGORIA")]
-    public Categorias? CategoriaDivida { get; set; }
+    public CategoriaReceitas? CategoriaDivida { get; set; }
     
     [Required]
     [Column("VALOR")]

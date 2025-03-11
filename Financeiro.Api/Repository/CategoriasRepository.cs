@@ -14,12 +14,12 @@ namespace Financeiro.Api.Repository
             _context = context;
         }
 
-        public async Task<ServiceResponse<Boolean>> Atualizar(Categorias receber)
+        public async Task<ServiceResponse<Boolean>> Atualizar(CategoriaReceitas receber)
         {
             var retorno = new ServiceResponse<Boolean>();
             try
             {
-                Categorias item = await _context.Categorias.AsNoTracking().FirstOrDefaultAsync(p => p.Id == receber.Id);
+                CategoriaReceitas item = await _context.Categorias.AsNoTracking().FirstOrDefaultAsync(p => p.Id == receber.Id);
                 if (item == null)
                 {
                     retorno.Mensagem = "Conta a receber não existe no banco de dados.";
@@ -40,12 +40,12 @@ namespace Financeiro.Api.Repository
             return retorno;
         }
 
-        public async Task<ServiceResponse<Categorias>> FindId(int id)
+        public async Task<ServiceResponse<CategoriaReceitas>> FindId(int id)
         {
-            var retorno = new ServiceResponse<Categorias>();
+            var retorno = new ServiceResponse<CategoriaReceitas>();
             try
             {
-                Categorias item = await _context.Categorias.FirstOrDefaultAsync(p => p.Id == id);
+                CategoriaReceitas item = await _context.Categorias.FirstOrDefaultAsync(p => p.Id == id);
                 retorno.DadosRetorno = item;
 
                 if (item == null)
@@ -64,9 +64,9 @@ namespace Financeiro.Api.Repository
             return retorno;
         }
 
-        public async Task<ServiceResponse<IEnumerable<Categorias>>> Listar()
+        public async Task<ServiceResponse<IEnumerable<CategoriaReceitas>>> Listar()
         {
-            var retorno = new ServiceResponse<IEnumerable<Categorias>>();
+            var retorno = new ServiceResponse<IEnumerable<CategoriaReceitas>>();
             try
             {
                 retorno.DadosRetorno = await _context.Categorias.ToListAsync();
@@ -89,7 +89,7 @@ namespace Financeiro.Api.Repository
             var retorno = new ServiceResponse<Boolean>();
             try
             {
-                Categorias item = await _context.Categorias.FirstOrDefaultAsync(p => p.Id == id);
+                CategoriaReceitas item = await _context.Categorias.FirstOrDefaultAsync(p => p.Id == id);
 
                 _context.Categorias.Remove(item);
                 await _context.SaveChangesAsync();
@@ -108,7 +108,7 @@ namespace Financeiro.Api.Repository
             return retorno;
         }
 
-        public async Task<ServiceResponse<Boolean>> Salvar(Categorias Categorias)
+        public async Task<ServiceResponse<Boolean>> Salvar(CategoriaReceitas Categorias)
         {
             var retorno = new ServiceResponse<Boolean>();
             try

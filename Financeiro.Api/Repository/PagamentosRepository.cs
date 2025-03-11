@@ -25,11 +25,13 @@ public class PagamentosRepository : IPagamentos
                 retorno.Mensagem = "Conta a receber não existe no banco de dados.";
                 retorno.Sucesso = false;
             }
-
-            item.DataAlteracao = DateTime.Now.ToLocalTime();
-            _context.Pagamentos.Update(receber);
-            await _context.SaveChangesAsync();
-            retorno.DadosRetorno = true;
+            else
+            {
+                item.DataAlteracao = DateTime.Now.ToLocalTime();
+                _context.Pagamentos.Update(receber);
+                await _context.SaveChangesAsync();
+                retorno.DadosRetorno = true;
+            }
 
         }
         catch (Exception ex)
@@ -117,6 +119,7 @@ public class PagamentosRepository : IPagamentos
         var retorno = new ServiceResponse<Boolean>();
         try
         {
+
             _context.Pagamentos.Add(Pagamentos);
             await _context.SaveChangesAsync();
             retorno.DadosRetorno = true;
