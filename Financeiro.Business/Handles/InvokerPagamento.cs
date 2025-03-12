@@ -11,9 +11,10 @@ namespace Financeiro.Business.Handles
             this.pagamentoHandle = pagamentoHandle;
         }
 
-        public void Executar()
+        public bool Executar()
         {
             pagamentoHandle.Executar();
+            return true;
         }
     }
 }

@@ -18,15 +18,15 @@ public class PagamentosHandle : Command
 
     public override void Executar()  //executar as ações de pagamento
     {
-        if ("Pagar")
-        {
-            PagtoAcao.RealizarPagamento(Valor);
-        }
+        //    if ("Pagar")
+        //    {
+        //        PagtoAcao.RealizarPagamento(Valor);
+        //    }
 
-        if ("Receber")
-        {
+        //    if ("Receber")
+        //    {
 
-        }
+        //    }
     }
 
 

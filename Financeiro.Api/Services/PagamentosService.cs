@@ -1,10 +1,12 @@
-﻿using Financeiro.Api.Models;
+﻿using Financeiro.Api.Handle;
+using Financeiro.Api.Models;
+using Financeiro.Business.Handles;
 
 namespace Financeiro.Api.Services
 {
     public class PagamentosService  //client
     {
-        public async Task<bool> Pagar(ContasPagar contapagar, decimal valor)
+        public bool Pagar(ContasPagar contapagar, double valor)
         {
             //receiver
             PagamentoAcao receberPgto = new PagamentoAcao();
@@ -13,6 +15,7 @@ namespace Financeiro.Api.Services
             InvokerPagamento pgtoinvoker = new InvokerPagamento(handlepgto); //invoker 
             pgtoinvoker.Executar();
 
+            return true;
         }
     }
 }

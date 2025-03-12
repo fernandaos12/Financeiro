@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Financeiro.Core", "Financei
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financeiro.Business", "Financeiro.Business\Financeiro.Business.csproj", "{EEEA7DF2-2FE4-45B7-8DC2-9CC9D3AB5D91}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financeiro.Teste", "Financeiro.Teste\Financeiro.Teste.csproj", "{E47DBF51-8723-4530-8E7A-128B8FE992DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{EEEA7DF2-2FE4-45B7-8DC2-9CC9D3AB5D91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEEA7DF2-2FE4-45B7-8DC2-9CC9D3AB5D91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EEEA7DF2-2FE4-45B7-8DC2-9CC9D3AB5D91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E47DBF51-8723-4530-8E7A-128B8FE992DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E47DBF51-8723-4530-8E7A-128B8FE992DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E47DBF51-8723-4530-8E7A-128B8FE992DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E47DBF51-8723-4530-8E7A-128B8FE992DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

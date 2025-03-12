@@ -12,7 +12,7 @@ namespace Financeiro.Api.Repository
 
         public ContasPagarRepository(ApiDbcontext context)
         {
-            _context = context;
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
         public async Task<ServiceResponse<Boolean>> Atualizar(ContasPagar pagar)

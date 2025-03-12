@@ -9,6 +9,7 @@ namespace Financeiro.Api.Data
         {
         }
         public DbSet<ContasPagar> ContasPagar { get; set; }
+        public DbSet<ContasReceber> ContasReceber { get; set; }
         public DbSet<Receitas> Receitas { get; set; }
         public DbSet<Pagamento> Pagamentos { get; set; }
         public DbSet<CategoriaReceitas> Categorias { get; set; }
