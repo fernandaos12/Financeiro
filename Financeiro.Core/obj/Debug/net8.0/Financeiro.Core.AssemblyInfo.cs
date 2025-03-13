@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Financeiro.Core")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e3cb400d02e7d8260c68129fb758b7d9c919b1ba")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+19a7970e7fa3f5f7285487fb6c7ceef5dd22a6b0")]
 [assembly: System.Reflection.AssemblyProductAttribute("Financeiro.Core")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Financeiro.Core")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

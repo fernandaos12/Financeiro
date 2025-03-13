@@ -1,11 +1,20 @@
-using Financeiro.Api.Models.Enums;
+
 using Financeiro.Teste.Entities;
+using Financeiro.Teste.Interfaces;
 using Financeiro.Teste.Models;
+using Moq;
 
 namespace Financeiro.Teste
 {
     public class ContasPagarTeste
     {
+        private readonly Mock<IContasPagarRepositoryTeste> _contaspagarRepoMock;
+
+        public ContasPagarTeste()
+        {
+            _contaspagarRepoMock = new Mock<IContasPagarRepositoryTeste>();
+        }
+
         [Fact]
         public async Task ValidarAtualizarObjetoContasPagar()
         {
@@ -15,9 +24,9 @@ namespace Financeiro.Teste
                 Descricao = "Teste Conta Pagar",
                 Data_Vencimento = DateTime.Now,
                 Valor = 100.0,
-                Status_Conta = StatusConta.Pendente,
+                //Status_Conta = StatusConta.Pendente,
                 CategoriaId = 1,
-                Repeticao = TipoRepeticao.UNICO,
+                //Repeticao = TipoRepeticao.UNICO,
                 Periodicidade = 1,
                 ValorParcela = 100,
                 NumeroParcelas = 1,
@@ -46,9 +55,9 @@ namespace Financeiro.Teste
                 Descricao = "Teste Conta Pagar",
                 Data_Vencimento = DateTime.Now,
                 Valor = 100.0,
-                Status_Conta = StatusConta.Pendente,
+                //Status_Conta = StatusConta.Pendente,
                 CategoriaId = 1,
-                Repeticao = TipoRepeticao.UNICO,
+                //Repeticao = TipoRepeticao.UNICO,
                 Periodicidade = 1,
                 ValorParcela = 100,
                 NumeroParcelas = 1,
@@ -68,5 +77,26 @@ namespace Financeiro.Teste
             Assert.Equal(cp, repositoriocontapagar.RetornoSalvarObjetoCpTeste());
             Assert.Equal(1, repositoriocontapagar.RetornaQdadeEnvioRequisicao());
         }
+
+
+        [Fact]
+        public async Task AdicionarItemContaPagarRetornarTrue()
+        {
+            int Idconta = 1;
+
+            //Arrange
+            _contaspagarRepoMock.Setup(x => x.ObterContaPagarPorId(Idconta)).ReturnsAsync(new ContasPagarTesteModel());
+            _contaspagarRepoMock.Setup(x => x.AdicionarContaPagar(It.IsAny<ContasPagarTesteModel>())).ReturnsAsync(true);
+
+            var repositorio = new ContasPagarTesteRepository(_contaspagarRepoMock.Object);
+            var modelfake = ContasPagarFake.FakeContasPagar(); //envia os dados fake
+            //act
+            var resultado = await repositorio.AdicionarContaPagar(modelfake);
+
+            //assert
+            Assert.True(resultado);
+        }
+
+
     }
 }
