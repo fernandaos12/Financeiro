@@ -4,7 +4,7 @@ public abstract class ContaBancariaService
 {
     public decimal Balance { get; private set; }
     public abstract void Saque(decimal valor);
-    
+
 }
 
 public class CheckingAccount : ContaBancariaService

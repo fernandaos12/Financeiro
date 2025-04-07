@@ -2,6 +2,8 @@
 {
     public class AcrescimosConta
     {
-        public double valor { get; set; }
+        public double valorTotal { get; set; }
+        public double juros { get; set; }
+        public double multa { get; set; }
     }
 }

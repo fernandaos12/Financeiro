@@ -1,7 +1,19 @@
-﻿namespace Financeiro.Business.Commands
+﻿using Financeiro.Business.Commands.Interface;
+
+namespace Financeiro.Business.Commands
 {
-    public abstract class Command
+    public class Command : ICommand
     {
-        public abstract void Executar();
+        public int Id { get; private set; }
+        public string Descricao { get; private set; }
+        public Command(int id, string descricao)
+        {
+            Id = id;
+            Descricao = descricao;
+        }
+        public void Executar()
+        {
+            Console.WriteLine("Executando comando: ");
+        }
     }
 }

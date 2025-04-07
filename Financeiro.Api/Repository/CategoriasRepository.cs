@@ -14,20 +14,17 @@ namespace Financeiro.Api.Repository
             _context = context;
         }
 
-        public async Task<ServiceResponse<Boolean>> Atualizar(CategoriaReceitas receber)
+        public async Task<ServiceResponse<Boolean>> Atualizar(Categorias categoria)
         {
             var retorno = new ServiceResponse<Boolean>();
             try
             {
-                CategoriaReceitas item = await _context.Categorias.AsNoTracking().FirstOrDefaultAsync(p => p.Id == receber.Id);
-                if (item == null)
-                {
-                    retorno.Mensagem = "Conta a receber não existe no banco de dados.";
-                    retorno.Sucesso = false;
-                }
+                var item = await _context.Categorias
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(x => x.Id == categoria.Id)
+                    ?? throw new ArgumentException("Categoria não encontrada");
 
-                item.DataAlteracao = DateTime.Now.ToLocalTime();
-                _context.Categorias.Update(receber);
+                _context.Categorias.Update(categoria);
                 await _context.SaveChangesAsync();
                 retorno.DadosRetorno = true;
 
@@ -40,21 +37,14 @@ namespace Financeiro.Api.Repository
             return retorno;
         }
 
-        public async Task<ServiceResponse<CategoriaReceitas>> FindId(int id)
+        public async Task<ServiceResponse<Categorias>> FindId(int id)
         {
-            var retorno = new ServiceResponse<CategoriaReceitas>();
+            var retorno = new ServiceResponse<Categorias>();
             try
             {
-                CategoriaReceitas item = await _context.Categorias.FirstOrDefaultAsync(p => p.Id == id);
+                Categorias item = await _context.Categorias.FirstOrDefaultAsync(p => p.Id == id)
+                                   ?? throw new ArgumentException("Categoria não encontrada");
                 retorno.DadosRetorno = item;
-
-                if (item == null)
-                {
-                    retorno.DadosRetorno = null;
-                    retorno.Mensagem = "Conta a receber não existe no banco de dados.";
-                    retorno.Sucesso = false;
-                }
-
             }
             catch (Exception ex)
             {
@@ -64,9 +54,9 @@ namespace Financeiro.Api.Repository
             return retorno;
         }
 
-        public async Task<ServiceResponse<IEnumerable<CategoriaReceitas>>> Listar()
+        public async Task<ServiceResponse<IEnumerable<Categorias>>> Listar()
         {
-            var retorno = new ServiceResponse<IEnumerable<CategoriaReceitas>>();
+            var retorno = new ServiceResponse<IEnumerable<Categorias>>();
             try
             {
                 retorno.DadosRetorno = await _context.Categorias.ToListAsync();
@@ -89,7 +79,8 @@ namespace Financeiro.Api.Repository
             var retorno = new ServiceResponse<Boolean>();
             try
             {
-                CategoriaReceitas item = await _context.Categorias.FirstOrDefaultAsync(p => p.Id == id);
+                var item = await _context.Categorias.FirstOrDefaultAsync(p => p.Id == id)
+                                    ?? throw new ArgumentException("Categoria não encontrada"); ;
 
                 _context.Categorias.Remove(item);
                 await _context.SaveChangesAsync();
@@ -108,7 +99,7 @@ namespace Financeiro.Api.Repository
             return retorno;
         }
 
-        public async Task<ServiceResponse<Boolean>> Salvar(CategoriaReceitas Categorias)
+        public async Task<ServiceResponse<Boolean>> Salvar(Categorias Categorias)
         {
             var retorno = new ServiceResponse<Boolean>();
             try

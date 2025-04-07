@@ -1,12 +1,11 @@
-﻿using Financeiro.Api.Handle;
-
+﻿
 namespace Financeiro.Business.Handles
 {
     public class InvokerPagamento //invoker
     {
-        private PagamentosHandle pagamentoHandle;
+        private PagamentosCommand pagamentoHandle;
 
-        public InvokerPagamento(PagamentosHandle pagamentoHandle)
+        public InvokerPagamento(PagamentosCommand pagamentoHandle)
         {
             this.pagamentoHandle = pagamentoHandle;
         }

@@ -1,6 +1,3 @@
-using Financeiro.Api.Models;
-using Financeiro.Api.Repository;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Financeiro.Api.Controllers
@@ -9,11 +6,11 @@ namespace Financeiro.Api.Controllers
     [ApiController]
     public class CobrancasController : ControllerBase
     {
-           private readonly CobrancaRepository _repository;
-        public CobrancasController(CobrancaRepository repo)
-        {
-            _repository = repo;
-        }
+        //   private readonly CobrancaRepository _repository;
+        //public CobrancasController(CobrancaRepository repo)
+        //{
+        //    _repository = repo;
+        //}
 
         // [HttpGet()]
         // public async Task<IEnumerable<Cobrancas>> ListarContas()
@@ -47,7 +44,7 @@ namespace Financeiro.Api.Controllers
         //     if(item == null){
         //         throw new Exception("Erro ao atualizar.Item não encontrado.");
         //     }
-            
+
         //     _repository.Atualizar(cp);            
         // }
 

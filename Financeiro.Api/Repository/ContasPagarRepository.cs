@@ -20,8 +20,7 @@ namespace Financeiro.Api.Repository
             var retorno = new ServiceResponse<Boolean>();
             try
             {
-                ContasPagar item =
-                    await _context.ContasPagar.AsNoTracking().FirstOrDefaultAsync(p => p.Id == pagar.Id);
+                var item = await _context.ContasPagar.AsNoTracking().FirstOrDefaultAsync(p => p.Id == pagar.Id);
                 if (item == null)
                 {
                     retorno.Mensagem = "Conta a pagar não existe no banco de dados.";
@@ -93,7 +92,7 @@ namespace Financeiro.Api.Repository
             var retorno = new ServiceResponse<Boolean>();
             try
             {
-                ContasPagar item = await _context.ContasPagar.FirstOrDefaultAsync(p => p.Id == id);
+                var item = await _context.ContasPagar.FirstOrDefaultAsync(p => p.Id == id);
 
                 _context.ContasPagar.Remove(item);
                 await _context.SaveChangesAsync();
