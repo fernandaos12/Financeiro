@@ -6,11 +6,11 @@
 App web para organizar as finanças pessoais integrando pagamentos e contas a pagar.
 
 ### Tecnologias:
-1 - .Net Core 9
-2 - API Rest
-3 - Angular
-4 - SqlServer
-5 - DockerFile
+.Net Core 9
+API Rest
+Angular
+SqlServer
+DockerFile
 
 ### Instalação e pre-requisitos
 Docker
