@@ -11,15 +11,15 @@ namespace Financeiro.Application.InputModels
         public PagamentoService PagamentoTotal()
             => new PagamentoService(Descricao, Valor, Vencimento, DataPagamento);
 
-        public static PagamentoOrderService PagamentoFinal(PagamentoService pgto)
-        {
-            var dadospgto = PagamentoService.PagamentoFinal;
-            return new PagamentoOrderService(
-                dadospgto.Descricao,
-                dadospgto.Valor,
-                dadospgto.Vencimento,
-                dadospgto.DataPagamento);
-        }
+        //public static PagamentoOrderService PagamentoFinal(PagamentoService pgto)
+        //{
+        //    var dadospgto = PagamentoService.PagamentoFinal;
+        //    return new PagamentoOrderService(
+        //        dadospgto.Descricao,
+        //        dadospgto.Valor,
+        //        dadospgto.Vencimento,
+        //        dadospgto.DataPagamento);
+        //}
 
     }
 

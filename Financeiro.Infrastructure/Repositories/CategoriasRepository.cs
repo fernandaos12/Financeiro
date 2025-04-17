@@ -28,7 +28,7 @@ namespace Financeiro.Api.Repository
             }
             catch (Exception ex)
             {
-                throw new ArgumentException("Erro ao atualizar + " ex.Message);
+                throw new ArgumentException("Erro ao atualizar: " + ex.Message);
             }
             return true;
         }

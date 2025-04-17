@@ -1,5 +1,5 @@
-﻿using Financeiro.Api.Services;
-using Financeiro.Api.Services.Interfaces;
+﻿using Financeiro.Domain.Repository;
+using Financeiro.Infrastructure.Repository;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Financeiro.Application
@@ -16,7 +16,7 @@ namespace Financeiro.Application
 
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
-            services.AddScoped<IContasPagarService, ContasPagarService>();
+            services.AddScoped<IContasPagarRepository, ContasPagarRepository>();
             return services;
         }
     }

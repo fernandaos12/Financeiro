@@ -4,7 +4,7 @@
     {
         public string Descricao { get; set; }
 
-        public ContasPagarService servicescontas()
-            => new ContasPagarService(Descricao, Valor, DataVencimento);
+        //public ContasPagarService servicescontas()
+        //    => new ContasPagarService(Descricao, Valor, DataVencimento);
     }
 }

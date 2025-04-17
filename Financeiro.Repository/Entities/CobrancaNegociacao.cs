@@ -1,8 +1,8 @@
-using Financeiro.Api.Models.Base;
+using Financeiro.Domain.Abstractions;
 
 namespace Financeiro.Domain.Entities;
 
-public class Cobranca_Negociacao : BaseModel
+public class Cobranca_Negociacao : Entity
 {
     public string? Descricao { get; set; }
     public Pagamento? Pagamento { get; set; }

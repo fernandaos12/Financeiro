@@ -1,8 +1,8 @@
-using Financeiro.Api.Models.Base;
+using Financeiro.Domain.Abstractions;
 
 namespace Financeiro.Domain.Entities;
 
-public class CartaoCredito : BaseModel
+public class CartaoCredito : Entity
 {
     public string? Descricao { get; set; }
     public int NumeroCartao { get; set; }

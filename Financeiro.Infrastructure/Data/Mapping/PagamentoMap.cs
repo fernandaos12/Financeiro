@@ -63,5 +63,5 @@ public class PagamentoMap : IEntityTypeConfiguration<Pagamento>
             .HasConversion<StatusConta>();
     }
 }
-}
+
 

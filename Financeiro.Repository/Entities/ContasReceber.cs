@@ -1,9 +1,9 @@
-using Financeiro.Api.Models.Base;
-using Financeiro.Api.Models.Enums;
+using Financeiro.Domain.Abstractions;
+using Financeiro.Domain.Enums;
 
 namespace Financeiro.Domain.Entities
 {
-    public class ContasReceber : BaseModel
+    public class ContasReceber : Entity
     {
         public string? Descricao { get; set; }
         public double Valor { get; set; }

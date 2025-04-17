@@ -1,9 +1,9 @@
-using Financeiro.Api.Models.Base;
+using Financeiro.Domain.Abstractions;
 
 namespace Financeiro.Domain.Entities
 {
 
-    public class Configuracoes : BaseModel
+    public class Configuracoes : Entity
     {
         public string? Nome { get; set; }
         public string? Email { get; set; }
