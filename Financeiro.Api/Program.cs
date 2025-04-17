@@ -27,6 +27,7 @@ builder.Services.AddScoped<IPagamentos, PagamentosRepository>();
 //builder.Services.AddScoped<IReceitas, ReceitasRepository>();
 //builder.Services.AddScoped<ITags, TagsRepository>();
 
+builder.Services.AddAplicationServices();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -1,9 +1,9 @@
-﻿using Financeiro.Api.Models.Enums;
-using Financeiro.Api.Repository.Interfaces;
+﻿using Financeiro.Domain.Entities;
+using Financeiro.Domain.Enums;
 
-namespace Financeiro.Api.Models.DTO
+namespace Financeiro.Domain.ValueObjects
 {
-    public class ContasPagarDTO
+    public record ContasPagarValue
     {
         public string? Descricao { get; set; }
         public StatusConta Status_Conta { get; set; } = StatusConta.Pendente;
@@ -19,6 +19,6 @@ namespace Financeiro.Api.Models.DTO
         public string? CaminhoAnexos { get; set; } = string.Empty;
         public byte[]? Anexos { get; set; }
         public int PagamentoId { get; set; }
-        public IPagamentos? Pagamento { get; set; }
+        public Pagamento? Pagamento { get; set; }
     }
 }

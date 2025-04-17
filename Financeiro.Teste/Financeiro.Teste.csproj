@@ -23,8 +23,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Financeiro.Api\Financeiro.Api.csproj" />
-    <ProjectReference Include="..\Financeiro.Business\Financeiro.Business.csproj" />
-    <ProjectReference Include="..\Financeiro.Core\Financeiro.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

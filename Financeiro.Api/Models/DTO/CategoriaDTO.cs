@@ -7,6 +7,6 @@ namespace Financeiro.Api.Models.DTO
         public string? Descricao { get; set; }
         public TipoCategoria tipoCategoria { get; set; }
         public string? CorGrafico { get; set; } = "#FFF";
-        public ICollection<ContasPagar> ContasPagar { get; set; } = new List<ContasPagar>();
+        public ICollection<ContasPagarDTO> ContasPagar { get; set; } = new List<ContasPagarDTO>();
     }
 }
