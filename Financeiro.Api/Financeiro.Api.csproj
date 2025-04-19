@@ -9,30 +9,34 @@
 		<UserSecretsId>48f986e0-8b90-4cf5-b5cd-3cc3f05db5a7</UserSecretsId>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 		<DockerfileContext>.</DockerfileContext>
-		<OutputType>Library</OutputType>
+		<OutputType>Exe</OutputType>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.3" />
+		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.4" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.2" />
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.1" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<Compile Remove="Handle\**" />
+		<Compile Remove="Models\Enums\**" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<EmbeddedResource Remove="Handle\**" />
+		<EmbeddedResource Remove="Models\Enums\**" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<Content Remove="Handle\**" />
+		<Content Remove="Models\Enums\**" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<None Remove="Handle\**" />
+		<None Remove="Models\Enums\**" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -40,6 +44,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\Financeiro.Application\Financeiro.Application.csproj" />
 	  <ProjectReference Include="..\Financeiro.Infrastructure\Financeiro.Infrastructure.csproj" />
 	</ItemGroup>
 

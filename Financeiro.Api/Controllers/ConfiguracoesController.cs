@@ -1,48 +1,56 @@
-using Financeiro.Api.Models;
-using Financeiro.Api.Repository.Interfaces;
+using Financeiro.Api.Models.DTO;
 using Financeiro.Api.Repository.Models;
+using Financeiro.Domain.Entities;
+using Financeiro.Domain.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Financeiro.Api.Controllers
 {
-    public class ConfiguracoesController : ControllerBase 
+    public class ConfiguracoesController : ControllerBase
     {
-        private readonly IConfiguracoes _repository;
-        public ConfiguracoesController(IConfiguracoes repo)
+        private readonly IConfiguracoesRepository _repository;
+        public ConfiguracoesController(IConfiguracoesRepository repo)
         {
             _repository = repo;
         }
 
         [HttpGet()]
-        public async Task<ActionResult<ServiceResponse<IEnumerable<Configuracoes>>>> ListarContas()
+        public async Task<ActionResult<ServiceResponse<IEnumerable<ConfiguracoesDTO>>>> ListarContas()
         {
-            return await _repository.Listar();
+            await _repository.Listar();
+            return Ok();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Configuracoes>> FindbyId(int id)
+        public async Task<ActionResult<ConfiguracoesDTO>> FindbyId(int id)
         {
-            ServiceResponse<Configuracoes> contaReceberItem = await _repository.FindId(id);
+            var contaReceberItem = await _repository.ObterporId(id);
             return Ok(contaReceberItem);
         }
 
         [HttpPost()]
-        public async Task<ActionResult<ServiceResponse<Boolean>>> Salvar(Configuracoes Configuracoes)
+        public async Task<ActionResult<ServiceResponse<Boolean>>> Salvar(ConfiguracoesDTO config)
         {
-            return Ok(await _repository.Salvar(Configuracoes));
+            var itens = new Configuracoes
+            {
+                Id = config.Id,
+                Nome = config.Nome,
+            };
+            await _repository.Salvar(itens);
+            return Ok();
         }
 
         [HttpPut()]
-        public async Task<ActionResult<Boolean>> AtualizarItem(Configuracoes Configuracoes)
+        public async Task<ActionResult<Boolean>> AtualizarItem(Configuracoes configuracoes)
         {
-            ServiceResponse<Boolean> contaReceberAtualizar = await _repository.Atualizar(Configuracoes);
+            bool contaReceberAtualizar = await _repository.Atualizar(configuracoes);
             return Ok(contaReceberAtualizar);
         }
 
         [HttpDelete()]
         public async Task<ActionResult<Boolean>> Apagar(int id)
         {
-            ServiceResponse<Boolean> contaReceberRemover = await _repository.Remover(id);
+            bool contaReceberRemover = await _repository.Remover(id);
             return Ok(contaReceberRemover);
         }
     }

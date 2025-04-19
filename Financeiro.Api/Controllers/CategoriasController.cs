@@ -1,6 +1,8 @@
-using Financeiro.Api.Models;
+using Financeiro.Api.Models.DTO;
 using Financeiro.Api.Repository.Interfaces;
 using Financeiro.Api.Repository.Models;
+using Financeiro.Domain.Entities;
+using Financeiro.Domain.Enums;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Financeiro.Api.Controllers
@@ -9,43 +11,65 @@ namespace Financeiro.Api.Controllers
     [ApiController]
     public class CategoriasController : ControllerBase
     {
-        private readonly ICategorias _repository;
-        public CategoriasController(ICategorias repo)
+        private readonly ICategoriasRepository _repository;
+        public CategoriasController(ICategoriasRepository repo)
         {
             _repository = repo;
         }
 
         [HttpGet()]
-        public async Task<ActionResult<ServiceResponse<IEnumerable<Categorias>>>> ListarContas()
+        public async Task<ActionResult<ServiceResponse<IEnumerable<CategoriaDTO>>>> ListarContas()
         {
-            return await _repository.Listar();
+            var lista = await _repository.Listar();
+            return Ok(lista);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Categorias>> FindbyId(int id)
+        public async Task<ActionResult<CategoriaDTO>> FindbyId(int id)
         {
-            ServiceResponse<Categorias> contaReceberItem = await _repository.FindId(id);
+            var contaReceberItem = await _repository.FindId(id);
             return Ok(contaReceberItem);
         }
 
         [HttpPost()]
-        public async Task<ActionResult<ServiceResponse<Boolean>>> Salvar(Categorias Categorias)
+        public async Task<ActionResult<ServiceResponse<Boolean>>> Salvar([FromBody] CategoriaDTO categorias)
         {
-            return Ok(await _repository.Salvar(Categorias));
+            var itens = new Categorias
+            {
+                Descricao = categorias.Descricao,
+                Status = categorias.Status,
+                DataAlteracao = DateTime.Now,
+                TipoCategoria = (TipoCategoria)categorias.tipoCategoria,
+                CorGrafico = categorias.CorGrafico
+            };
+            await _repository.Salvar(itens);
+            return Ok();
         }
 
         [HttpPut()]
-        public async Task<ActionResult<Boolean>> AtualizarItem(Categorias Categorias)
+        public async Task<ActionResult<Boolean>> AtualizarItem(CategoriaDTO categorias)
         {
-            ServiceResponse<Boolean> contaReceberAtualizar = await _repository.Atualizar(Categorias);
-            return Ok(contaReceberAtualizar);
+            var itens = new Categorias
+            {
+                Descricao = categorias.Descricao,
+                Status = categorias.Status,
+                DataAlteracao = DateTime.Now,
+                TipoCategoria = (TipoCategoria)categorias.tipoCategoria,
+                CorGrafico = categorias.CorGrafico
+            };
+            await _repository.Atualizar(itens);
+            return Ok();
         }
 
         [HttpDelete()]
         public async Task<ActionResult<Boolean>> Apagar(int id)
         {
-            ServiceResponse<Boolean> contaReceberRemover = await _repository.Remover(id);
-            return Ok(contaReceberRemover);
+            var item = await _repository.FindId(id);
+            if (item == null)
+                return BadRequest("Item não encontrado");
+
+            await _repository.Remover(id);
+            return Ok();
         }
     }
 }

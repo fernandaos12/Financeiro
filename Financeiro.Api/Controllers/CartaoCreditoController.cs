@@ -1,6 +1,6 @@
-using Financeiro.Api.Models;
 using Financeiro.Api.Repository.Interfaces;
 using Financeiro.Api.Repository.Models;
+using Financeiro.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Financeiro.Api.Controllers
@@ -9,42 +9,43 @@ namespace Financeiro.Api.Controllers
     [ApiController]
     public class CartaoCreditoController : ControllerBase
     {
-        private readonly ICartaoCredito _repository;
-        public CartaoCreditoController(ICartaoCredito repo)
+        private readonly ICartaoCreditoRepository _repository;
+        public CartaoCreditoController(ICartaoCreditoRepository repo)
         {
             _repository = repo;
         }
 
         [HttpGet()]
-        public async Task<ActionResult<ServiceResponse<IEnumerable<CartaoCredito>>>> ListarContas()
+        public async Task<ActionResult<ServiceResponse<IEnumerable<CartaoCreditoDTO>>>> ListarContas()
         {
-            return await _repository.Listar();
+            var itens = await _repository.Listar();
+            return Ok(itens);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<CartaoCredito>> FindbyId(int id)
+        public async Task<ActionResult<ServiceResponse<CartaoCreditoDTO>>> FindbyId(int id)
         {
-            ServiceResponse<CartaoCredito> contaReceberItem = await _repository.FindId(id);
+            var contaReceberItem = await _repository.FindId(id);
             return Ok(contaReceberItem);
         }
 
         [HttpPost()]
-        public async Task<ActionResult<ServiceResponse<Boolean>>> Salvar(CartaoCredito CartaoCredito)
+        public async Task<ActionResult<ServiceResponse<Boolean>>> Salvar(CartaoCreditoDTO CartaoCredito)
         {
             return Ok(await _repository.Salvar(CartaoCredito));
         }
 
         [HttpPut()]
-        public async Task<ActionResult<Boolean>> AtualizarItem(CartaoCredito CartaoCredito)
+        public async Task<ActionResult<Boolean>> AtualizarItem(CartaoCreditoDTO CartaoCredito)
         {
-            ServiceResponse<Boolean> contaReceberAtualizar = await _repository.Atualizar(CartaoCredito);
+            var contaReceberAtualizar = await _repository.Atualizar(CartaoCredito);
             return Ok(contaReceberAtualizar);
         }
 
         [HttpDelete()]
         public async Task<ActionResult<Boolean>> Apagar(int id)
         {
-            ServiceResponse<Boolean> contaReceberRemover = await _repository.Remover(id);
+            var contaReceberRemover = await _repository.Remover(id);
             return Ok(contaReceberRemover);
         }
 

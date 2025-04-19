@@ -9,7 +9,7 @@ namespace Financeiro.Domain.Entities
         public string? Email { get; set; }
         public int telefone { get; set; }
         public List<Receitas>? Receitas { get; set; }
-        public List<CartaoCredito>? CartaoCredito { get; set; }
+        public List<CartaoCreditoDTO>? CartaoCredito { get; set; }
         public List<ContaBancaria>? ContasBancarias { get; set; }
     }
 }

@@ -22,6 +22,7 @@ namespace Financeiro.Domain.Entities
         public Pagamento? Pagamento { get; set; }
         public List<string> Tags { get; set; } = new List<string>();
         public double SaldoDevedorAtualizado { get; set; }
+        public object Observacao { get; set; }
 
         public void SaldoDevedor(double valorDivida, double valorPago)
         {

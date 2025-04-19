@@ -1,6 +1,7 @@
-using Financeiro.Api.Models;
+using Financeiro.Api.Models.DTO;
 using Financeiro.Api.Repository.Interfaces;
 using Financeiro.Api.Repository.Models;
+using Financeiro.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Financeiro.Api.Controllers
@@ -9,43 +10,56 @@ namespace Financeiro.Api.Controllers
     [ApiController]
     public class ContasReceberController : ControllerBase
     {
-        private readonly IContasReceber _repository;
-        public ContasReceberController(IContasReceber repo)
+        private readonly IContasReceberRepository _repository;
+        public ContasReceberController(IContasReceberRepository repo)
         {
             _repository = repo;
         }
 
         [HttpGet()]
-        public async Task<ActionResult<ServiceResponse<IEnumerable<ContasReceber>>>> ListarContas()
+        public async Task<ActionResult<ServiceResponse<IEnumerable<ContasReceberDTO>>>> ListarContas()
         {
-            return await _repository.ListarContas();
+            var lista = await _repository.ListarContas();
+            return Ok(lista);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ContasReceber>> FindbyId(int id)
+        public async Task<ActionResult<ContasReceberDTO>> FindbyId(int id)
         {
-            ServiceResponse<ContasReceber> contaReceberItem  = await _repository.FindId(id);
-            return Ok(contaReceberItem);              
+            var contaReceberItem = await _repository.FindId(id);
+            return Ok(contaReceberItem);
         }
 
         [HttpPost()]
-        public async Task<ActionResult<ServiceResponse<Boolean>>> Salvar(ContasReceber contasreceber)
+        public async Task<ActionResult<ServiceResponse<Boolean>>> Salvar(ContasReceberDTO contasreceber)
         {
-            return Ok(await _repository.Salvar(contasreceber));                 
+            try
+            {
+                var itens = new ContasReceber
+                {
+
+                };
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            return Ok(true);
         }
 
         [HttpPut()]
         public async Task<ActionResult<Boolean>> AtualizarItem(ContasReceber contasreceber)
-        { 
-            ServiceResponse<Boolean> contaReceberAtualizar = await _repository.Atualizar(contasreceber);
-            return Ok(contaReceberAtualizar);   
+        {
+            var contaReceberAtualizar = await _repository.Atualizar(contasreceber);
+            return Ok(contaReceberAtualizar);
         }
 
         [HttpDelete()]
         public async Task<ActionResult<Boolean>> Apagar(int id)
         {
-            ServiceResponse<Boolean> contaReceberRemover = await _repository.Remover(id);
-            return Ok(contaReceberRemover);               
+            var contaReceberRemover = await _repository.Remover(id);
+            return Ok(contaReceberRemover);
         }
 
     }

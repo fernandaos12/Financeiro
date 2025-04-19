@@ -1,6 +1,7 @@
-using Financeiro.Api.Models;
+using Financeiro.Api.Models.DTO;
 using Financeiro.Api.Repository.Interfaces;
 using Financeiro.Api.Repository.Models;
+using Financeiro.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Financeiro.Api.Controllers
@@ -9,42 +10,55 @@ namespace Financeiro.Api.Controllers
     [ApiController]
     public class ReceitasController : ControllerBase
     {
-        private readonly IReceitas _repository;
-        public ReceitasController(IReceitas repo)
+        private readonly IReceitasRepository _repository;
+        public ReceitasController(IReceitasRepository repo)
         {
             _repository = repo;
         }
 
         [HttpGet()]
-        public async Task<ActionResult<ServiceResponse<IEnumerable<Receitas>>>> ListarContas()
+        public async Task<ActionResult<ServiceResponse<IEnumerable<ReceitasDTO>>>> ListarContas()
         {
-            return await _repository.Listar();
+            var listar = await _repository.Listar();
+            return Ok(listar);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Receitas>> FindbyId(int id)
+        public async Task<ActionResult<ReceitasDTO>> FindbyId(int id)
         {
-            ServiceResponse<Receitas> contaReceberItem = await _repository.FindId(id);
+            var contaReceberItem = await _repository.FindId(id);
             return Ok(contaReceberItem);
         }
 
         [HttpPost()]
-        public async Task<ActionResult<ServiceResponse<Boolean>>> Salvar(Receitas Receitas)
+        public async Task<ActionResult<ServiceResponse<Boolean>>> Salvar(ReceitasDTO receitas)
         {
-            return Ok(await _repository.Salvar(Receitas));
+            try
+            {
+                var itens = new Receitas
+                {
+                    Descricao = receitas.Descricao
+                };
+                await _repository.Salvar(itens);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            return Ok(true);
         }
 
         [HttpPut()]
         public async Task<ActionResult<Boolean>> AtualizarItem(Receitas Receitas)
         {
-            ServiceResponse<Boolean> contaReceberAtualizar = await _repository.Atualizar(Receitas);
+            var contaReceberAtualizar = await _repository.Atualizar(Receitas);
             return Ok(contaReceberAtualizar);
         }
 
         [HttpDelete()]
         public async Task<ActionResult<Boolean>> Apagar(int id)
         {
-            ServiceResponse<Boolean> contaReceberRemover = await _repository.Remover(id);
+            var contaReceberRemover = await _repository.Remover(id);
             return Ok(contaReceberRemover);
         }
 

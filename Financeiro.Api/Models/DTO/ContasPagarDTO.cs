@@ -1,5 +1,4 @@
-﻿using Financeiro.Api.Models.Enums;
-using Financeiro.Api.Repository.Interfaces;
+﻿using Financeiro.Domain.Enums;
 
 namespace Financeiro.Api.Models.DTO
 {
@@ -9,7 +8,7 @@ namespace Financeiro.Api.Models.DTO
         public StatusConta Status_Conta { get; set; } = StatusConta.Pendente;
         public DateTime Data_Vencimento { get; set; } = DateTime.Now;
         public double Valor { get; set; }
-        public Categorias? Categoria { get; set; } = null;
+        public TipoCategoria Categoria { get; set; }
         public int? CategoriaId { get; set; }
         public TipoRepeticao Repeticao { get; set; } = TipoRepeticao.UNICO;
         public int? Periodicidade { get; set; }
@@ -19,6 +18,8 @@ namespace Financeiro.Api.Models.DTO
         public string? CaminhoAnexos { get; set; } = string.Empty;
         public byte[]? Anexos { get; set; }
         public int PagamentoId { get; set; }
-        public IPagamentos? Pagamento { get; set; }
+        public PagamentoDTO? Pagamento { get; set; }
+        public double ValorPago { get; set; }
+        public string Observacao { get; set; } = string.Empty;
     }
 }

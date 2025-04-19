@@ -1,7 +1,7 @@
 
 namespace Financeiro.Domain.Enums;
 
-public enum TipoConta
+public enum FormaPagamentoEnum
 {
     Carteira = 1,
     Cartao_Credito = 2,

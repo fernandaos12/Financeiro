@@ -1,4 +1,4 @@
-﻿using Financeiro.Api.Models.Enums;
+﻿using Financeiro.Domain.Enums;
 
 namespace Financeiro.Api.Models.DTO
 {
@@ -6,13 +6,15 @@ namespace Financeiro.Api.Models.DTO
     {
         public string? Descricao { get; set; }
         public MesCompetencia? MesCompetencia { get; set; }
-        public TipoConta FormaPagamento { get; set; }
+        public FormaPagamentoEnum FormaPagamento { get; set; }
         public bool PagamentoParcial { get; set; } = false;
         public double ValorPagamentoParcial { get; set; } = 0;
         public double Valor { get; set; } = 0;
         public StatusConta StatusPagamento { get; set; }
         public double SaldoDevedor { get; set; } = 0;
-        public ICollection<ContasPagar> ContasPagar { get; set; } = new List<ContasPagar>();
+        public ICollection<ContasPagarDTO> ContasPagar { get; set; } = new List<ContasPagarDTO>();
         public DateTime DataPagamento { get; set; }
+        public object Observacao { get; internal set; }
+        public object DataVencimento { get; internal set; }
     }
 }

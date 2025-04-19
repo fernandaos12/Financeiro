@@ -1,6 +1,7 @@
-using Financeiro.Api.Models;
-using Financeiro.Api.Repository.Interfaces;
+using Financeiro.Api.Models.DTO;
 using Financeiro.Api.Repository.Models;
+using Financeiro.Domain.Entities;
+using Financeiro.Domain.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Financeiro.Api.Controllers
@@ -9,42 +10,59 @@ namespace Financeiro.Api.Controllers
     [ApiController]
     public class PagamentosController : ControllerBase
     {
-        private readonly IPagamentos _repository;
-        public PagamentosController(IPagamentos repo)
+        private readonly IPagamentosRepository _repository;
+        public PagamentosController(IPagamentosRepository repo)
         {
             _repository = repo;
         }
 
         [HttpGet()]
-        public async Task<ActionResult<ServiceResponse<IEnumerable<Pagamento>>>> ListarContas()
+        public async Task<ActionResult<ServiceResponse<IEnumerable<PagamentoDTO>>>> ListarContas()
         {
-            return await _repository.Listar();
+            var lista = await _repository.Listar();
+            return Ok(lista);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Pagamento>> FindbyId(int id)
+        public async Task<ActionResult<PagamentoDTO>> FindbyId(int id)
         {
-            ServiceResponse<Pagamento> contaReceberItem = await _repository.FindId(id);
+            var contaReceberItem = await _repository.FindId(id);
             return Ok(contaReceberItem);
         }
 
         [HttpPost()]
-        public async Task<ActionResult<ServiceResponse<Boolean>>> Salvar(Pagamento Pagamentos)
+        public async Task<ActionResult<ServiceResponse<Boolean>>> Salvar(PagamentoDTO pagamentos)
         {
-            return Ok(await _repository.Salvar(Pagamentos));
+            var itens = new Pagamento
+            {
+                DataPagamento = pagamentos.DataPagamento,
+                DataVencimento = pagamentos.DataVencimento,
+                Valor = pagamentos.Valor,
+                Observacao = pagamentos.Observacao,
+                FormaPagamento = (Domain.Enums.FormaPagamentoEnum)pagamentos.FormaPagamento,
+            };
+            return Ok();
         }
 
         [HttpPut()]
-        public async Task<ActionResult<Boolean>> AtualizarItem(Pagamento Pagamentos)
+        public async Task<ActionResult<Boolean>> AtualizarItem(PagamentoDTO pagamentos)
         {
-            ServiceResponse<Boolean> contaReceberAtualizar = await _repository.Atualizar(Pagamentos);
+            var itens = new Pagamento
+            {
+                DataPagamento = pagamentos.DataPagamento,
+                DataVencimento = pagamentos.DataVencimento,
+                Valor = pagamentos.Valor,
+                Observacao = pagamentos.Observacao,
+                FormaPagamento = (Domain.Enums.FormaPagamentoEnum)pagamentos.FormaPagamento,
+            };
+            var contaReceberAtualizar = await _repository.Atualizar(itens);
             return Ok(contaReceberAtualizar);
         }
 
         [HttpDelete()]
         public async Task<ActionResult<Boolean>> Apagar(int id)
         {
-            ServiceResponse<Boolean> contaReceberRemover = await _repository.Remover(id);
+            var contaReceberRemover = await _repository.Remover(id);
             return Ok(contaReceberRemover);
         }
 

@@ -1,6 +1,5 @@
-using Financeiro.Api.Data;
-using Financeiro.Api.Repository;
-using Financeiro.Api.Repository.Interfaces;
+using Financeiro.Application;
+using Financeiro.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,27 +10,22 @@ var connectionSql = builder.Configuration.GetConnectionString("ConnectionSqlServ
 //var connection = builder.Configuration.GetConnectionString("ConnectionMySql");
 //builder.Services.AddDbContext<ApiDbcontext>(o => o.UseMySql(connection, ServerVersion.AutoDetect(connection)));
 
-builder.Services.AddDbContext<ApiDbcontext>(x => x.UseSqlServer(connectionSql));
+builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer(connectionSql));
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); //adicionado automapper
 
-builder.Services.AddScoped<DbContext, ApiDbcontext>();
+builder.Services.AddScoped<DbContext, AppDbContext>();
 
-builder.Services.AddScoped<IContasPagar, ContasPagarRepository>();
-builder.Services.AddScoped<ICategorias, CategoriasRepository>();
-builder.Services.AddScoped<IPagamentos, PagamentosRepository>();
-//builder.Services.AddScoped<IContasReceber, ContasReceberRepository>();
-//builder.Services.AddScoped<IPagamentos, PagamentosRepository>();
-//builder.Services.AddScoped<ICategorias, CategoriasRepository>();
-//builder.Services.AddScoped<ICartaoCredito, CartaoCreditoRepository>();
-//builder.Services.AddScoped<IReceitas, ReceitasRepository>();
-//builder.Services.AddScoped<ITags, TagsRepository>();
-
-builder.Services.AddAplicationServices();
+builder.Services.AddApplicationServices();  //adicionando inj dependencia
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+
+builder.Services.AddSwaggerGen();
+
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
@@ -51,7 +45,9 @@ builder.Services.AddCors(options =>
             builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().Build();
         });
     });
+
 var app = builder.Build();
+app.UseSwagger();
 
 app.UseRouting();
 

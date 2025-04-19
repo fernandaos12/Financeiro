@@ -7,7 +7,7 @@ public class Receitas : Entity
 {
     public string? Descricao { get; set; }
     public TipoReceita? TipoReceita { get; set; }
-    public TipoConta? TipoConta { get; set; }
+    public FormaPagamentoEnum? TipoConta { get; set; }
     public double Valor { get; set; }
     public MesCompetencia? MesCompetencia { get; set; }
     public DateTime DataRecebimento { get; set; }

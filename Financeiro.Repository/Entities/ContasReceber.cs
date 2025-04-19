@@ -10,7 +10,7 @@ namespace Financeiro.Domain.Entities
         public DateTime DataRecebimento { get; set; }
         public bool Repeticao { get; set; }
         public bool Confirmado { get; set; }
-        public TipoConta? Conta { get; set; } //se a conta é de cartao de credito
+        public FormaPagamentoEnum? Conta { get; set; } //se a conta é de cartao de credito
         public Categorias? Categorias { get; set; }
         public string? Observacoes { get; set; }
         public string? CorGrafico { get; set; }
