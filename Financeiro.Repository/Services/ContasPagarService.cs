@@ -4,12 +4,12 @@
     {
         public ContasPagarService(string descricao, decimal valor, DateTime dataVencimento) : base()
         {
-            descricao = Descricao;
+            descricao = Descricao ?? String.Empty;
             valor = Valor;
             dataVencimento = DataVencimento;
         }
 
-        public string Descricao { get; private set; }
+        public string? Descricao { get; private set; }
         public decimal Valor { get; private set; }
         public DateTime DataVencimento { get; private set; }
     }

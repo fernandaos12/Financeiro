@@ -16,8 +16,8 @@ namespace Financeiro.Domain.Entities
         public ICollection<ContasPagar> ContasPagar { get; set; } = new List<ContasPagar>();
         public DateTime DataPagamento { get; set; }
         public double ValorPagamentoTotal { get; set; }
-        public object DataVencimento { get; set; }
-        public object Observacao { get; set; }
+        public DateTime DataVencimento { get; set; }
+        public string? Observacao { get; set; }
 
         public void ValorPagamento(double valor, DateTime dataPagamento)
         {

@@ -1,11 +1,13 @@
-﻿namespace Financeiro.Application.Interfaces
+﻿using Financeiro.Application.Models.DTO;
+
+namespace Financeiro.Application.Interfaces
 {
     public interface IApplicationContasPagar
     {
-        //Task<ServiceResponse<IEnumerable<ContasPagarDTO>>> ListarContas();
-        //Task<ServiceResponse<ContasPagarDTO>> FindId(int id);
-        //Task<ServiceResponse<Boolean>> Salvar(ContasPagarDTO contaspagar);
-        //Task<ServiceResponse<Boolean>> Atualizar(ContasPagarDTO contaspagar);
-        //Task<ServiceResponse<Boolean>> Remover(int id)/*;*/
+        Task<IEnumerable<ContasPagarDTO>> ListarContas();
+        Task<ContasPagarDTO> FindId(int id);
+        Task<Boolean> Salvar(ContasPagarDTO contaspagar);
+        Task<Boolean> Atualizar(ContasPagarDTO contaspagar);
+        Task<Boolean> Remover(int id);
     }
 }

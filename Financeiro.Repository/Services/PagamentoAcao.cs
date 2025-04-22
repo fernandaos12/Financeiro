@@ -6,8 +6,8 @@ namespace Financeiro.Domain.Services
     //receiver
     public class PagamentoAcao
     {
-        private readonly Pagamento _pagamento;
-        private readonly ContasPagar _contaspagar;
+        private readonly Pagamento? _pagamento;
+        private readonly ContasPagar? _contaspagar;
 
         public double RealizarPagamento(double valor)
         {

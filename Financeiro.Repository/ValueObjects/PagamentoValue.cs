@@ -11,7 +11,7 @@
         }
 
         public decimal Valor { get; private set; }
-        public string Descricao { get; private set; }
+        public string Descricao { get; private set; } = String.Empty;
         public DateTime DataPagamento { get; private set; } = DateTime.Now;
         public DateTime DataVencimento { get; private set; }
     }

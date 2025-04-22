@@ -1,5 +1,5 @@
-using Financeiro.Api.Models.DTO;
 using Financeiro.Api.Repository.Models;
+using Financeiro.Application.Models.DTO;
 using Financeiro.Domain.Entities;
 using Financeiro.Domain.Repository;
 using Microsoft.AspNetCore.Mvc;
@@ -33,7 +33,6 @@ namespace Financeiro.Api.Controllers
         {
             var itens = new Configuracoes
             {
-                Id = config.Id,
                 Nome = config.Nome,
             };
             await _repository.Salvar(itens);

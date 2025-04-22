@@ -57,7 +57,21 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "MediatR": {
+              "target": "Package",
+              "version": "[12.5.0, )"
+            },
+            "MediatR.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[11.0.0, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[9.0.4, )"
             },
@@ -127,6 +141,9 @@
             "projectReferences": {
               "C:\\Projetos\\Financeiro\\Financeiro.Infrastructure\\Financeiro.Infrastructure.csproj": {
                 "projectPath": "C:\\Projetos\\Financeiro\\Financeiro.Infrastructure\\Financeiro.Infrastructure.csproj"
+              },
+              "C:\\Projetos\\Financeiro\\Financeiro.Repository\\Financeiro.Domain.csproj": {
+                "projectPath": "C:\\Projetos\\Financeiro\\Financeiro.Repository\\Financeiro.Domain.csproj"
               }
             }
           }

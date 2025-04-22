@@ -2,9 +2,9 @@
 
 namespace Financeiro.Domain.Abstractions
 {
-    public class Result
+    public class CustomResult
     {
-        protected Result(bool isSucess, Error error)
+        protected CustomResult(bool isSucess, Error error)
         {
             switch (isSucess)
             {
@@ -25,22 +25,22 @@ namespace Financeiro.Domain.Abstractions
         public bool IsSucess { get; }
         public Error Error { get; }
         public bool IsFailure => !IsSucess;
-        public static Result Success() => new(true, Error.None);
-        public static Result Failure(Error error) => new(false, error);
-        public static Result<T> Success<T>(T value) => new(value, true, Error.None);
-        public static Result<T> Failure<T>(Error error) => new(default, false, error);
-        public static Result<T> Create<T>(T? value) => value is not null ? Success(value) : Failure<T>(Error.NullValue);
+        public static CustomResult Success() => new(true, Error.None);
+        public static CustomResult Failure(Error error) => new(false, error);
+        public static CustomResult<T> Success<T>(T value) => new(value, true, Error.None);
+        public static CustomResult<T> Failure<T>(Error error) => new(default, false, error);
+        public static CustomResult<T> Create<T>(T? value) => value is not null ? Success(value) : Failure<T>(Error.NullValue);
     }
 
-    public class Result<T> : Result
+    public class CustomResult<T> : CustomResult
     {
         private readonly T? _value;
-        protected internal Result(T? value, bool isSucess, Error error) : base(isSucess, error)
+        protected internal CustomResult(T? value, bool isSucess, Error error) : base(isSucess, error)
             => _value = value;
 
         [NotNull]
         public T Value => _value ?? throw new InvalidOperationException("Resultado não tem valor ");
-        public static implicit operator Result<T>(T? value) => Create(value);
+        public static implicit operator CustomResult<T>(T? value) => Create(value);
 
     }
 }

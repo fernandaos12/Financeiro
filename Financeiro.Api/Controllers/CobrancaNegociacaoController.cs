@@ -1,6 +1,6 @@
-using Financeiro.Api.Models.DTO;
 using Financeiro.Api.Repository.Interfaces;
 using Financeiro.Api.Repository.Models;
+using Financeiro.Application.Models.DTO;
 using Financeiro.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,9 +1,10 @@
-using Financeiro.Api.Models.DTO;
 using Financeiro.Api.Repository.Models;
-using Financeiro.Domain.Entities;
-using Financeiro.Domain.Repository;
+using Financeiro.Application.Models.DTO;
+using Financeiro.Application.UseCases.ContasPagar.Commands;
+using Financeiro.Application.UseCases.ContasPagar.Queries;
+using Financeiro.Application.UseCases.ContasPagar.Responses;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-
 
 namespace Financeiro.Api.Controllers
 {
@@ -11,88 +12,55 @@ namespace Financeiro.Api.Controllers
     [Route("api/[controller]")]
     public class ContasPagarController : ControllerBase
     {
-        private readonly IContasPagarRepository _repo;
+        private readonly IMediator _mediator;
 
-        public ContasPagarController(IContasPagarRepository repo)
+        public ContasPagarController(IMediator mediator)
         {
-            _repo = repo;
+            _mediator = mediator;
         }
 
         [HttpGet()]
         public async Task<ActionResult<ServiceResponse<IEnumerable<ContasPagarDTO>>>> ListarContas()
         {
-            var lista = await _repo.ListarContas();
+            var query = new ListarContaPagarQuery();
+            var lista = await _mediator.Send(query);
             return Ok(lista);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ContasPagarDTO>> FindbyId(int id)
         {
-            var item = await _repo.FindId(id);
+            var command = new ObterContaPorIdQuery(id);
+            var item = await _mediator.Send(command);
             return Ok(item);
         }
 
-        [HttpPost(), DisableRequestSizeLimit]
+        [HttpPost()]
         public async Task<ActionResult<ServiceResponse<Boolean>>> Salvar([FromBody] ContasPagarDTO contaspagar)
         {
-            var contas = new ContasPagar
-            {
-                Descricao = contaspagar.Descricao,
-                Data_Vencimento = contaspagar.Data_Vencimento,
-                DataAlteracao = DateTime.Now,
-                Valor = contaspagar.Valor,
-                Status = Domain.Enums.Status_Default.Ativo,
-                ValorPago = contaspagar.ValorPago,
-                ValorParcela = contaspagar.ValorParcela,
-                Periodicidade = contaspagar.Periodicidade,
-                Repeticao = (Domain.Enums.TipoRepeticao)contaspagar.Repeticao,
-                Anexos = contaspagar.Anexos,
-                CaminhoAnexos = contaspagar.CaminhoAnexos,
-                Observacao = contaspagar.Observacao,
-                NumeroParcelas = contaspagar.NumeroParcelas,
-                Categoria = (Domain.Enums.TipoCategoria)contaspagar.Categoria
-            };
-
-
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            var obj = await _repo.Salvar(contas);
+            var command = new RegistrarContasPagarCommand(contaspagar);
+            await _mediator.Send(command);
             return Ok(true);
         }
 
         [HttpPut()]
         public async Task<ActionResult<Boolean>> AtualizarItem(ContasPagarDTO contaspagar)
         {
-            var contas = new ContasPagar
-            {
-                Descricao = contaspagar.Descricao,
-                Data_Vencimento = contaspagar.Data_Vencimento,
-                DataAlteracao = DateTime.Now,
-                Valor = contaspagar.Valor,
-                Status = Domain.Enums.Status_Default.Ativo,
-                ValorPago = contaspagar.ValorPago,
-                ValorParcela = contaspagar.ValorParcela,
-                Periodicidade = contaspagar.Periodicidade,
-                Repeticao = (Domain.Enums.TipoRepeticao)contaspagar.Repeticao,
-                Anexos = contaspagar.Anexos,
-                CaminhoAnexos = contaspagar.CaminhoAnexos,
-                Observacao = contaspagar.Observacao,
-                NumeroParcelas = contaspagar.NumeroParcelas,
-                Categoria = (Domain.Enums.TipoCategoria)contaspagar.Categoria
-            };
-
-            var contaReceberAtualizar = await _repo.Atualizar(contas);
-            return Ok(true);
+            var command = new AtualizarContaPagarCommand(contaspagar);
+            var contaReceberAtualizar = await _mediator.Send(command);
+            return Ok(contaReceberAtualizar);
         }
 
         [HttpDelete()]
         public async Task<ActionResult<Boolean>> Apagar(int id)
         {
-            var contaReceberRemover = await _repo.Remover(id);
-            return Ok(true);
+            var command = new RemoverContaPagarCommand(id);
+            var contaReceberRemover = await _mediator.Send(command);
+            return Ok(contaReceberRemover);
         }
     }
 }

@@ -19,8 +19,8 @@
         public decimal Desconto { get; private set; }
         public decimal Multa { get; private set; }
         public decimal Juros { get; private set; }
-        public string Status { get; private set; }
-        public string CodigoPgto { get; private set; }
+        public string? Status { get; private set; }
+        public string? CodigoPgto { get; private set; }
         public List<PagamentoService> Services { get; private set; }
 
 
@@ -41,7 +41,7 @@
 
         }
 
-        private string CodigoPagamento()
+        private string? CodigoPagamento()
         {
             const string numero = "0123456789";
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

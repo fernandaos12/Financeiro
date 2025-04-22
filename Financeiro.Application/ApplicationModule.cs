@@ -24,8 +24,17 @@ namespace Financeiro.Application
             //builder.Services.AddScoped<ICategorias, CategoriasRepository>();
             //builder.Services.AddScoped<ICartaoCredito, CartaoCreditoRepository>();
             //builder.Services.AddScoped<IReceitas, ReceitasRepository>();
-            //builder.Services.AddScoped<ITags, TagsRepository>();
+
             return services;
+        }
+
+        public static class DependencyInjection
+        {
+            public static IServiceCollection AppDependencyInjection(IServiceCollection services)
+            {
+                services.AddMediatR(x => x.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));
+                return services;
+            }
         }
     }
 }
