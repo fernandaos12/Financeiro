@@ -14,7 +14,7 @@ public class ContasPagarDTO : BaseModel
     public int? NumeroParcelas { get; set; }
     public string? CaminhoAnexos { get; set; } = string.Empty;
     public byte[]? Anexos { get; set; }
-    public int PagamentoId { get; set; }
+    public int? PagamentoId { get; set; }
     public PagamentoDTO? Pagamento { get; set; }
     public double ValorPago { get; set; }
     public double SaldoDevedorAtualizado { get; set; }

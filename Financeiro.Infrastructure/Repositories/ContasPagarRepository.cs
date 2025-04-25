@@ -7,30 +7,28 @@ namespace Financeiro.Infrastructure.Repository
 {
     public class ContasPagarRepository : IContasPagarRepository
     {
-        private readonly AppDbContext _context;
+        private readonly IDbContextFactory<AppDbContext> _context;
 
-        public ContasPagarRepository(AppDbContext context)
+        public ContasPagarRepository(IDbContextFactory<AppDbContext> context)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _context = context;
         }
 
         public async Task<Boolean> Atualizar(ContasPagar pagar)
         {
-            var retorno = new Boolean();
             try
             {
-                pagar.DataAlteracao = DateTime.Now.ToLocalTime();
-                _context.ContasPagar.Update(pagar);
-                await _context.SaveChangesAsync();
-                retorno = true;
-
+                using (var con = _context.CreateDbContext())
+                {
+                    con.ContasPagar.Update(pagar);
+                    await con.SaveChangesAsync();
+                    return true;
+                }
             }
             catch (Exception ex)
             {
                 throw new ArgumentException("Erro ao atualizar: " + ex.Message);
             }
-
-            return retorno;
         }
 
         public async Task<ContasPagar> FindId(int id)
@@ -38,10 +36,14 @@ namespace Financeiro.Infrastructure.Repository
             var retorno = new ContasPagar();
             try
             {
-                var item = await _context.ContasPagar.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id)
+                using (var con = _context.CreateDbContext())
+                {
+                    var item = await con.ContasPagar
+                        .AsNoTracking().FirstOrDefaultAsync(p => p.Id == id)
                     ?? throw new ArgumentException("Conta a pagar nao encontrada");
 
-                retorno = item;
+                    retorno = item;
+                }
             }
             catch (Exception ex)
             {
@@ -56,7 +58,11 @@ namespace Financeiro.Infrastructure.Repository
             var retorno = new List<ContasPagar>();
             try
             {
-                retorno = await _context.ContasPagar.ToListAsync() ?? throw new ArgumentException("Nenhuma conta a pagar encontrada.");
+                using (var con = _context.CreateDbContext())
+                {
+                    retorno = await con.ContasPagar.ToListAsync()
+                        ?? throw new ArgumentException("Nenhuma conta a pagar encontrada.");
+                }
             }
             catch (Exception ex)
             {
@@ -70,10 +76,13 @@ namespace Financeiro.Infrastructure.Repository
         {
             try
             {
-                var item = await _context.ContasPagar.FirstOrDefaultAsync(p => p.Id == id) ?? throw new ArgumentException("Conta a pagar nao encontrada.");
+                using (var con = _context.CreateDbContext())
+                {
+                    var item = await con.ContasPagar.FirstOrDefaultAsync(p => p.Id == id) ?? throw new ArgumentException("Conta a pagar nao encontrada.");
 
-                _context.ContasPagar.Remove(item);
-                await _context.SaveChangesAsync();
+                    con.ContasPagar.Remove(item);
+                    await con.SaveChangesAsync();
+                }
             }
             catch (Exception ex)
             {
@@ -86,30 +95,32 @@ namespace Financeiro.Infrastructure.Repository
         public async Task<Boolean> Salvar(ContasPagar pagar)
         {
             byte[] anexopdf;
-            string nomeArquivo = pagar.CaminhoAnexos ?? "anexoContaPagar";
-            //IFormFile file;
+            string nomeArquivo = "anexoContaPagar_" + pagar.Descricao?.Replace(" ", "_") + ".pdf";
+
             try
             {
-                //var caminhoFisicoAnexo = ContasPagar.CaminhoAnexos;
-                //var caminho = Directory.GetFiles(caminhoFisicoAnexo);
-                if (nomeArquivo != null)
+                using (var con = _context.CreateDbContext())
                 {
-                    string currentDirectory = Directory.GetCurrentDirectory();
-                    if (!Directory.Exists(Path.Combine(currentDirectory, "tmp")))
+                    if (nomeArquivo != null)
                     {
-                        Directory.CreateDirectory(Path.Combine(currentDirectory, "tmp"));
+                        string currentDirectory = Directory.GetCurrentDirectory();
+                        if (!Directory.Exists(Path.Combine(currentDirectory, "tmp")))
+                        {
+                            Directory.CreateDirectory(Path.Combine(currentDirectory, "tmp"));
+                        }
+
+                        anexopdf = pagar.Anexos != null ? pagar.Anexos : throw new ArgumentNullException("Erro ao anexar arquivo.");
+                        string caminho_arquivo = Path.Combine(currentDirectory, "tmp", nomeArquivo);
+
+                        File.WriteAllBytes(caminho_arquivo, anexopdf.ToArray());
+
+                        pagar.Anexos = anexopdf.ToArray();
+                        pagar.CaminhoAnexos = caminho_arquivo;
                     }
 
-                    var arquivo = Directory.GetDirectories(Path.Combine(currentDirectory, "tmp", nomeArquivo));
-                    //anexopdf = File.ReadAllBytes(ContasPagar.Anexos);
-                    anexopdf = pagar.Anexos != null ? pagar.Anexos : throw new ArgumentNullException("Erro ao anexar arquivo.");
-                    File.WriteAllBytes(nomeArquivo, anexopdf.ToArray());
-
-                    pagar.Anexos = anexopdf.ToArray();
+                    con.ContasPagar.Add(pagar);
+                    await con.SaveChangesAsync();
                 }
-
-                _context.ContasPagar.Add(pagar);
-                await _context.SaveChangesAsync();
             }
             catch (Exception e)
             {

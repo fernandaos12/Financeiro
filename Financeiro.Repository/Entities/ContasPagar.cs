@@ -17,8 +17,8 @@ namespace Financeiro.Domain.Entities
         public int? NumeroParcelas { get; set; }
         public string? Observacoes { get; set; }
         public String? CaminhoAnexos { get; set; } = String.Empty;
-        public Byte[]? Anexos { get; set; }
-        public int PagamentoId { get; set; }
+        public Byte[]? Anexos { get; set; } = Array.Empty<byte>();
+        public int? PagamentoId { get; set; } = null;
         public Pagamento? Pagamento { get; set; }
         public List<string> Tags { get; set; } = new List<string>();
         public double SaldoDevedorAtualizado { get; set; }

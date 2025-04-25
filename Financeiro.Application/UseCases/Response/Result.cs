@@ -1,4 +1,4 @@
-﻿namespace Financeiro.Application.UseCases.ContasPagar.Responses
+﻿namespace Financeiro.Application.UseCases.Response
 {
     //public sealed record Response(bool sucesso, string Descricao) : IRequest<Result<Response>>
     //{

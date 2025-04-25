@@ -46,10 +46,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Compile Include="gitignore" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <ProjectReference Include="..\Financeiro.Application\Financeiro.Application.csproj" />
 	  <ProjectReference Include="..\Financeiro.Infrastructure\Financeiro.Infrastructure.csproj" />
 	</ItemGroup>

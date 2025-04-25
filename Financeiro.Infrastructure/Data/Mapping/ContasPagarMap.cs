@@ -51,7 +51,7 @@ public class ContasPagarMap : IEntityTypeConfiguration<ContasPagar>
         builder.HasOne(x => x.Pagamento)
             .WithMany(x => x.ContasPagar)
             .HasForeignKey(x => x.PagamentoId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder.Property(x => x.Repeticao)
             .HasConversion<TipoRepeticao>()

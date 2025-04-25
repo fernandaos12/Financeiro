@@ -1,6 +1,6 @@
 ﻿using Financeiro.Application.Models.DTO;
 using Financeiro.Application.UseCases.ContasPagar.Queries;
-using Financeiro.Application.UseCases.ContasPagar.Responses;
+using Financeiro.Application.UseCases.Response;
 using Financeiro.Domain.Repository;
 using MediatR;
 

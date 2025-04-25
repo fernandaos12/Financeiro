@@ -1,5 +1,7 @@
 using Financeiro.Application;
+using Financeiro.Application.UseCases.ContasPagar.Handles;
 using Financeiro.Infrastructure.Data;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,19 +14,21 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); //adici
 var connectionSql = builder.Configuration.GetConnectionString("ConnectionSqlServer")
                     ?? throw new InvalidOperationException("Connection string não encontrada");
 
-builder.Services.AddDbContext<AppDbContext>(options =>
+builder.Services.AddDbContextFactory<AppDbContext>(options =>
         options.UseSqlServer(connectionSql));
 
-//var connectionSql = builder.Configuration.GetConnectionString("ConnectionSqlServer") ?? throw new InvalidOperationException("Connection string não encontrada");
-
-//builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer(connectionSql)); //adicionado dbcontext
-//var connection = builder.Configuration.GetConnectionString("ConnectionMySql");
-//builder.Services.AddDbContext<ApiDbcontext>(o => o.UseMySql(connection, ServerVersion.AutoDetect(connection)));
-
-builder.Services.AddScoped<DbContext, AppDbContext>();
+//builder.Services.AddScoped<DbContext, AppDbContext>();
 builder.Services.AddApplicationServices();  //adicionando inj dependencia
+//builder.Services.AddScoped<IContasPagarRepository, ContasPagarRepository>();
 
-builder.Services.AddMediatR(config => config.RegisterServicesFromAssemblyContaining<Program>()); //Mediatr
+builder.Services.AddMediatR(config =>
+{
+    config.RegisterServicesFromAssemblyContaining<Program>();
+    config.RegisterServicesFromAssemblyContaining<RegistrarContasPagarHandler>();
+});
+
+
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

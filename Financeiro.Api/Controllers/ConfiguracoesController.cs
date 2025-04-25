@@ -1,4 +1,4 @@
-using Financeiro.Api.Repository.Models;
+using Financeiro.Api.Models;
 using Financeiro.Application.Models.DTO;
 using Financeiro.Domain.Entities;
 using Financeiro.Domain.Repository;

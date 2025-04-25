@@ -28,13 +28,13 @@ namespace Financeiro.Application
             return services;
         }
 
-        public static class DependencyInjection
-        {
-            public static IServiceCollection AppDependencyInjection(IServiceCollection services)
-            {
-                services.AddMediatR(x => x.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));
-                return services;
-            }
-        }
+        //public static class DependencyInjection
+        //{
+        //    public static IServiceCollection AppDependencyInjection(IServiceCollection services)
+        //    {
+        //        services.AddMediatR(x => x.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));
+        //        return services;
+        //    }
+        //}
     }
 }

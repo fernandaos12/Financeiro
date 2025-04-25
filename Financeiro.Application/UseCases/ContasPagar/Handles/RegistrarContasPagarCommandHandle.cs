@@ -1,5 +1,5 @@
 ﻿using Financeiro.Application.UseCases.ContasPagar.Commands;
-using Financeiro.Application.UseCases.ContasPagar.Responses;
+using Financeiro.Application.UseCases.Response;
 using Financeiro.Domain.Repository;
 using MediatR;
 
@@ -11,24 +11,24 @@ public sealed class RegistrarContasPagarHandler(IContasPagarRepository _repo)
     {
         var item = new Domain.Entities.ContasPagar
         {
-            Descricao = request.ContasAPagar.Descricao,
-            Data_Vencimento = request.ContasAPagar.Data_Vencimento,
-            Valor = request.ContasAPagar.Valor,
-            Observacao = request.ContasAPagar.Observacao,
-            Status = request.ContasAPagar.Status,
+            Descricao = request.contas.Descricao,
+            Data_Vencimento = request.contas.Data_Vencimento,
+            Valor = request.contas.Valor,
+            Observacao = request.contas.Observacao,
+            Status = request.contas.Status,
             DataAlteracao = DateTime.Now,
-            Status_Conta = request.ContasAPagar.Status_Conta,
-            ValorPago = request.ContasAPagar.ValorPago,
-            Categoria = request.ContasAPagar.Categoria,
-            Repeticao = request.ContasAPagar.Repeticao,
-            Periodicidade = request.ContasAPagar.Periodicidade,
-            ValorParcela = request.ContasAPagar.ValorParcela,
-            NumeroParcelas = request.ContasAPagar.NumeroParcelas,
-            CaminhoAnexos = request.ContasAPagar.CaminhoAnexos,
-            Anexos = request.ContasAPagar.Anexos,
-            PagamentoId = request.ContasAPagar.PagamentoId,
-            SaldoDevedorAtualizado = request.ContasAPagar.SaldoDevedorAtualizado,
-            Tags = request.ContasAPagar.Tags ?? new List<string>(),
+            Status_Conta = request.contas.Status_Conta,
+            ValorPago = request.contas.ValorPago,
+            Categoria = request.contas.Categoria,
+            Repeticao = request.contas.Repeticao,
+            Periodicidade = request.contas.Periodicidade,
+            ValorParcela = request.contas.ValorParcela,
+            NumeroParcelas = request.contas.NumeroParcelas,
+            CaminhoAnexos = request.contas.CaminhoAnexos,
+            Anexos = request.contas.Anexos,
+            PagamentoId = null,
+            SaldoDevedorAtualizado = request.contas.SaldoDevedorAtualizado,
+            Tags = request.contas.Tags ?? new List<string>(),
         };
         await _repo.Salvar(item);
 

@@ -1,6 +1,6 @@
 namespace Financeiro.Api.Models;
 
-public class BaseApiModels
+public class BaseResponseApiModels
 {
     public class PostApiRetorno
     {
@@ -54,13 +54,13 @@ public class BaseApiModels
     }
     public class Response
     {
-        public bool result { get; set; }
+        public bool Result { get; set; }
 
-        public string message { get; set; }
+        public string Message { get; set; }
 
-        public string exception { get; set; }
+        public string Exception { get; set; }
 
-        public string stacktrace { get; set; }
+        public string Stacktrace { get; set; }
     }
     public class ResponseSucesso
     {
