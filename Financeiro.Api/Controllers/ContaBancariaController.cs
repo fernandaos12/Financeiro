@@ -1,7 +1,7 @@
 using Financeiro.Api.Models;
-using Financeiro.Api.Repository.Interfaces;
 using Financeiro.Application.Models.DTO;
 using Financeiro.Domain.Entities;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Financeiro.Api.Controllers
@@ -10,60 +10,107 @@ namespace Financeiro.Api.Controllers
     [ApiController]
     public class ContaBancariaController : ControllerBase
     {
-        private readonly IContaBancariaRepository _repository;
-        public ContaBancariaController(IContaBancariaRepository repo)
+        private readonly IMediator _mediator;
+        public ContaBancariaController(IMediator mediator)
         {
-            _repository = repo;
+            _mediator = mediator;
         }
 
         [HttpGet()]
         public async Task<ActionResult<ServiceResponse<IEnumerable<ContaBancariaDTO>>>> ListarContas()
         {
-            var lista = await _repository.Listar();
-            return Ok(lista);
+            var retorno = new ServiceResponse<IEnumerable<ContaBancariaDTO>>();
+            try
+            {
+                var command = new ListarContasBancariasQuery();
+                retorno.DadosRetorno = (await _mediator.Send(command)).Dados;
+                retorno.Sucesso = true;
+            }
+            catch (Exception ex)
+            {
+                retorno.Sucesso = false;
+                retorno.Mensagem = ex.Message;
+            }
+
+            return Ok(retorno);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ContaBancariaDTO>> FindbyId(int id)
         {
-            var contaReceberItem = await _repository.FindId(id);
-            return Ok(contaReceberItem);
+            var retorno = new ServiceResponse<ContaBancariaDTO>();
+            try
+            {
+                var command = new ObterContaBancariaPorIdQuery(id);
+                retorno.DadosRetorno = (await _mediator.Send(command)).Dados;
+                retorno.Sucesso = true;
+            }
+            catch (Exception ex)
+            {
+                retorno.Sucesso = false;
+                retorno.Mensagem = ex.Message;
+            }
+
+            return Ok(retorno);
         }
 
         [HttpPost()]
         public async Task<ActionResult<ServiceResponse<Boolean>>> Salvar(ContaBancariaDTO contaBancaria)
         {
+
+            var retorno = new ServiceResponse<Boolean>();
             try
             {
-                var itens = new ContaBancaria
-                {
-
-                };
-                await _repository.Salvar(itens);
+                var command = new GravarContaBancariaCommand(contaBancaria);
+                await _mediator.Send(command);
+                retorno.Sucesso = true;
+                retorno.Mensagem = "Dados gravados com sucesso.";
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                retorno.Mensagem = ex.Message;
+                retorno.Sucesso = false;
             }
-            return Ok(true);
+            return Ok(retorno);
         }
 
         [HttpPut()]
         public async Task<ActionResult<Boolean>> AtualizarItem(ContaBancaria contaBancaria)
         {
-            var itens = new ContaBancaria
+            var retorno = new ServiceResponse<Boolean>();
+            try
             {
-
-            };
-            await _repository.Atualizar(itens);
-            return Ok(true);
+                var command = new AtualizarContaBancariaCommand(contaBancaria);
+                await _mediator.Send(command);
+                retorno.Sucesso = true;
+                retorno.Mensagem = "Dados atualizados com sucesso.";
+            }
+            catch (Exception ex)
+            {
+                retorno.Mensagem = ex.Message;
+                retorno.Sucesso = false;
+            }
+            return Ok(retorno);
         }
 
         [HttpDelete()]
         public async Task<ActionResult<Boolean>> Apagar(int id)
         {
-            var contaReceberRemover = await _repository.Remover(id);
-            return Ok(contaReceberRemover);
+            var retorno = new ServiceResponse<Boolean>();
+            try
+            {
+                var command = new RemoverContaBancariaCommand(id);
+                await _mediator.Send(command);
+                retorno.Sucesso = true;
+                retorno.Mensagem = "Dados removidos com sucesso.";
+            }
+            catch (Exception ex)
+            {
+                retorno.Mensagem = ex.Message;
+                retorno.Sucesso = false;
+            }
+
+            return Ok(retorno);
         }
     }
 }

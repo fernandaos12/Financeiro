@@ -2,7 +2,6 @@ using Financeiro.Api.Models;
 using Financeiro.Application.Models.DTO;
 using Financeiro.Application.UseCases.ContasPagar.Commands;
 using Financeiro.Application.UseCases.ContasPagar.Queries;
-using Financeiro.Application.UseCases.ContasPagar.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

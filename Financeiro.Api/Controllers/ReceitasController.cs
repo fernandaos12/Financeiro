@@ -1,7 +1,7 @@
 using Financeiro.Api.Models;
-using Financeiro.Api.Repository.Interfaces;
 using Financeiro.Application.Models.DTO;
 using Financeiro.Domain.Entities;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Financeiro.Api.Controllers
@@ -10,56 +10,111 @@ namespace Financeiro.Api.Controllers
     [ApiController]
     public class ReceitasController : ControllerBase
     {
-        private readonly IReceitasRepository _repository;
-        public ReceitasController(IReceitasRepository repo)
+        private readonly IMediator _mediator;
+        public ReceitasController(IMediator mediator)
         {
-            _repository = repo;
+            _mediator = mediator;
         }
 
         [HttpGet()]
         public async Task<ActionResult<ServiceResponse<IEnumerable<ReceitasDTO>>>> ListarContas()
         {
-            var listar = await _repository.Listar();
-            return Ok(listar);
+            var retorno = new ServiceResponse<IEnumerable<ReceitasDTO>>();
+
+            try
+            {
+                var command = new ListarReceitasQuery();
+                _mediator.Send(command);
+
+                retorno.Sucesso = true;
+                retorno.DadosRetorno = (await _mediator.Send(command)).Dados;
+            }
+            catch (Exception ex)
+            {
+                retorno.Sucesso = false;
+                retorno.Mensagem = ex.Message;
+            }
+
+            return Ok(retorno);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ReceitasDTO>> FindbyId(int id)
         {
-            var contaReceberItem = await _repository.FindId(id);
-            return Ok(contaReceberItem);
+            var retorno = new ServiceResponse<ReceitasDTO>();
+            try
+            {
+                var command = new ObterReceitaPorIdQuery(id);
+                retorno.DadosRetorno = (await _mediator.Send(command)).Dados;
+                retorno.Sucesso = true;
+
+            }
+            catch (Exception ex)
+            {
+                retorno.Sucesso = false;
+                retorno.Mensagem = ex.Message;
+            }
+            return Ok(retorno);
         }
 
         [HttpPost()]
         public async Task<ActionResult<ServiceResponse<Boolean>>> Salvar(ReceitasDTO receitas)
         {
+            var retorno = new ServiceResponse<Boolean>();
             try
             {
-                var itens = new Receitas
-                {
-                    Descricao = receitas.Descricao
-                };
-                await _repository.Salvar(itens);
+                var command = new GravarReceitaCommand(receitas);
+                await _mediator.Send(command);
+
+                retorno.Sucesso = true;
+                retorno.Mensagem = "Dados gravados com sucesso.";
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                retorno.Sucesso = false;
+                retorno.Mensagem = ex.Message;
             }
-            return Ok(true);
+            return Ok(retorno);
         }
 
         [HttpPut()]
         public async Task<ActionResult<Boolean>> AtualizarItem(Receitas Receitas)
         {
-            var contaReceberAtualizar = await _repository.Atualizar(Receitas);
-            return Ok(contaReceberAtualizar);
+            var retorno = new ServiceResponse<Boolean>();
+            try
+            {
+                var command = new AtualizarReceitaCommand(Receitas);
+                await _mediator.Send(command);
+
+                retorno.Sucesso = true;
+                retorno.Mensagem = "Dados atualizados com sucesso.";
+            }
+            catch (Exception ex)
+            {
+                retorno.Sucesso = false;
+                retorno.Mensagem = ex.Message;
+            }
+            return Ok(retorno);
         }
 
         [HttpDelete()]
         public async Task<ActionResult<Boolean>> Apagar(int id)
         {
-            var contaReceberRemover = await _repository.Remover(id);
-            return Ok(contaReceberRemover);
+            var retorno = new ServiceResponse<Boolean>();
+            try
+            {
+                var command = new RemoverReceitaCommand(id);
+                await _mediator.Send(command);
+
+                retorno.Sucesso = true;
+                retorno.Mensagem = "Dados removidos com sucesso.";
+            }
+            catch (Exception ex)
+            {
+                retorno.Sucesso = false;
+                retorno.Mensagem = ex.Message;
+            }
+            return Ok(retorno);
         }
 
     }

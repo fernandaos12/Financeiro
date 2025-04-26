@@ -1,3 +1,8 @@
+using Financeiro.Api.Models;
+using Financeiro.Application.Models.DTO;
+using Financeiro.Application.UseCases.Cobrancas.Command;
+using Financeiro.Application.UseCases.Cobrancas.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Financeiro.Api.Controllers
@@ -6,59 +11,107 @@ namespace Financeiro.Api.Controllers
     [ApiController]
     public class CobrancasController : ControllerBase
     {
-        //   private readonly CobrancaRepository _repository;
-        //public CobrancasController(CobrancaRepository repo)
-        //{
-        //    _repository = repo;
-        //}
+        private readonly IMediator _mediator;
+        public CobrancasController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
 
-        // [HttpGet()]
-        // public async Task<IEnumerable<Cobrancas>> ListarContas()
-        // {
-        //    var retorno = await _repository.Get();
+        [HttpGet()]
+        public async Task<ActionResult<ServiceResponse<IEnumerable<CobrancaDTO>>>> ListarContas()
+        {
+            var retorno = new ServiceResponse<IEnumerable<CobrancaDTO>>();
+            try
+            {
+                var command = new ListarCobrancasQuery();
+                retorno.DadosRetorno = (await _mediator.Send(command)).Dados;
+                retorno.Sucesso = true;
+            }
+            catch (Exception ex)
+            {
+                retorno.Sucesso = false;
+                retorno.Mensagem = ex.Message;
+            }
 
-        //    return retorno;
-        // }
+            return Ok(retorno);
+        }
 
-        // [HttpGet("{id}")]
-        // public async Task<Cobrancas> FindbyId(int id)
-        // {
-        //     var retorno = await _repository.FindById(id);
-        //     if(retorno == null){
-        //          throw new Exception("Conta a pagar não encontrado.");
-        //     }
-        //     return retorno;         
-        // }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ServiceResponse<CobrancaDTO>>> FindbyId(int id)
+        {
+            var retorno = new ServiceResponse<CobrancaDTO>();
+            try
+            {
+                var command = new ObterCobrancaPorIdQuery(id);
+                retorno.DadosRetorno = (await _mediator.Send(command)).Dados;
+                retorno.Sucesso = true;
+            }
+            catch (Exception ex)
+            {
+                retorno.Sucesso = false;
+                retorno.Mensagem = ex.Message;
+            }
 
-        // [HttpPost()]
-        // public async Task<bool> Salvar(Cobranca cp)
-        // {
-        //     await _repository.Salvar(cp);
-        //     return true;         
-        // }
+            return Ok(retorno);
+        }
 
-        // [HttpPut("{id:int}")]
-        // public async void AtualizarItem(Cobranca cp)
-        // { 
-        //     var item = await _repository.FindId(cp.Id);
-        //     if(item == null){
-        //         throw new Exception("Erro ao atualizar.Item não encontrado.");
-        //     }
+        [HttpPost()]
+        public async Task<ActionResult<ServiceResponse<bool>>> Salvar(CobrancaDTO cp)
+        {
+            var retorno = new ServiceResponse<bool>();
+            try
+            {
+                var command = new GravarCobrancaCommand(cp);
+                await _mediator.Send(command);
+                retorno.Sucesso = true;
+                retorno.Mensagem = "Dados gravados com sucesso.";
+            }
+            catch (Exception ex)
+            {
+                retorno.Mensagem = ex.Message;
+                retorno.Sucesso = false;
+            }
 
-        //     _repository.Atualizar(cp);            
-        // }
+            return Ok(retorno);
+        }
 
-        // [HttpDelete("{id:int}")]
-        // public async Task<bool> Apagar(int id)
-        // {
-        //     var retorno = await _repository.FindId(id);
-        //     if(retorno == null){
-        //          throw new Exception("Conta a pagar não encontrado.");
-        //     }
+        [HttpPut("{id}")]
+        public async Task<ActionResult<ServiceResponse<bool>>> AtualizarItem(CobrancaDTO cp)
+        {
+            var retorno = new ServiceResponse<bool>();
+            try
+            {
+                var command = new AtualizarCobrancaCommand(cp);
+                await _mediator.Send(command);
+                retorno.Sucesso = true;
+                retorno.Mensagem = "Dados atualizados com sucesso.";
+            }
+            catch (Exception ex)
+            {
+                retorno.Mensagem = ex.Message;
+                retorno.Sucesso = false;
+            }
+            return Ok(retorno);
+        }
 
-        //     await _repository.Remover(id);
-        //     return true;  
-        // }
+        [HttpDelete("{id")]
+        public async Task<ActionResult<ServiceResponse<bool>>> Apagar(int id)
+        {
+            var retorno = new ServiceResponse<bool>();
+            try
+            {
+                var command = new RemoverCobrancaCommand(id);
+                await _mediator.Send(command);
+                retorno.Sucesso = true;
+                retorno.Mensagem = "Dados removidos com sucesso.";
+            }
+            catch (Exception ex)
+            {
+                retorno.Mensagem = ex.Message;
+                retorno.Sucesso = false;
+            }
+            return Ok(retorno);
+        }
 
     }
 }

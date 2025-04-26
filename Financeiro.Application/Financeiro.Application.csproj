@@ -16,4 +16,11 @@
     <ProjectReference Include="..\Financeiro.Repository\Financeiro.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UseCases\Configuracoes\" />
+    <Folder Include="UseCases\Negociacoes\" />
+    <Folder Include="UseCases\ContasReceber\" />
+    <Folder Include="UseCases\Receitas\" />
+  </ItemGroup>
+
 </Project>

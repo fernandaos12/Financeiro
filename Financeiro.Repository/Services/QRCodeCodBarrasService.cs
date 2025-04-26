@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Financeiro.Api.Controllers
+﻿namespace Financeiro.Domain.Services
 {
-    public class CodigoBarrasController
+    public class QRCodeCodBarrasService
     {
         //           foreach (var item in retorno)
         //         { 
@@ -108,6 +103,5 @@ namespace Financeiro.Api.Controllers
 
         //         return byteArray;
         //     }
-
     }
 }

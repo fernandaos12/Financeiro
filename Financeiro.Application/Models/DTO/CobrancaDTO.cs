@@ -1,9 +1,8 @@
-using Financeiro.Domain.Abstractions;
+﻿using Financeiro.Domain.Entities;
 using Financeiro.Domain.Enums;
 
-namespace Financeiro.Domain.Entities;
-
-public class Cobrancas : Entity
+namespace Financeiro.Application.Models.DTO;
+public class CobrancaDTO : BaseModel
 {
     public string Descricao { get; set; } = String.Empty;
     public Pagamento? Pagamento { get; set; }
@@ -16,5 +15,5 @@ public class Cobrancas : Entity
     public Cobranca_Negociacao? Negociacao { get; set; }
     public int? NegociacaoId { get; set; }
     public string? CorGrafico { get; set; }
-
 }
+

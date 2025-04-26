@@ -1,7 +1,7 @@
 ﻿using Financeiro.Domain.Enums;
 
 namespace Financeiro.Application.Models.DTO;
-public class PagamentoDTO
+public class PagamentoDTO : BaseModel
 {
     public string? Descricao { get; set; }
     public MesCompetencia? MesCompetencia { get; set; }

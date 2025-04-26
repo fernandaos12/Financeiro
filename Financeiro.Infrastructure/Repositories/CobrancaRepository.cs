@@ -1,66 +1,111 @@
+using Financeiro.Domain.Entities;
+using Financeiro.Domain.Repository;
+using Financeiro.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace Financeiro.Api.Repository;
 
-//public class CobrancaRepository : ICobrancas
-//{
-//    private readonly ApiDbcontext _context;
-//    public CobrancaRepository(ApiDbcontext context)
-//    {
-//        _context = context;
-//    }
-//    public string Link { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+public class CobrancaRepository : ICobrancasRepository
+{
+    private readonly IDbContextFactory<AppDbContext> _context;
+    public CobrancaRepository(IDbContextFactory<AppDbContext> context)
+    {
+        _context = context;
+    }
 
-//    public void AlterarDataVencimento(string idcobranca, DateTime DataAlteracao)
-//    {
-//        throw new NotImplementedException();
-//    }
+    public async Task<Boolean> AlterarCobranca(Cobrancas cobranca)
+    {
+        try
+        {
+            using (var con = _context.CreateDbContext())
+            {
+                con.Cobranca.Update(cobranca);
+                await con.SaveChangesAsync();
+                return true;
+            }
+        }
+        catch (Exception ex)
+        {
+            throw new ArgumentException("Erro ao atualizar: " + ex.Message);
+        }
+    }
 
-//    public CancelamentoCobranca CancelarCobranca(string idcobranca)
-//    {
-//        throw new NotImplementedException();
-//    }
+    public async Task<Cobrancas> BuscarCobrancaItem(int id)
+    {
+        var retorno = new Cobrancas();
+        try
+        {
+            using (var con = _context.CreateDbContext())
+            {
+                var item = await con.Cobranca
+                    .AsNoTracking().FirstOrDefaultAsync(p => p.Id == id)
+                ?? throw new ArgumentException("Cobrança não encontrada");
 
-//    public RetornoPix CobrancaPix(string pix)
-//    {
-//        throw new NotImplementedException();
-//    }
+                retorno = item;
+            }
+        }
+        catch (Exception ex)
+        {
+            throw new ArgumentException("Cobrança não encontrada: " + ex.Message);
+        }
 
-//    public void EnviarEmail(string idcobranca)
-//    {
-//        throw new NotImplementedException();
-//    }
+        return retorno;
+    }
 
-//    public RetornoCobranca GerarBoleto(Cobrancas cobranca)
-//    {
-//        throw new NotImplementedException();
-//    }
+    public async Task<IEnumerable<Cobrancas>> Listar()
+    {
+        var retorno = new List<Cobrancas>();
+        try
+        {
+            using (var con = _context.CreateDbContext())
+            {
+                retorno = await con.Cobranca.ToListAsync()
+                    ?? throw new ArgumentException("Nenhuma cobrança encontrada.");
+            }
+        }
+        catch (Exception ex)
+        {
+            throw new ArgumentException("Nenhuma cobrança encontrada: " + ex.Message);
+        }
 
-//    public RetornoCobranca GerarBoletoNegociacao(Cobranca_Negociacao cobranca)
-//    {
-//        throw new NotImplementedException();
-//    }
+        return retorno;
+    }
 
-//    public RetornoCobranca GerarCobrancaCredito(Cobrancas cobranca, string cartaoToken)
-//    {
-//        throw new NotImplementedException();
-//    }
+    public async Task<Boolean> ExcluirCobranca(int id)
+    {
+        try
+        {
+            using (var con = _context.CreateDbContext())
+            {
+                var item = await con.Cobranca.FirstOrDefaultAsync(p => p.Id == id)
+                    ?? throw new ArgumentException("Cobrança não  encontrada.");
 
-//    public void GetInformacaoCobranca(string idcobranca)
-//    {
-//        throw new NotImplementedException();
-//    }
+                con.Cobranca.Remove(item);
+                await con.SaveChangesAsync();
+            }
+        }
+        catch (Exception ex)
+        {
+            throw new ArgumentException("Erro ao remover cobrança: " + ex.Message);
+        }
 
-//    public Task GetNotificacoes(string idcobranca)
-//    {
-//        throw new NotImplementedException();
-//    }
+        return true;
+    }
 
-//    public byte[] GetPDF(string linhaDigitavel, long? idGateway, Cobrancas cobrancaFaturamento)
-//    {
-//        throw new NotImplementedException();
-//    }
-
-//    public string TokenizaCartao(string numeroCartao, string mesVencimento, string anoVencimento, string codSeguranca, string nomeCartao, string bandeira)
-//    {
-//        throw new NotImplementedException();
-//    }
-//}
+    public async Task<Boolean> GravarCobranca(Cobrancas cobranca)
+    {
+        try
+        {
+            using (var con = _context.CreateDbContext())
+            {
+                con.Cobranca.Add(cobranca);
+                await con.SaveChangesAsync();
+            }
+        }
+        catch (Exception e)
+        {
+            throw new Exception("Erro ao salvar: " + e.Message);
+        }
+        return true;
+    }
+}
